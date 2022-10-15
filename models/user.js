@@ -35,7 +35,7 @@ const userSchema = new mongoose.Schema ({
     },
 
     networth: {
-        type: Number,
+        type: String,
         required: true
     }
 })

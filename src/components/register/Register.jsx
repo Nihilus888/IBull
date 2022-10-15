@@ -31,7 +31,7 @@ export default function Register() {
   const [details, setDetails] = useState("");
   const [titleError, setTitleError] = useState("");
   const [detailsError, setDetailsError] = useState("");
-  const [techStack, setTechStack] = useState([])
+  const [financeSkill, setFinanceSkill] = useState([])
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -39,13 +39,14 @@ export default function Register() {
     job: "",
     position: "",
     experience: 0,
-    skills: []
+    skills: [],
+    networth: 0,
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      skills: [...techStack],
+      skills: [...financeSkill],
       [e.target.name]: e.target.value
     });
   };
@@ -53,7 +54,7 @@ export default function Register() {
   const handleChangeOnSubmit = () => {
     setFormData({
       ...formData,
-      skills: [...techStack]
+      skills: [...financeSkill]
     });
   };
 
@@ -82,11 +83,12 @@ export default function Register() {
       name: formData.name,
       job: formData.job,
       position: formData.position,
-      skills: formData.skills
+      skills: formData.skills,
+      networth: formData.networth
     });
 
       // Need to add the mongodb here?
-      fetch(`http://localhost:3000/users/register`, {
+      fetch(`http://localhost:3001/users/register`, {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {
@@ -119,7 +121,7 @@ export default function Register() {
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'Cover',
             backgroundImage: `url(${Image})`,
-            bgcolor: 'text.primary',
+            bgcolor: 'white',
           }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -254,8 +256,8 @@ export default function Register() {
                     multiple
                     name="skills"
                     id="skills"
-                    onChange={(event,value) => setTechStack(value)}
-                    value={techStack}
+                    onChange={(event,value) => setFinanceSkill(value)}
+                    value={financeSkill}
                     autoSelect
                     options={setskills}
                     getOptionLabel={(option) => option.name}
@@ -265,12 +267,27 @@ export default function Register() {
                     <TextField
                       {...params}
                       variant="standard"
-                      label="Add Your Tech Stack"
+                      label="Add Your Finance Skills"
                       placeholder="Skills"
                     />
                   )}
                 />
                 </Stack>
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  name="networth"
+                  label="Networth"
+                  type="networth"
+                  id="networth"
+                  autoComplete="networth"
+                  value={formData.networth}
+                  onChange={handleChange}
+                  error={titleError}
+                />
               </Grid>
 
               <Grid item xs={12}>
@@ -307,11 +324,11 @@ export default function Register() {
 }
 
 const setskills = [
-  { name: "HTML" },
-  { name: "CSS" },
-  { name: "JavaScript" },
-  { name: "React" },
-  { name: "Node" },
-  { name: "Mongo" },
-  { name: "Express" },
+  { name: "Investing" },
+  { name: "Trading" },
+  { name: "Corporate Finance" },
+  { name: "Personal Finance" },
+  { name: "Insurance" },
+  { name: "Alternative Investments" },
+  { name: "Asset Allocation" },
 ];
