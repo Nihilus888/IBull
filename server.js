@@ -4,6 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose")
 const cors = require('cors')
+const { Router } = require('express')
 
 const app = express()
 const port = process.env.PORT || 3000;
@@ -16,6 +17,10 @@ app.use(express.json())
 app.use(cors({
     origin: '*'
   }))
+
+//extension of user routes
+const userRoutes = require('./routers/user_routes')
+app.use('/user', userRoutes)
 
 //listening port
 app.listen(port, async () => {
