@@ -19,7 +19,7 @@ const userValidators = {
     skills: Joi.array().items(Joi.object({
         name: Joi.string()
     })),
-    networth: Joi.number.min(4).required(),
+    networth: Joi.number().min(4).required(),
     
     if(err) {
       console.log(err);
@@ -42,7 +42,7 @@ const userValidators = {
     skills: Joi.array().items(Joi.object({
         name: Joi.string()
     })),
-    networth: Joi.number.min(4).required(),
+    networth: Joi.number().min(4).required(),
     
     if(err) {
       console.log(err);
