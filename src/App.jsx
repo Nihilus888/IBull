@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import Home from './components/home/Home'
 import StickyFooter from './components/partials/SiteFooter'
 import Register from './components/register/Register'
+import Guest from './components/auth/Guest'
 
 function App() {
   // const profile = (<SiteHeader id={} showViewButton={true} />)

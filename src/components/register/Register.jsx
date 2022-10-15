@@ -40,7 +40,7 @@ export default function Register() {
     position: "",
     experience: 0,
     skills: [],
-    networth: 0,
+    networth: "",
   });
 
   const handleChange = (e) => {
@@ -88,7 +88,7 @@ export default function Register() {
     });
 
       // Need to add the mongodb here?
-      fetch(`http://localhost:3001/users/register`, {
+      fetch(`http://localhost:3001/user/register`, {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {
@@ -106,8 +106,9 @@ export default function Register() {
             }
 
             console.log('Registration Successful!')
-
-            navigate('/login')
+            
+            //remember to deal navigate straight to home logged in page
+            //navigate('/login')
         })
         .catch(err => {
             console.log('err: ',err)
