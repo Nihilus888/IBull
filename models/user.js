@@ -17,10 +17,27 @@ const userSchema = new mongoose.Schema ({
         required: true
     },
 
+    job: {
+        type: String,
+    },
+
+    position: {
+        type: String,
+    },
+
     experience: {
         type: Number,
         required: true
     },
+
+    skills: {
+        type: [],
+    },
+
+    networth: {
+        type: Number,
+        required: true
+    }
 })
 
 module.exports = mongoose.model('User', userSchema)
