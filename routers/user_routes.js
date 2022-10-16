@@ -9,6 +9,6 @@ const router = express.Router()
 router.post('/register', userController.register)
 
 //login route 
-router.login('/login', userController.login)
+router.post('/login', userController.login)
 
 module.exports = router;
