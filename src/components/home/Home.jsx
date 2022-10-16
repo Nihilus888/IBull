@@ -10,17 +10,19 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+// import Search from '../Search'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Paper } from '@mui/material';
+import Image from '../../components/stockmarket.jpg'
 import { Backdrop } from '@mui/material';
 
 //use Paper material UI to get the background image but it does not work
-// const styles = {
-//   paperContainer: {
-//     backgroundImage: `url(${"./beach.png"})`,
-//   }
-// };
+const styles = {
+  paperContainer: {
+    backgroundImage: `url(${"./beach.png"})`,
+  }
+};
 
 const responsive = {
   superLargeDesktop: {
@@ -136,7 +138,7 @@ export default function Home() {
   },[jobId])
 
   return (
-    // <Paper style={styles.paperContainer}>
+    <Paper style={styles.paperContainer}>
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
@@ -162,10 +164,10 @@ export default function Home() {
               fontWeight='bold'
               mb={5}
             >
-              Software Engineered
+              IBull
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
-              Here you can search, save and apply for jobs!
+              Here you can search, save, buy and sell equities!
             </Typography>
 
 
@@ -182,7 +184,7 @@ export default function Home() {
                     fontWeight='bold'
                     mt={5}
                   >
-                    Our Platform Jobs
+                    Our Featured Stocks
                   </Typography>
                 </div>
 
@@ -272,6 +274,6 @@ export default function Home() {
 
       </main>
     </ThemeProvider>
-    // </Paper>
+    </Paper>
   );
 } 
