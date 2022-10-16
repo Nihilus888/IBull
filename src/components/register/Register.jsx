@@ -86,7 +86,6 @@ export default function Register() {
       skills: formData.skills,
       networth: formData.networth
     });
-
       // Need to add the mongodb here?
       fetch(`http://localhost:3001/user/register`, {
         method: 'POST',
