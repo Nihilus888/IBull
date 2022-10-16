@@ -21,6 +21,11 @@ const savedStocksSchema = new mongoose.Schema({
 
     currency: {
         type: String,
+    },
+
+    price: {
+        type: Number,
+        required: true,
     }
 })
 
