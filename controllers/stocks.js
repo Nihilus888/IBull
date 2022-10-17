@@ -45,5 +45,8 @@ module.exports = {
         let shortRatio = stockData.quoteSummary.result.shortRatio.fmt
         let beta = stockData.quoteSummary.results.beta.fmt
         let priceToBook = stockData.quoteSummary.results.priceToBook.fmt
-    }
+
+        res.json(result, stock)
+        return
+    },
 }
