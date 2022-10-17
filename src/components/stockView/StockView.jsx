@@ -10,10 +10,11 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import { useParams, useNavigate } from 'react-router-dom'
-import { toast } from "react-toastify";
+import { Line } from 'react-chartjs-2';
+import { EightteenMpSharp } from '@mui/icons-material';
 
 function StockView(props) {
-  const { _id, title, position, company, salary_min, salary_max } = props.data
+  const { _id, symbol, title, name, price, eps } = props.data
   const displayView = props.showViewButton ? true : false
 
   const navigate = useNavigate()
@@ -26,16 +27,16 @@ function StockView(props) {
         >
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h2" fontWeight='bold'>
+              {symbol}
+            </Typography>
+            <Typography>
               {title}
             </Typography>
             <Typography>
-              {position}
+              {price}
             </Typography>
             <Typography>
-              {company}
-            </Typography>
-            <Typography>
-              ${salary_min} - {salary_max}
+              {EightteenMpSharp}
             </Typography>
           </CardContent>
           <CardActions sx={{ justifyContent: 'center'}}>
