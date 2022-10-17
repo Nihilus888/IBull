@@ -108,7 +108,7 @@ export default function Register() {
             console.log('Registration Successful!')
             
             //remember to deal navigate straight to home logged in page
-            //navigate('/login')
+            navigate('/')
         })
         .catch(err => {
             console.log('err: ',err)

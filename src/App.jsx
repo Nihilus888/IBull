@@ -21,6 +21,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path="/register" element={<Guest component={Register} />} />
         <Route path="/login" element={<Guest component={Login} />} />
+        <Route path='/logout' />
       </Routes>
 
       <StickyFooter />

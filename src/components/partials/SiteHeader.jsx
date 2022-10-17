@@ -35,6 +35,7 @@ const SiteHeader = () => {
           }
     })
       const data = await res.json()
+      console.log(data)
       setProfile(token)
       setProfileId(id)
     } else {
@@ -85,9 +86,9 @@ const SiteHeader = () => {
     }
 
 
-  const loggedIn = [<Link style={{textDecoration: 'underline', color: 'white', fontWeight: 'bold'}} to='/employer'>Employer's Portal</Link>,
+  const loggedIn = [<Link style={{textDecoration: 'underline', color: 'white', fontWeight: 'bold'}} to='/'>Watchlist</Link>,
   //link the routes to the saved jobs
-  <Link style={{textDecoration: 'underline', color: 'white', fontWeight: 'bold'}} to='/employer'>Saved Jobs</Link>,
+  <Link style={{textDecoration: 'underline', color: 'white', fontWeight: 'bold'}} to='/'>Watchlist</Link>,
   <Link style={{textDecoration: 'underline', color: 'white', fontWeight:'bold'}} to={`/profile/${profileId}`}>Profile</Link>,]
 
   const loggedOut = [<Link style={{textDecoration: 'underline', color: 'white', fontWeight: 'bold'}} to='/login'>Login</Link>, 
