@@ -10,7 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-// import Search from '../Search'
+import Search from '../Search'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Paper } from '@mui/material';
@@ -171,7 +171,7 @@ export default function Home() {
             </Typography>
 
 
-            {/* <Search sx={{mt: 10, mb : 5}} /> */}
+            <Search sx={{mt: 10, mb : 5}} /> 
           
             <Container maxWidth="xl">
 

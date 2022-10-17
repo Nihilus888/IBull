@@ -18,6 +18,10 @@ app.use(cors({
     origin: '*'
   }))
 
+//extension of stock routes
+const stockRoutes = require('./routers/stock_routes')
+app.use('/stock', stockRoutes)
+
 //extension of user routes
 const userRoutes = require('./routers/user_routes')
 app.use('/user', userRoutes)
