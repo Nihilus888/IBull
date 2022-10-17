@@ -11,21 +11,39 @@ module.exports = {
         const searchStr = req.body.search
 
         //chart data
-        const chartData = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${searchStr}`)
+        const chart = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${searchStr}`)
+
+        //stock info
+        const stockInfo = await fetch(`https://query1.finance.yahoo.com/v10/finance/quoteSummary/${searchStr}?modules=defaultKeyStatistics`)
 
         //get data from the API response
-        const data = await chartData.json()
+        const chartData = await chart.json()
         let result = []
 
-        //get the individual details from the data
-        let name = data.chart.result.meta.symbol
-        let currency = data.chart.result.meta.currency
+        //get the individual details from the data like name and currency
+        let name = chartData.chart.result.meta.symbol
+        let currency = chartData.chart.result.meta.currency
 
         //get all the close prices for the searched stock
-        data.stock_listings.forEach((stock, idx) => {
+        chartData.stock_listings.forEach((stock, idx) => {
             result[idx] = {
                 dailyprice: stock.chart.result.indicators.quote.close
             }
         })
+
+        //get the financial ratios to display in the frontend for later
+        const stockData = await stockInfo.json()
+        let stock = []
+
+        //get the individual financial ratio details
+        let enterpriseValue = stockData.quoteSummary.result.enterpriseValue.fmt
+        let forwardPE = stockData.quoteSummary.result.forwardPE.fmt
+        let profitMargins = stockData.quoteSummary.result.profitMargins.fmt
+        let floatShares = stockData.quoteSummary.result.floatShares.fmt
+        let sharesOutstanding = stockData.quoteSummary.result.sharesShort.fmt
+        let sharesShort = stockData.quoteSummary.result.sharesShort.fmt
+        let shortRatio = stockData.quoteSummary.result.shortRatio.fmt
+        let beta = stockData.quoteSummary.results.beta.fmt
+        let priceToBook = stockData.quoteSummary.results.priceToBook.fmt
     }
 }
