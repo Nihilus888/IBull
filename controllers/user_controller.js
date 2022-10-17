@@ -128,6 +128,22 @@ module.exports = {
         //whatever else
         res.json({ token, userId });
       },
-    
 
+      logout: async (req, res) => {
+        let token = res.locals.userAuth;
+        console.log('token backend:', token)
+    
+        try {
+          //if token is not there, immediately logout
+          if (!token) {
+            return res.status(404).json({message: 'token is not found', status: 404})
+          }
+        } catch (err) {
+          console.log(err)
+          res.status(404).json({err: 'unable to logout', status: 404})
+        }
+          
+          console.log('successfully logged out')
+          res.json("logged out successful");
+      },
 }
