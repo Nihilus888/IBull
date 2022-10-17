@@ -54,7 +54,7 @@ const Search = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
 
-        fetch('http://localhost:3000/jobs/search', {
+        fetch('http://localhost:3001/stock/search', {
             method: 'POST',
             body: JSON.stringify(searchData),
             headers: {
@@ -85,7 +85,7 @@ const Search = (props) => {
                 onSubmit={handleSubmit}>
                     <InputBase
                     sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search Jobs"
+                    placeholder="Search Stocks"
                     id="search"
                     name="search"
                     label="search"

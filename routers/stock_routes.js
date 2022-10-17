@@ -6,3 +6,5 @@ const router = express.Router()
 
 //list stock from search
 router.post('/search', stockController.listStock)
+
+module.exports = router
