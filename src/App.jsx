@@ -5,7 +5,7 @@ import Home from './components/home/Home'
 import StickyFooter from './components/partials/SiteFooter'
 import Register from './components/register/Register'
 import Guest from './components/auth/Guest'
-import Auth from './componets/auth/auth'
+import Auth from './components/auth/Auth'
 import Login from './components/login/Login'
 import SiteHeader from './components/partials/SiteHeader'
 import StockView from './components/stockView/StockView'
@@ -24,7 +24,7 @@ function App() {
         <Route path="/register" element={<Guest component={Register} />} />
         <Route path="/login" element={<Guest component={Login} />} />
         <Route path="/stock/:id" element={<Guest component={StockView} />} />
-        <Route path='/profile/:id' element={<Auth component={Profile} />} />
+        {/* <Route path='/profile/:id' element={<Auth component={Profile} />} /> */}
         <Route path='/logout' />
       </Routes>
 
