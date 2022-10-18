@@ -87,8 +87,8 @@ const SiteHeader = () => {
 
 
   const loggedIn = [<Link style={{textDecoration: 'underline', color: 'white', fontWeight: 'bold'}} to='/'>Watchlist</Link>,
-  //link the routes to the saved jobs
-  <Link style={{textDecoration: 'underline', color: 'white', fontWeight: 'bold'}} to='/'>Watchlist</Link>,
+  //link the routes to watchlist
+  <Link style={{textDecoration: 'underline', color: 'white', fontWeight: 'bold'}} to='/watchlist'>Watchlist</Link>,
   <Link style={{textDecoration: 'underline', color: 'white', fontWeight:'bold'}} to={`/profile/${profileId}`}>Profile</Link>,]
 
   const loggedOut = [<Link style={{textDecoration: 'underline', color: 'white', fontWeight: 'bold'}} to='/login'>Login</Link>, 
