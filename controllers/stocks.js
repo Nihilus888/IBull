@@ -22,12 +22,29 @@ module.exports = {
         //get data from the API response resolve response
         const chartData = await chart.json()
         //console.log(chartData.chart.result)
-        let result = []
+
+        //closeData price for this particular stock
+        closeData = chartData.chart.result[0].indicators.quote[0].close
+        let result = Object.keys(closeData)
+            .map(function(key) {
+                return closeData[key]
+            })
+
+        console.log(result)
+        
+
+        // console.log('stockPrice: ', stockPrice)
+        // console.log(typeof(stockPrice))
+        
+        
+        //loop through the array and push it into result
+        // console.log('result', result)
+        // console.log(typeof(result))
+
 
         //get the financial ratios to display in the frontend for later
         const stockData = await stockInfo.json()
         //console.log(stockData.quoteSummary.result[0].defaultKeyStatistics)
-        let stock = []
 
         // //get the individual details from the data like name and currency
         let name = chartData.chart.result[0].meta.symbol
@@ -46,8 +63,15 @@ module.exports = {
         let priceToBook = stockData.quoteSummary.result[0].defaultKeyStatistics.priceToBook.fmt
         
         //push all the individuals to stock
+        let stock = []
         stock.push(enterpriseValue, forwardPE, profitMargins, floatShares, sharesOutstanding, sharesShort, shortRatio, beta, priceToBook)
-        console.log('stock', stock)
+        // console.log('stock', stock)
+        // console.log(typeof(stock))
+
+        let financialInfo = result.push(stock)
+        let finance = JSON.stringify(financialInfo)
+        console.log(finance)
+        
 
         res.json(stock)
         return
