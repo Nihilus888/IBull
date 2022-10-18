@@ -10,6 +10,8 @@ import Login from './components/login/Login'
 import SiteHeader from './components/partials/SiteHeader'
 import StockView from './components/stockView/StockView'
 
+//react-query or axios for frontend API call
+
 function App() {
   // const profile = (<SiteHeader id={} showViewButton={true} />)
 
