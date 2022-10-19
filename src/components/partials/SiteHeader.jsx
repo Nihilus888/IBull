@@ -35,7 +35,7 @@ const SiteHeader = () => {
           },
         });
         const data = await res.json();
-        console.log(data);
+        console.log('data: ', data);
         setProfile(token);
         setProfileId(id);
       } else {
@@ -43,6 +43,7 @@ const SiteHeader = () => {
       }
     };
 
+    //
     fetchProfileApi();
   });
 
@@ -142,6 +143,7 @@ const SiteHeader = () => {
   ];
 
   const loggedInSettings = [
+    //For logged In settings we need a profile route
     <Link
       style={{ textDecoration: "none", color: "black" }}
       to={`/profile/${profileId}`}

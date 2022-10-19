@@ -188,6 +188,7 @@ export default function Home() {
                   </Typography>
                 </div>
 
+
               <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000} infinite={true} mt={12}>
 
                   {postedJobs.map((jobs) => (
