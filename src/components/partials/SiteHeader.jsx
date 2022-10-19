@@ -15,7 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
-import NewspaperIcon from '@mui/icons-material/Newspaper';
+import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { useEffect, useState } from "react";
 
 const SiteHeader = () => {
@@ -47,6 +47,14 @@ const SiteHeader = () => {
     //
     fetchProfileApi();
   });
+
+  //CNBC login
+  const RedirectPage = () => {
+    React.useEffect(() => {
+      window.location.replace('https://www.google.com')
+      console.log('Redirecting Page')
+    }, [])
+  }
 
   // Logout function
   const handleLogout = (e) => {
@@ -93,11 +101,10 @@ const SiteHeader = () => {
         color: "white",
         fontWeight: "bold",
       }}
-      to="https://www.cnbc.com/world/?region=world"
+      to={`/about`}
     >
       CNBC
     </Link>,
-
 
     <Link
       style={{
@@ -142,6 +149,14 @@ const SiteHeader = () => {
     >
       Profile
     </Link>,
+
+    <Button
+      style={{ textDecoration: "none", color: "black" }}
+      onClick={RedirectPage}
+    >
+      CNBC
+    </Button>,
+
     <Button
       style={{ textDecoration: "none", color: "black" }}
       onClick={handleLogout}
