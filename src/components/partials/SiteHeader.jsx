@@ -28,7 +28,7 @@ const SiteHeader = () => {
     const fetchProfileApi = async () => {
       if (token) {
         //Have not created a profile part yet
-        const res = await fetch(`${process.env.BACKEND}/user/profile/${id}`, {
+        const res = await fetch(`http://localhost:3001/user/profile/${id}`, {
           method: "GET",
           headers: {
             Authorization: token,
@@ -53,7 +53,7 @@ const SiteHeader = () => {
 
     let token = localStorage.getItem("user_token");
 
-    fetch(`${process.env.BACKEND}/user/logout`, {
+    fetch(`http://localhost:3001/user/logout`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

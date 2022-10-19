@@ -4,6 +4,7 @@ const userModel = require('../models/user')
 const userValidators = require('../controllers/validators/users')
 const mongoose = require('mongoose')
 const user = require('../models/user')
+const { use } = require('bcrypt/promises')
 
 module.exports = {
     register: async (req, res) => {
@@ -145,5 +146,42 @@ module.exports = {
           
           console.log('successfully logged out')
           res.json("logged out successful");
+      },
+
+      profile: async (req, res) => {
+        let user = req.params.id
+        console.log('req.params.id:', req.params.id)
+
+        //retrieve user id
+        let userId = mongoose.Types.ObjectId(user)
+
+        //try catch statement to ensure if the user is there
+        try {
+          user = await userModel.findOne({_id: userId}) 
+          console.log('user: ', user)
+          //if not user return error
+          if (!user) {
+            console.log('user not found')
+            return res.status(404).json()
+          }
+        } catch (err) {
+          console.log(err)
+          return res.status(500).json({ error: "unable to retrieve user information"})
+        }
+
+        //get userData to push it into the frontend for use
+        const userData = {
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          job: user.job,
+          position: user.experience,
+          skills: user.skills,
+          networth: user.networth
+        }
+
+        console.log('userData: ', userData)
+
+        return res.json(userData)
       },
 }
