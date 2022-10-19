@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const savedStocksSchema = require('../models/saved_stocks')
 const stockValidators = require('./validators/stocks')
 const mongoose = require('mongoose')
+const saved_stocks = require('../models/saved_stocks')
 
 module.exports = {
     listStock: async (req, res) => {
@@ -58,4 +59,9 @@ module.exports = {
         res.json(stock)
         return
     },
+
+    listWatchlist: async(req, res) => {
+        const Watchlist = await savedStocksSchema.find()
+        res.json(Watchlist)
+    }
 }
