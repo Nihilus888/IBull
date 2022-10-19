@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
+import NewspaperIcon from '@mui/icons-material/Newspaper';
 import { useEffect, useState } from "react";
 
 const SiteHeader = () => {
@@ -35,7 +36,7 @@ const SiteHeader = () => {
           },
         });
         const data = await res.json();
-        console.log('data: ', data);
+        console.log("data: ", data);
         setProfile(token);
         setProfileId(id);
       } else {
@@ -92,30 +93,21 @@ const SiteHeader = () => {
         color: "white",
         fontWeight: "bold",
       }}
-      to="/"
+      to="https://www.cnbc.com/world/?region=world"
     >
-      Watchlist
+      CNBC
     </Link>,
-    //link the routes to watchlist
+
+
     <Link
       style={{
         textDecoration: "underline",
         color: "white",
         fontWeight: "bold",
       }}
-      to="/watchlist"
+      to={`/watchlist`}
     >
       Watchlist
-    </Link>,
-    <Link
-      style={{
-        textDecoration: "underline",
-        color: "white",
-        fontWeight: "bold",
-      }}
-      to={`/profile/${profileId}`}
-    >
-      Profile
     </Link>,
   ];
 

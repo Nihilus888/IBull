@@ -11,20 +11,32 @@ module.exports = {
         const searchStr = req.body.search
         console.log('searchStr:', searchStr)
 
-        //chart data
         const chart = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${searchStr}`)
-        // console.log('chart:', chart)
-    
-        //stock info
+            // .then(response => {
+            //     const isJson = response.headers.get('content-type')?.includes('application/json');
+            //     const chartData = isJson ? response.json(): null
+
+            //     if(!response.ok) {
+            //         const error = (chartData)
+            //         return Promise.reject(error)
+            //     }
+            // })
+            // .catch(error => {
+            //     console.log('There was an error!', error)
+            // })
+
+        const chartData = await chart.json()
+        
+            //stock info
         const stockInfo = await fetch(`https://query1.finance.yahoo.com/v10/finance/quoteSummary/${searchStr}?modules=defaultKeyStatistics`)
-        //console.log('stockInfo: ', stockInfo)
         
         //get data from the API response resolve response
-        const chartData = await chart.json()
+        // const chartData = await chart.json()
         //console.log(chartData.chart.result)
 
         //closeData price for this particular stock
         closeData = chartData.chart.result[0].indicators.quote[0].close
+        console.log('closeData: ', closeData)
         let result = Object.keys(closeData)
             .map(function(key) {
                 return closeData[key]
