@@ -87,21 +87,11 @@ const SiteHeader = () => {
   };
 
   const loggedIn = [
-    // <Link
-    //   style={{
-    //     textDecoration: "underline",
-    //     color: "white",
-    //     fontWeight: "bold",
-    //   }}
-    //   to={`/about`}
-    // >
-    //   CNBC
-    // </Link>,
     <a
       href="https://www.cnbc.com/world/?region=world"
       target="_blank"
       rel="noopener"
-      textAlign='center'
+      textAlign="center"
     >
       CNBC
     </a>,

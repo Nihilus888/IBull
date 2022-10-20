@@ -24,7 +24,6 @@ function App() {
         <Route path="/register" element={<Guest component={Register} />} />
         <Route path="/login" element={<Guest component={Login} />} />
         <Route path="/stock/:id" element={<Guest component={StockView} />} />
-        {/* <Route path="/about" element={<About />} /> */}
         {/* <Route path="/profile/:id" element={<Auth component={Profile} />} /> */}
         <Route path="/logout" />
       </Routes>
