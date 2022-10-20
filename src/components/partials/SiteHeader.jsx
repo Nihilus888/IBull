@@ -48,14 +48,6 @@ const SiteHeader = () => {
     fetchProfileApi();
   });
 
-  //CNBC login
-  const RedirectPage = () => {
-    React.useEffect(() => {
-      window.location.replace('https://www.google.com')
-      console.log('Redirecting Page')
-    }, [])
-  }
-
   // Logout function
   const handleLogout = (e) => {
     e.preventDefault();
@@ -95,16 +87,24 @@ const SiteHeader = () => {
   };
 
   const loggedIn = [
-    <Link
-      style={{
-        textDecoration: "underline",
-        color: "white",
-        fontWeight: "bold",
-      }}
-      to={`/about`}
+    // <Link
+    //   style={{
+    //     textDecoration: "underline",
+    //     color: "white",
+    //     fontWeight: "bold",
+    //   }}
+    //   to={`/about`}
+    // >
+    //   CNBC
+    // </Link>,
+    <a
+      href="https://www.cnbc.com/world/?region=world"
+      target="_blank"
+      rel="noopener"
+      textAlign='center'
     >
       CNBC
-    </Link>,
+    </a>,
 
     <Link
       style={{
@@ -149,13 +149,6 @@ const SiteHeader = () => {
     >
       Profile
     </Link>,
-
-    <Button
-      style={{ textDecoration: "none", color: "black" }}
-      onClick={RedirectPage}
-    >
-      CNBC
-    </Button>,
 
     <Button
       style={{ textDecoration: "none", color: "black" }}

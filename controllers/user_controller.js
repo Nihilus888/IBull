@@ -114,6 +114,7 @@ module.exports = {
     
         console.log("userData:", userData);
     
+        //sign the token for jwt encryption
         const token = jwt.sign(
           {
             exp: Math.floor(Date.now() / 1000) + 60 * 60,
