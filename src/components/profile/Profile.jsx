@@ -187,7 +187,7 @@ export default function Profile(props) {
     <ThemeProvider theme={theme}>
       <Box
         sx={{
-          backdropFilter: "blur(3px)",
+          backdropFilter: "blur(4px)",
           backgroundRepeat: "no-repeat",
           backgroundSize: "Cover",
           backgroundImage: `url(${Image})`,
@@ -212,18 +212,19 @@ export default function Profile(props) {
             <TabPanel value="1">
               <Card
                 sx={{
-                  minHeight: 300,
-                  minWidth: 300,
-                  mb: 20,
+                  minHeight: 400,
+                  minWidth: 400,
+                  mb: 40,
                   backgroundColor: "black",
                   opacity: "0.6",
                   color: "white",
+                  justifyContent: 'center',
                 }}
               >
                 <CardContent>
                   <Typography
                     sx={{
-                      fontSize: 18,
+                      fontSize: 30,
                       mb: 3,
                       textDecoration: "underline",
                       fontWeight: "bold",
@@ -237,7 +238,7 @@ export default function Profile(props) {
                     Email: {formData.email}
                   </Typography>
                   
-                  <Typography variant="body2" sx={{ fontSize: 15 }}>
+                  <Typography variant="body2" sx={{ fontSize: 20 }}>
                     Position: {formData.position}
                     <br />
                     Title: {formData.job}

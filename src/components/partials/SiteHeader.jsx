@@ -28,7 +28,6 @@ const SiteHeader = () => {
 
     const fetchProfileApi = async () => {
       if (token) {
-        //Have not created a profile part yet
         const res = await fetch(`http://localhost:3001/user/profile/${id}`, {
           method: "GET",
           headers: {
@@ -94,6 +93,15 @@ const SiteHeader = () => {
       textAlign="center"
     >
       CNBC
+    </a>,
+
+    <a
+      href="https://www.ft.com/"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+    >
+      Financial Times
     </a>,
 
     <Link
