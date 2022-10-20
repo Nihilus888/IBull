@@ -176,7 +176,8 @@ module.exports = {
           name: user.name,
           email: user.email,
           job: user.job,
-          position: user.experience,
+          position: user.position,
+          experience: user.experience,
           skills: user.skills,
           networth: user.networth
         }

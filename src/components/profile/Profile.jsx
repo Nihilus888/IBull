@@ -33,7 +33,7 @@ import { CardMedia } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import FaceIcon from "@mui/icons-material/Face";
-import Image from "../../components/Stockmarketimage.jpg";
+import Image from "../../components/stockmarket.jpg";
 
 const theme = createTheme();
 
@@ -238,13 +238,14 @@ export default function Profile(props) {
                   </Typography>
                   
                   <Typography variant="body2" sx={{ fontSize: 15 }}>
-                    Experience: {formData.position}
+                    Position: {formData.position}
                     <br />
-                    Job: {formData.job}
+                    Title: {formData.job}
                     <br />
-                    Experience: {formData.job}
+                    Experience: {formData.experience}
                     <br />
                     Networth: {formData.networth}
+                    <br />
                   </Typography>
                 </CardContent>
               </Card>
