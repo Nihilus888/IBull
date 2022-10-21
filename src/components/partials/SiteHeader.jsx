@@ -117,6 +117,15 @@ const SiteHeader = () => {
   ];
 
   const loggedOut = [
+    <a
+      href="https://www.cnbc.com/world/?region=world"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+    >
+      CNBC
+    </a>,
+
     <Link
       style={{
         textDecoration: "underline",
@@ -186,7 +195,7 @@ const SiteHeader = () => {
             noWrap
             component="a"
             sx={{
-              mr: 120,
+              mr: 110,
               display: { xs: "none", md: "flex" },
               fontFamily: "Segoe UI Symbol",
               fontWeight: 900,

@@ -217,7 +217,7 @@ export default function Profile(props) {
                   marginTop: 3,
                   display: "flex",
                   flexDirection: "column",
-                  marginLeft: 20,
+                  marginLeft: 22,
                   marginBottom: 3, 
                 }}
               >
