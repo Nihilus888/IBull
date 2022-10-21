@@ -210,6 +210,19 @@ export default function Profile(props) {
             </Box>
 
             <TabPanel value="1">
+              <Avatar
+                sx={{
+                  bgcolor: "primary.main",
+                  alignItems: "center",
+                  marginTop: 3,
+                  display: "flex",
+                  flexDirection: "column",
+                  marginLeft: 20,
+                  marginBottom: 3, 
+                }}
+              >
+                <FaceIcon />
+              </Avatar>
               <Card
                 sx={{
                   minHeight: 400,
@@ -218,7 +231,7 @@ export default function Profile(props) {
                   backgroundColor: "black",
                   opacity: "0.6",
                   color: "white",
-                  justifyContent: 'center',
+                  justifyContent: "center",
                 }}
               >
                 <CardContent>
@@ -237,7 +250,7 @@ export default function Profile(props) {
                   <Typography sx={{ mb: 3 }} variant="h5" component="div">
                     Email: {formData.email}
                   </Typography>
-                  
+
                   <Typography variant="body2" sx={{ fontSize: 20 }}>
                     Position: {formData.position}
                     <br />
@@ -378,8 +391,8 @@ export default function Profile(props) {
                       />
                     </Grid>
 
-                    <Grid item xs={12}>      
-                    <Typography id="input-slider" gutterBottom>
+                    <Grid item xs={12}>
+                      <Typography id="input-slider" gutterBottom>
                         Networth
                       </Typography>
                       <TextField
@@ -486,11 +499,11 @@ export default function Profile(props) {
 }
 
 const setskills = [
-    { name: "Investing" },
-    { name: "Trading" },
-    { name: "Corporate Finance" },
-    { name: "Personal Finance" },
-    { name: "Insurance" },
-    { name: "Alternative Investments" },
-    { name: "Asset Allocation" },
+  { name: "Investing" },
+  { name: "Trading" },
+  { name: "Corporate Finance" },
+  { name: "Personal Finance" },
+  { name: "Insurance" },
+  { name: "Alternative Investments" },
+  { name: "Asset Allocation" },
 ];
