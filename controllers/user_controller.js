@@ -5,14 +5,13 @@ const userValidators = require('../controllers/validators/users')
 const mongoose = require('mongoose')
 const user = require('../models/user')
 const { use } = require('bcrypt/promises')
-const API_KEY = 'dec7e29faf0cc303432ed91390b896a8-d117dd33-9ba67eb3';
 const DOMAIN = 'sandbox3a6439aadc5c4344a1fb034e03540685.mailgun.org';
 
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');
 
 const mailgun = new Mailgun(formData);
-const client = mailgun.client({username: 'api', key: API_KEY});
+const client = mailgun.client({username: 'api', key: `${process.env.api_key}`});
 
 module.exports = {
     register: async (req, res) => {
