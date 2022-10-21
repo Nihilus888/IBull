@@ -210,4 +210,47 @@ module.exports = {
 
         return res.json(userData)
       },
+
+      editProfile: async (req, res) => {
+        let token = res.locals.userAuth;
+        let Id = token.data.id;
+        let userId = mongoose.Types.ObjectId(Id);
+        let userInformation = {}
+    
+        const validationResults =  userValidators.editUser.validate(req.body);
+    
+        if (validationResults.error) {
+          res.json(validationResults.error.details[0].message);
+          return;
+        }
+        
+        const validatedResults = validationResults.value;
+    
+        //check if password is the same
+        if (req.body.password === undefined || '') {
+          const passwordUnchanged = await userModel.findById(userId)
+          userInformation = {
+            id: validatedResults.id,
+            name: validatedResults.name,
+            email: validatedResults.email,
+            password: passwordUnchanged.password,
+            job: validatedResults.job,
+            position: validatedResults.position,
+            experience: validatedResults.experience,
+            skills: validatedResults.skills,
+            networth: validatedResults.networth
+          }
+        } else {
+            const passwordHash = await bcrypt.hash(req.body.password, 5)
+            console.log("pwh: ", passwordHash)
+            userInformation = { ...req.body, password: passwordHash }
+        }
+    
+        try {
+          await user.findByIdAndUpdate(userId, userInformation);
+        } catch (err) {
+          console.log(err);
+        }
+        res.json("update successful");
+      },
 }

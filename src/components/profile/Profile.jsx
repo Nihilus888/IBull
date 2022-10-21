@@ -66,7 +66,7 @@ export default function Profile(props) {
       const res = await fetch(`http://localhost:3001/user/profile/${id}`, {
         method: "GET",
         headers: {
-          "Content-type": "application/json",
+          // "Content-type": "application/json",
           Authorization: token,
         },
       });
@@ -385,8 +385,8 @@ export default function Profile(props) {
                       <TextField
                         required
                         fullWidth
-                        id="Networth"
-                        name="Networth"
+                        id="networth"
+                        name="networth"
                         label="Networth"
                         value={formData.networth}
                         onChange={handleChange}
