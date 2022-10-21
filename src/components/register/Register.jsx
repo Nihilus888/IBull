@@ -88,7 +88,7 @@ export default function Register() {
       networth: formData.networth
     });
       // Need to add the mongodb here?
-      fetch(`${process.env.BACKEND}/user/register`, {
+      fetch("http://localhost:3001/user/register", {
         method: 'POST',
         body: JSON.stringify(formData),
         headers: {

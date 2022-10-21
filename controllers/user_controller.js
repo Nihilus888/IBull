@@ -5,10 +5,14 @@ const userValidators = require('../controllers/validators/users')
 const mongoose = require('mongoose')
 const user = require('../models/user')
 const { use } = require('bcrypt/promises')
-const sgMail = require('@sendgrid/mail')
+const API_KEY = 'dec7e29faf0cc303432ed91390b896a8-d117dd33-9ba67eb3';
+const DOMAIN = 'sandbox3a6439aadc5c4344a1fb034e03540685.mailgun.org';
 
-//grab the API key from Sendgrid
-sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+const formData = require('form-data');
+const Mailgun = require('mailgun.js');
+
+const mailgun = new Mailgun(formData);
+const client = mailgun.client({username: 'api', key: API_KEY});
 
 module.exports = {
     register: async (req, res) => {
@@ -21,34 +25,27 @@ module.exports = {
           res.send(validateUser.error);
           return;
         }
-
-        const msg = {
-          to: validatedValues.email,
-          from: 'austonmartin@gmail.com',
-          subject: 'Welcome to IBull!',
-          html: `
-          <h1>Welcome to IBull!</h1>
-          <h3>Here is a quick tutorial on how to navigate this platform</h3>
-          <h5>There are links to financial news for you to use such as CNBC and Financial Times</h5>
-          `
-        }
-
-        (async () => {
-          try {
-            await sgMail.send(msg);
-          } catch (error) {
-            console.error(error);
-        
-            if (error.response) {
-              console.error(error.response.body)
-            }
-          }
-        })();
     
         //get values from validated users
         const validatedValues = validateUser.value;
         console.log("validatedValues: ", validatedValues);
         console.log("validatedValuesSkill", validatedValues.skills);
+
+        const msg = {
+          from: 'austonmartin@gmail.com',
+          to: validatedValues.email,
+          subject: 'Welcome to IBull!',
+          text: 'Welcome to IBull! We would love to give you a quick tutorial on how to navigate this website!'     
+        }
+
+        client.messages.create(DOMAIN, msg) 
+          .then((res) => {
+            console.log('email response:', res)
+          })
+          .catch((err) => {
+            console.error('send email err:', err)
+          })
+        
     
         //find validated users from database
         try {
