@@ -266,6 +266,7 @@ export default function Profile(props) {
                       fontSize: 30,
                       mb: 3,
                       textDecoration: "underline",
+                      textDecorationThickness: '2',
                       fontWeight: "bold",
                     }}
                     color="black"
@@ -282,7 +283,7 @@ export default function Profile(props) {
                     }}
                   />
 
-                  <Typography sx={{ mb: 3 }} variant="h5" component="div">
+                  <Typography sx={{ mb: 3, textDecoration: 'underline' }} variant="h5" component="div">
                     Email: {formData.email}
                   </Typography>
 

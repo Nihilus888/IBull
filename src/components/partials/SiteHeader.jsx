@@ -17,6 +17,8 @@ import LoginIcon from "@mui/icons-material/Login";
 import CreateIcon from "@mui/icons-material/Create";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { useEffect, useState } from "react";
+import { styled } from "@mui/material/styles";
+import Badge from "@mui/material/Badge";
 
 const SiteHeader = () => {
   const [profile, setProfile] = useState(null);
@@ -148,7 +150,7 @@ const SiteHeader = () => {
       Profile
     </Link>,
 
-    <Link to={{ pathname: 'https://www.ft.com/'}} target="_blank" >
+    <Link to={{ pathname: "https://www.ft.com/" }} target="_blank">
       Financial Times
     </Link>,
 
@@ -177,6 +179,35 @@ const SiteHeader = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const StyledBadge = styled(Badge)(({ theme }) => ({
+    "& .MuiBadge-badge": {
+      backgroundColor: "#44b700",
+      color: "#44b700",
+      boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+      "&::after": {
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        borderRadius: "50%",
+        animation: "ripple 1.2s infinite ease-in-out",
+        border: "1px solid currentColor",
+        content: '""',
+      },
+    },
+    "@keyframes ripple": {
+      "0%": {
+        transform: "scale(.8)",
+        opacity: 1,
+      },
+      "100%": {
+        transform: "scale(2.4)",
+        opacity: 0,
+      },
+    },
+  }));
 
   return (
     <AppBar position="static" style={{ backgroundColor: "#00688B" }}>
@@ -310,10 +341,25 @@ const SiteHeader = () => {
           {profile ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
+
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+
+                  <StyledBadge
+                    overlap="circular"
+                    anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+                    variant="dot"
+                  >
+                    <Avatar
+                      alt="Penguin avatar"
+                      src="../../components/Avatar.jpg"
+                    />
+
+                  </StyledBadge>
+
                 </IconButton>
+
               </Tooltip>
+
               <Menu
                 sx={{ mt: "45px" }}
                 id="menu-appbar"
