@@ -148,6 +148,10 @@ const SiteHeader = () => {
       Profile
     </Link>,
 
+    <Link to={{ pathname: 'https://www.ft.com/'}} target="_blank" >
+      Financial Times
+    </Link>,
+
     <Button
       style={{ textDecoration: "none", color: "black" }}
       onClick={handleLogout}

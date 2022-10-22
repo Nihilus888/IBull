@@ -233,9 +233,9 @@ export default function Profile(props) {
                   minWidth: 400,
                   mb: 10,
                   mr: 200,
-                  backgroundColor: "black",
+                  backgroundColor: "skyblue",
                   opacity: "0.6",
-                  color: "white",
+                  color: "black",
                   justifyContent: "center",
                 }}
               >
@@ -254,7 +254,7 @@ export default function Profile(props) {
                       textDecoration: "underline",
                       fontWeight: "bold",
                     }}
-                    color="white"
+                    color="black"
                     gutterBottom
                   >
                     Name: {formData.name}

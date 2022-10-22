@@ -34,7 +34,7 @@ module.exports = {
           from: 'austonmartin@gmail.com',
           to: validatedValues.email,
           subject: 'Welcome to IBull!',
-          text: 'Welcome to IBull! We would love to give you a quick tutorial on how to navigate this website!'     
+          text: 'Welcome to IBull! We would love to hear more from you and your opinions on the market'     
         }
 
         client.messages.create(DOMAIN, msg) 

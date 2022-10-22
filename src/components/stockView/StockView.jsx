@@ -14,7 +14,9 @@ import { Line } from 'react-chartjs-2';
 import { EightteenMpSharp } from '@mui/icons-material';
 
 function StockView(props) {
-  const { _id, symbol, title, name, price, eps } = props.data
+  //pull the data from the API called stocks
+  const { _id, symbol, title, name, price, eps } = <props className="data"></props>
+  console.log('props: ', props)
   const displayView = props.showViewButton ? true : false
 
   const navigate = useNavigate()
