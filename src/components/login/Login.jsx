@@ -15,10 +15,15 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Image from "../../components/stockmarket.jpg";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import Alert from '@mui/material/Alert';
 
 const theme = createTheme();
 
 function Login() {
+  const [title, setTitle] = useState("");
+  const [details, setDetails] = useState("");
+  const [titleError, setTitleError] = useState("");
+  const [detailsError, setDetailsError] = useState("");
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -35,6 +40,21 @@ function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Hello there");
+
+    setTitleError(false)
+    setDetailsError(false)
+
+    if(title === '') {
+      setTitleError(true)
+    }
+
+    if(details === '') {
+      setDetailsError(true)
+    }
+
+    if (title && details) {
+      console.log(title, details);
+    }
 
     // Need to add the mongodb here?
     fetch(`http://localhost:3001/user/login`, {
@@ -60,6 +80,7 @@ function Login() {
       })
       .catch((err) => {
         console.log(err);
+
       });
   };
 
@@ -116,7 +137,8 @@ function Login() {
                 value={formData.email}
                 onChange={handleChange}
                 autoFocus
-                inputProps={{ style: { color: "black" } }}
+                inputProps={{ style: { color: "green" } }}
+                error={titleError}
               />
 
             <Typography>
@@ -133,7 +155,8 @@ function Login() {
                 autoComplete="current-password"
                 value={formData.password}
                 onChange={handleChange}
-                inputProps={{ style: { color: "black" } }}
+                inputProps={{ style: { color: "green" } }}
+                error={titleError}
               />
               <FormControlLabel
                 control={<Checkbox value="remember" color="secondary" />}

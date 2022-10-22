@@ -19,6 +19,7 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
+import Alert from '@mui/material/Alert';
 
 const SiteHeader = () => {
   const [profile, setProfile] = useState(null);
@@ -88,6 +89,7 @@ const SiteHeader = () => {
   };
 
   const loggedIn = [
+
     <a
       href="https://www.cnbc.com/world/?region=world"
       target="_blank"
