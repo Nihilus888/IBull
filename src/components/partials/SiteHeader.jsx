@@ -95,15 +95,6 @@ const SiteHeader = () => {
       CNBC
     </a>,
 
-    <a
-      href="https://www.ft.com/"
-      target="_blank"
-      rel="noopener"
-      textAlign="center"
-    >
-      Financial Times
-    </a>,
-
     <Link
       style={{
         textDecoration: "underline",
@@ -195,7 +186,7 @@ const SiteHeader = () => {
             noWrap
             component="a"
             sx={{
-              mr: 110,
+              mr: 120,
               display: { xs: "none", md: "flex" },
               fontFamily: "Segoe UI Symbol",
               fontWeight: 900,
