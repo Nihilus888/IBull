@@ -27,7 +27,7 @@ module.exports = {
                 return closeData[key]
             })
 
-        console.log(result)
+        console.log('result:', result)
 
         //get the financial ratios to display in the frontend for later
         const stockData = await stockInfo.json()
@@ -49,13 +49,13 @@ module.exports = {
         
         //push all the individuals to stock
         let stock = []
-        stock.push(enterpriseValue, forwardPE, profitMargins, floatShares, sharesOutstanding, sharesShort, shortRatio, beta, priceToBook)
+        stock.push(name, currency, enterpriseValue, forwardPE, profitMargins, floatShares, sharesOutstanding, sharesShort, shortRatio, beta, priceToBook)
 
-        let financialInfo = result.push(stock)
+        let financialInfo = stock.push(result)
+        console.log('financialInfo:', financialInfo)
         let finance = JSON.stringify(financialInfo)
-        console.log(finance)
+        console.log('finance:', finance)
         
-
         res.json(stock)
         return
     },
