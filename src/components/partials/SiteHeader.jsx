@@ -20,6 +20,7 @@ import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import Alert from '@mui/material/Alert';
+import { purple } from '@mui/material/colors';
 
 const SiteHeader = () => {
   const [profile, setProfile] = useState(null);
@@ -98,6 +99,9 @@ const SiteHeader = () => {
       target="_blank"
       rel="noopener"
       textAlign="center"
+      style={{
+        color: "white"
+      }}
     >
       CNBC
     </a>,
@@ -242,7 +246,7 @@ const SiteHeader = () => {
             </Link>
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
+          <Box sx={{ flexGrow: 1, mr: 2, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -355,9 +359,11 @@ const SiteHeader = () => {
                     variant="dot"
                   >
                     <Avatar
-                      alt="Penguin avatar"
-                      src="../../components/Avatar.jpg"
-                    />
+                      sx={{ bgcolor: purple[400]}}
+                    >
+                      J
+                    </Avatar>
+
 
                   </StyledBadge>
 

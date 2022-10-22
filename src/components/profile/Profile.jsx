@@ -317,37 +317,6 @@ export default function Profile(props) {
                   </Typography>
 
                 </CardContent>
-
-                {/* <Line data= {{
-              labels: ['Time', 'Price'],
-              datasets: [
-                {
-                  label: 'Stock price',
-                  data: [12, 19, 3, 4, 5, 6, 7],
-                  borderWidth: 2,
-                }, 
-              ]
-            }}
-            height={500}
-            width={300}
-            options={{
-              maintainAspectRatio: false,
-              scales: {
-                yAxes: [
-                  {
-                    ticks: {
-                      beginAtZero: true,
-                    }
-                  }
-                ]
-              },
-              legend: {
-                lables: {
-                  fontSize: 30,
-                }
-              },
-            }}
-            /> */}
               </Card>
             </TabPanel>
 

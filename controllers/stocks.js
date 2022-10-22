@@ -58,6 +58,9 @@ module.exports = {
         
         res.json(stock)
         return
+
+        //API should give general enough information
+        //If we put it into the array, it is very hard to display in web or mobile
     },
 
     listWatchlist: async(req, res) => {
