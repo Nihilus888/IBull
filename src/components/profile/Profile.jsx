@@ -35,6 +35,8 @@ import CardContent from "@mui/material/CardContent";
 import FaceIcon from "@mui/icons-material/Face";
 import BadgeIcon from "@mui/icons-material/Badge";
 import EmailIcon from "@mui/icons-material/Email";
+import WorkIcon from "@mui/icons-material/Work";
+import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import Image from "../../components/stockmarket.jpg";
 
 const theme = createTheme();
@@ -229,7 +231,8 @@ export default function Profile(props) {
                 sx={{
                   minHeight: 400,
                   minWidth: 400,
-                  mb: 40,
+                  mb: 10,
+                  mr: 200,
                   backgroundColor: "black",
                   opacity: "0.6",
                   color: "white",
@@ -257,16 +260,25 @@ export default function Profile(props) {
                     Name: {formData.name}
                   </Typography>
 
-                  <EmailIcon 
+                  <EmailIcon
                     sx={{
                       mt: 0.5,
                       mb: 0.5,
                       width: 1 / 4,
-                  }} />
+                    }}
+                  />
 
                   <Typography sx={{ mb: 3 }} variant="h5" component="div">
                     Email: {formData.email}
                   </Typography>
+
+                  <WorkIcon
+                    sx={{
+                      mt: 0.5,
+                      mb: 0.5,
+                      width: 1 / 4,
+                    }}
+                  />
 
                   <Typography variant="body2" sx={{ fontSize: 20 }}>
                     Position: {formData.position}
@@ -274,10 +286,20 @@ export default function Profile(props) {
                     Title: {formData.job}
                     <br />
                     Experience: {formData.experience}
-                    <br />
-                    Networth: {formData.networth}
-                    <br />
                   </Typography>
+
+                  <LocalAtmIcon
+                    sx={{
+                      mt: 2,
+                      mb: 0.5,
+                      width: 1 / 4,
+                    }}
+                  />
+
+                  <Typography variant="body2" sx={{ fontSize: 20 }}>
+                    Networth: {formData.networth}
+                  </Typography>
+
                 </CardContent>
               </Card>
             </TabPanel>
