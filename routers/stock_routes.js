@@ -7,4 +7,7 @@ const router = express.Router()
 //list stock from search
 router.post('/search', stockController.listStock)
 
+//view the stock
+router.get('/stockView', stockController.listStock)
+
 module.exports = router

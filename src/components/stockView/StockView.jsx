@@ -1,55 +1,69 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import Grid from '@mui/material/Grid'
-import Button from '@mui/material/Button'
-import { useParams, useNavigate } from 'react-router-dom'
-import { Line } from 'react-chartjs-2';
-import { EightteenMpSharp } from '@mui/icons-material';
+import React from "react";
+import { Line, Bar } from "react-chartjs-2";
+import Grid from "@mui/material/Grid";
+import FusionCharts from "fusioncharts";
+import ReactFC from "react-fusioncharts";
+import Column2D from "fusioncharts/fusioncharts.charts";
+import FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme);
+const chartData = [
+    {
+      label: "Venezuela",
+      value: "290",
+    },
+    {
+      label: "Saudi",
+      value: "260",
+    },
+    {
+      label: "Canada",
+      value: "180",
+    },
+    {
+      label: "Iran",
+      value: "140",
+    },
+    {
+      label: "Russia",
+      value: "115",
+    },
+    {
+      label: "UAE",
+      value: "100",
+    },
+    {
+      label: "US",
+      value: "30",
+    },
+    {
+      label: "China",
+      value: "30",
+    },
+  ];
 
-function StockView(props) {
-  //pull the data from the API called stocks
-  const { _id, symbol, title, name, price, eps } = props.data
-  console.log('props: ', props)
-  const displayView = props.showViewButton ? true : false
+  const chartConfigs = {
+    type: "column2d", // The chart type
+    width: "700", // Width of the chart
+    height: "400", // Height of the chart
+    dataFormat: "json", // Data type
+    dataSource: {
+      // Chart Configuration
+      chart: {
+        caption: "Countries With Most Oil Reserves [2017-18]", //Set the chart caption
+        subCaption: "In MMbbl = One Million barrels", //Set the chart subcaption
+        xAxisName: "Country", //Set the x-axis name
+        yAxisName: "Reserves (MMbbl)", //Set the y-axis name
+        numberSuffix: "K",
+        theme: "fusion", //Set the theme for your chart
+      },
+      // Chart Data - from step 2
+      data: chartData,
+    },
+  };
 
-  const navigate = useNavigate()
-  const params = useParams()
-
-  return (
-    <Grid item xs={12} sm={4} mt={5}>
-        <Card
-          sx={{ height: 'auto', width: '100', display: 'flex', flexDirection: 'column', mt:'5', opacity: '1', backgroundColor:'black', opacity: '0.7', color: 'white'}}
-        >
-          <CardContent sx={{ flexGrow: 1 }}>
-            <Typography gutterBottom variant="h5" component="h2" fontWeight='bold'>
-              {symbol}
-            </Typography>
-            <Typography>
-              {title}
-            </Typography>
-            <Typography>
-              {price}
-            </Typography>
-            <Typography>
-              {EightteenMpSharp}
-            </Typography>
-          </CardContent>
-          <CardActions sx={{ justifyContent: 'center'}}>
-            <Link style={{textDecoration: 'none', color: 'white', opacity: '1'}} to={`/jobs/${_id}/edit`}><Button size="small" variant="contained" color='info'>View or Edit</Button></Link>
-          </CardActions>
-        </Card>
-        </Grid>
-
-   
-
+export default function stockView(props) {
+  return ( 
+    <ReactFC {...chartConfigs} />
   )
+  ;
 }
-
-export default StockView

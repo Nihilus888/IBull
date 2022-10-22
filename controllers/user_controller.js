@@ -15,6 +15,8 @@ const client = mailgun.client({username: 'api', key: `${process.env.api_key}`});
 
 module.exports = {
     register: async (req, res) => {
+        //if input body is empty reject
+
         //get validated values from req.body
         const validateUser = userValidators.createUser.validate(req.body);
         console.log("validatedUser:", validateUser);
@@ -23,6 +25,11 @@ module.exports = {
           console.log("validateUser.error: ", validateUser.error);
           res.send(validateUser.error);
           return;
+        }
+
+        //if email input is empty
+        if (validateUser.email == "") {
+          return res.status(409).json({ error: 'email input is empty'})
         }
     
         //get values from validated users
@@ -34,7 +41,7 @@ module.exports = {
           from: 'austonmartin@gmail.com',
           to: validatedValues.email,
           subject: 'Welcome to IBull!',
-          text: 'Welcome to IBull! We would love to hear more from you and your opinions on the market'     
+          text: 'Welcome to IBull! We would love to hear more from you and your opinions on the market.',    
         }
 
         client.messages.create(DOMAIN, msg) 
@@ -58,8 +65,13 @@ module.exports = {
           return res.status(500).json({ error: "unable to get user" });
         }
     
+        //check if input password is empty
+        if (validatedValues.password == "") {
+          return res.status(409).json({ error: 'password input is empty'})
+        }
+
+
         //check if password is the same
-    
         if (validatedValues.password !== validatedValues.confirmPassword) {
           res.send(
             "Password and confirm password does not match. Please try again"

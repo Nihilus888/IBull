@@ -8,8 +8,9 @@ import Guest from "./components/auth/Guest";
 import Auth from "./components/auth/Auth";
 import Login from "./components/login/Login";
 import SiteHeader from "./components/partials/SiteHeader";
-import StockView from "./components/stockView/StockView";
+import StockCard from "./components/stockCard/StockCard";
 import Profile from "./components/profile/Profile";
+import stockView from "./components/stockView/StockView";
 
 //react-query or axios for frontend API call
 
@@ -20,12 +21,13 @@ function App() {
     <div className="App">
       <SiteHeader />
 
+
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Guest component={Register} />} />
         <Route path="/login" element={<Guest component={Login} />} />
-        <Route path="/stock/:id" element={<Guest component={StockView} />} />
         <Route path="/profile/:id" element={<Auth component={Profile} />} />
+        <Route path="/stockView" element={<Guest component={stockView} />} />
         <Route path="/logout" />
       </Routes>
 

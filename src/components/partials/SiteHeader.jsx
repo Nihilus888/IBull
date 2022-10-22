@@ -24,6 +24,7 @@ import Alert from '@mui/material/Alert';
 const SiteHeader = () => {
   const [profile, setProfile] = useState(null);
   const [profileId, setProfileId] = useState("");
+  const [isloggedin, setIsLoggedin] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem("user_token");
@@ -31,6 +32,7 @@ const SiteHeader = () => {
 
     const fetchProfileApi = async () => {
       if (token) {
+        setIsLoggedin(true)
         const res = await fetch(`http://localhost:3001/user/profile/${id}`, {
           method: "GET",
           headers: {
@@ -42,6 +44,7 @@ const SiteHeader = () => {
         setProfile(token);
         setProfileId(id);
       } else {
+        setIsLoggedin(false)
         return;
       }
     };
