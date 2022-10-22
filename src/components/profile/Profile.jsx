@@ -227,6 +227,20 @@ export default function Profile(props) {
               >
                 <FaceIcon />
               </Avatar>
+
+            <Typography
+            sx= {{
+              marginBottom: 3,
+              marginTop: 3,
+              justifyContent: "center",
+              marginLeft: 5,
+              fontSize: 25,
+              fontWeight: "bold",
+            }}
+            >
+                Welcome to your profile {formData.name}!
+            </Typography>
+
               <Card
                 sx={{
                   minHeight: 400,
