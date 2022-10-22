@@ -63,5 +63,11 @@ module.exports = {
     listWatchlist: async(req, res) => {
         const Watchlist = await savedStocksSchema.find()
         res.json(Watchlist)
+    },
+
+    showWatchlist: async(req, res) => {
+        const id = req.params.id
+        const savedWatchList = await savedStocksSchema.findById(id)
+        res.json(savedWatchList)
     }
 }
