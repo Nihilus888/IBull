@@ -16,6 +16,9 @@ import Container from "@mui/material/Container";
 import Image from "../../components/stockmarket.jpg";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Alert from '@mui/material/Alert';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import GoogleIcon from '@mui/icons-material/Google';
+import TwitterIcon from '@mui/icons-material/Twitter';
 
 const theme = createTheme();
 
@@ -170,7 +173,7 @@ function Login() {
               >
                 Sign In
               </Button>
-              <Grid container sx={{ mb: 20 }}>
+              <Grid container sx={{ mb: 5 }}>
                 <Grid item>
                   <Link
                     href="/register"
@@ -182,6 +185,9 @@ function Login() {
                   </Link>
                 </Grid>
               </Grid>
+              <FacebookIcon sx={{ml: 3, mb: 10}}/>
+              <GoogleIcon sx={{ml: 3, mb: 10}}/>
+              <TwitterIcon sx={{ml:3, mb: 10}} />
             </Box>
           </Box>
         </Container>

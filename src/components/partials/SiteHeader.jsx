@@ -153,8 +153,9 @@ const SiteHeader = () => {
   const loggedInSettings = [
     //For logged In settings we need a profile route
     <Link
-      style={{ textDecoration: "none", color: "black" }}
+      style={{ textDecoration: "none", color: "black", width: '100%'}}
       to={`/profile/${profileId}`}
+
     >
       Profile
     </Link>,

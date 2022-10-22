@@ -16,6 +16,10 @@ import "react-multi-carousel/lib/styles.css";
 import { Paper } from '@mui/material';
 import Image from '../../components/stockmarket.jpg'
 import { Backdrop } from '@mui/material';
+import Alert from '@mui/material/Alert';
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import AppleIcon from '@mui/icons-material/Apple';
+import Stack from '@mui/material/Stack';
 
 //use Paper material UI to get the background image but it does not work
 const styles = {
@@ -154,11 +158,57 @@ export default function Home() {
             pb: 6,
           }}
         >
-          <Container maxWidth="xl" align="center">
+          <Container maxWidth='md' align='right' display='flex' flexDirection='row'>
+            <Stack direction='row' spacing={15}>
+            <Typography 
+              component='h5'
+              variant='h5'
+              color='text.primary'
+              mb={3}
+              ml={70}
+              sx = {{
+                color: 'black'
+              }}
+              >
+              Apple: 
+            </Typography>
+
+            <Typography 
+              component='h5'
+              variant='h5'
+              color='text.primary'
+              mb={3}
+              sx = {{
+                color: 'black'
+              }}
+              >
+              Google:
+            </Typography>
+
+            <Typography 
+              component='h5'
+              variant='h5'
+              color='text.primary'
+              mb={3}
+              sx = {{
+                color: 'black'
+              }}
+              >
+              Tesla:
+            </Typography>
+            </Stack>
+
+          </Container>
+
+          <Container maxWidth="xl" align='center'>
+          <AttachMoneyIcon
+            sx={{ display: { xs: "none", md: "fix" }, mr: 1, color: "black" }}
+          />
             <Typography
               component="h1"
               variant="h2"
-              align="center"
+              align='left'
+              ml='10'
               color="text.primary"
               gutterBottom
               fontWeight='bold'
@@ -166,12 +216,20 @@ export default function Home() {
             >
               IBull
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+
+            <Typography variant="h5" align="left" color="text.secondary" paragraph mb={3}>
+              Stock Viewer to get the necessary stock information that you desire
+            </Typography>
+
+            <Typography variant="h5" align="left" color="text.secondary" paragraph mb={16}>
               Here you can search, save, buy and sell equities!
             </Typography>
 
+            <Typography variant="h8" align="center" color="text.primary" paragraph marginTop={10}>
+              Please use a ticker to search for your stocks
+            </Typography>
 
-            <Search sx={{mt: 10, mb : 5}} /> 
+            <Search sx={{mt: 10, mb : 3}} align='center' /> 
           
             <Container maxWidth="xl">
 
