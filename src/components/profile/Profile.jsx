@@ -33,6 +33,8 @@ import { CardMedia } from "@mui/material";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import FaceIcon from "@mui/icons-material/Face";
+import BadgeIcon from "@mui/icons-material/Badge";
+import EmailIcon from "@mui/icons-material/Email";
 import Image from "../../components/stockmarket.jpg";
 
 const theme = createTheme();
@@ -218,7 +220,7 @@ export default function Profile(props) {
                   display: "flex",
                   flexDirection: "column",
                   marginLeft: 22,
-                  marginBottom: 3, 
+                  marginBottom: 3,
                 }}
               >
                 <FaceIcon />
@@ -235,6 +237,13 @@ export default function Profile(props) {
                 }}
               >
                 <CardContent>
+                  <BadgeIcon
+                    sx={{
+                      mb: 0.5,
+                      mt: 0.5,
+                      width: 1 / 4,
+                    }}
+                  />
                   <Typography
                     sx={{
                       fontSize: 30,
@@ -247,6 +256,14 @@ export default function Profile(props) {
                   >
                     Name: {formData.name}
                   </Typography>
+
+                  <EmailIcon 
+                    sx={{
+                      mt: 0.5,
+                      mb: 0.5,
+                      width: 1 / 4,
+                  }} />
+
                   <Typography sx={{ mb: 3 }} variant="h5" component="div">
                     Email: {formData.email}
                   </Typography>
