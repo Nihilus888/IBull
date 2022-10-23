@@ -13,6 +13,12 @@ import { useState,useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 
 const theme = createTheme();
 
@@ -152,6 +158,42 @@ const Search = (props) => {
                         </Card> 
                         )) : ''}
             </Carousel> 
+
+            <TableContainer component={Paper}>
+                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                    <TableHead>
+                      <TableRow>
+                        <TableCell aliign='center'>Stock Description:</TableCell>
+                        <TableCell align="center">Enterprise Value:</TableCell>
+                        <TableCell align="center">Forward PE:</TableCell>
+                        <TableCell align="center">Profit Margins:</TableCell>
+                        <TableCell align="center">Float Shares:</TableCell>
+                        <TableCell align="center">Shares Outstanding:</TableCell>
+                        <TableCell align="center">Shares Short:</TableCell>
+                        <TableCell align="center">Short Ratio:</TableCell>
+                        <TableCell align="center">Beta:</TableCell>
+                        <TableCell align="center">Price to Book:</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {searchPass.map((stocks) => (
+                        <TableRow
+                          key={stocks}
+                          sx={{
+                            "&:last-child td, &:last-child th": { border: 0 },
+                          }}
+                        >
+                          <TableCell component="th" scope="row">
+                            {stocks}
+                          </TableCell>
+                          <TableCell align="center">{stocks}</TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+
+            
             </Container>
             : <></> }
 

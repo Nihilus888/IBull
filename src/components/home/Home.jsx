@@ -59,7 +59,7 @@ const theme = createTheme();
 
 export default function Home() {
   const navigate = useNavigate();
-  const [stock, setStock] = useState([]);
+  const [postedJobs, setpostedJobs] = useState([]);
   const [jobId, setJobId] = useState(null);
   const [savedData, setSavedData] = useState([]);
 
@@ -95,14 +95,13 @@ export default function Home() {
     }
   };
 
-  // To fetch search stock data and set into a state to be mapped onto the table
+  // To fetch posted jobs data and set into a state to be mapped on the carousel
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await fetch("http://localhost:3001/stock/search");
+      const res = await fetch("http://localhost:3000/jobs/posted");
       const data = await res.json();
-      console.log('stock data:,', data)
 
-      setStock(data);
+      setpostedJobs(data);
     };
 
     fetchApi();
@@ -268,7 +267,6 @@ export default function Home() {
               <Container maxWidth="xl">
                 <div>
                   <Typography
-                    textDecoration="underline"
                     component="h1"
                     variant="h2"
                     align="center"
@@ -297,20 +295,20 @@ export default function Home() {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {stock.map((stocks) => (
+                      {postedJobs.map((jobs) => (
                         <TableRow
-                          key={stocks.name}
+                          key={jobs.name}
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                         >
                           <TableCell component="th" scope="row">
-                            {stocks.name}
+                            {jobs.name}
                           </TableCell>
-                          <TableCell align="right">{stocks.calories}</TableCell>
-                          <TableCell align="right">{stocks.fat}</TableCell>
-                          <TableCell align="right">{stocks.carbs}</TableCell>
-                          <TableCell align="right">{stocks.protein}</TableCell>
+                          <TableCell align="right">{jobs.calories}</TableCell>
+                          <TableCell align="right">{jobs.fat}</TableCell>
+                          <TableCell align="right">{jobs.carbs}</TableCell>
+                          <TableCell align="right">{jobs.protein}</TableCell>
                         </TableRow>
                       ))}
                     </TableBody>
