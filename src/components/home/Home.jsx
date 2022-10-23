@@ -1,324 +1,298 @@
-import * as React from "react";
-import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import Button from "@mui/material/Button";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
-import CssBaseline from "@mui/material/CssBaseline";
-import Box from "@mui/material/Box";
-import { Chip } from "@mui/material";
-import Typography from "@mui/material/Typography";
-import Container from "@mui/material/Container";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import Search from "../Search";
+import * as React from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CssBaseline from '@mui/material/CssBaseline';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Search from '../Search'
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { Paper } from "@mui/material";
-import Image from "../../components/stockmarket.jpg";
-import { Backdrop } from "@mui/material";
-import Alert from "@mui/material/Alert";
+import { Paper } from '@mui/material';
+import Image from '../../components/stockmarket.jpg'
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
-import AppleIcon from "@mui/icons-material/Apple";
-import Stack from "@mui/material/Stack";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
+import Stack from '@mui/material/Stack';
 
 //use Paper material UI to get the background image but it does not work
 const styles = {
   paperContainer: {
     backgroundImage: `url(${"./beach.png"})`,
-  },
+  }
 };
 
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
-    items: 5,
+    items: 5
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
+    items: 3
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 2
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
-    items: 1,
-  },
+    items: 1
+  }
 };
 
 const theme = createTheme();
 
 export default function Home() {
-  const navigate = useNavigate();
-  const [postedJobs, setpostedJobs] = useState([]);
-  const [jobId, setJobId] = useState(null);
-  const [savedData, setSavedData] = useState([]);
+
+  const navigate = useNavigate()
+  const [postedJobs, setpostedJobs] = useState([])
+  const [jobId, setJobId] = useState(null)
+  const [savedData, setSavedData] = useState([])
 
   // To handle save job click event by setting jobId state, triggering useEffect
   const handleSave = (event) => {
-    let token = localStorage.getItem("user_token");
+    let token = localStorage.getItem('user_token')
     if (token) {
       setJobId({
-        id: event.target.value,
-      });
-    } else {
-      navigate("/login");
-    }
+        id: event.target.value 
+      })} else {
+        navigate('/login')
+      }
   };
 
   // Function to fetch user's saved jobs data
   const fetchSavedData = async () => {
-    let token = localStorage.getItem("user_token");
+    let token = localStorage.getItem('user_token')
     if (token) {
       const res = await fetch(`http://localhost:3000/jobs/saved`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          Authorization: token,
+          'Authorization': token
         },
-      });
-      const data = await res.json();
+      })
+      const data = await res.json()
 
       try {
-        setSavedData(data[0].jobId);
-      } catch (err) {
-        console.log("No saved jobs data present in DB");
+        setSavedData(data[0].jobId)
+      } catch(err) {
+        console.log("No saved jobs data present in DB")
       }
     }
-  };
+  }
 
   // To fetch posted jobs data and set into a state to be mapped on the carousel
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await fetch("http://localhost:3000/jobs/posted");
-      const data = await res.json();
-
-      setpostedJobs(data);
-    };
-
-    fetchApi();
+      const res = await fetch('http://localhost:3000/jobs/posted')
+      const data = await res.json()
+  
+      setpostedJobs(data)
+    }
+  
+    fetchApi()
     setTimeout(() => {
-      fetchSavedData();
-    }, "1000");
-  }, []);
+      fetchSavedData()
+    }, "1000")
+  }, [])
 
-  // POST
+  // POST 
   useEffect(() => {
-    let token = localStorage.getItem("user_token") || "";
+    let token = localStorage.getItem('user_token') || ""
 
     if (jobId === null) {
-      return;
+      return
     }
 
-    fetch(`http://localhost:3000/jobs/saved`, {
-      method: "POST",
-      body: JSON.stringify(jobId),
-      headers: {
-        "Content-type": "application/json",
-        Authorization: token,
-      },
+      fetch(`http://localhost:3000/jobs/saved`, {
+        method: 'POST',
+        body: JSON.stringify(jobId),
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': token
+        },
     })
-      .then((response) => {
-        console.log("response: ", response);
-        return response.json();
-      })
-      .then((jsonResponse) => {
-        if (jsonResponse.error) {
-          console.log("jsonResponse.error: ", jsonResponse.error);
-          return;
-        }
+        .then(response => {
+            console.log('response: ',response)
+            return response.json()
+        })
+        .then(jsonResponse => {
+            if (jsonResponse.error) {
+                console.log('jsonResponse.error: ', jsonResponse.error)
+                return
+            }
 
-        console.log("Save Successful!", jsonResponse);
-      })
-      .catch((err) => {
-        console.log("err: ", err);
-      });
+            console.log('Save Successful!', jsonResponse)
 
-    setTimeout(() => {
-      fetchSavedData();
-    }, "500");
-  }, [jobId]);
+        })
+        .catch(err => {
+            console.log('err: ',err)
+        })
+
+        setTimeout(() => {
+          fetchSavedData()
+        }, "500")
+  },[jobId])
 
   return (
     <Paper style={styles.paperContainer}>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <main>
-          {/* Hero unit */}
-          <Box
-            sx={{
-              backdropFilter: "blur(3px)",
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "Cover",
-              backgroundImage: `url(${Image})`,
-              bgcolor: "text.primary",
-              pt: 8,
-              pb: 6,
-            }}
-          >
-            <Container
-              maxWidth="md"
-              align="right"
-              display="flex"
-              flexDirection="row"
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <main>
+        {/* Hero unit */}
+        <Box
+          sx={{
+            backdropFilter: "blur(3px)",
+            backgroundRepeat: 'no-repeat',
+            backgroundSize: 'Cover',
+            backgroundImage: `url(${Image})`,
+            bgcolor: 'text.primary',
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Container maxWidth='md' align='right' display='flex' flexDirection='row'>
+            <Stack direction='row' spacing={15}>
+            <Typography 
+              component='h5'
+              variant='h5'
+              color='text.primary'
+              mb={3}
+              ml={70}
+              sx = {{
+                color: 'black'
+              }}
+              >
+              Apple: 
+            </Typography>
+
+            <Typography 
+              component='h5'
+              variant='h5'
+              color='text.primary'
+              mb={3}
+              sx = {{
+                color: 'black'
+              }}
+              >
+              Google:
+            </Typography>
+
+            <Typography 
+              component='h5'
+              variant='h5'
+              color='text.primary'
+              mb={3}
+              sx = {{
+                color: 'black'
+              }}
+              >
+              Tesla:
+            </Typography>
+            </Stack>
+
+          </Container>
+
+          <Container maxWidth="xl" align='center'>
+          <AttachMoneyIcon
+            sx={{ display: { xs: "none", md: "fix" }, mr: 1, color: "black" }}
+          />
+            <Typography
+              component="h1"
+              variant="h2"
+              align='left'
+              ml='10'
+              color="text.primary"
+              gutterBottom
+              fontWeight='bold'
+              mb={5}
             >
-              <Stack direction="row" spacing={15}>
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  color="text.primary"
-                  mb={3}
-                  ml={70}
-                  sx={{
-                    color: "black",
-                  }}
-                >
-                  Apple:
-                </Typography>
+              IBull
+            </Typography>
 
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  color="text.primary"
-                  mb={3}
-                  sx={{
-                    color: "black",
-                  }}
-                >
-                  Google:
-                </Typography>
+            <Typography variant="h5" align="left" color="text.secondary" paragraph mb={3}>
+              Stock Viewer to get the necessary stock information that you desire
+            </Typography>
 
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  color="text.primary"
-                  mb={3}
-                  sx={{
-                    color: "black",
-                  }}
-                >
-                  Tesla:
-                </Typography>
-              </Stack>
-            </Container>
+            <Typography variant="h5" align="left" color="text.secondary" paragraph mb={16}>
+              Here you can search, save, buy and sell equities!
+            </Typography>
 
-            <Container maxWidth="xl" align="center">
-              <AttachMoneyIcon
-                sx={{
-                  display: { xs: "none", md: "fix" },
-                  mr: 1,
-                  color: "black",
-                }}
-              />
-              <Typography
-                component="h1"
-                variant="h2"
-                align="left"
-                ml="10"
-                color="text.primary"
-                gutterBottom
-                fontWeight="bold"
-                mb={5}
-              >
-                IBull
-              </Typography>
+            <Typography variant="h8" align="center" color="text.primary" paragraph marginTop={10}>
+              Please use a ticker to search for your stocks
+            </Typography>
 
-              <Typography
-                variant="h5"
-                align="left"
-                color="text.secondary"
-                paragraph
-                mb={3}
-              >
-                Stock Viewer to get the necessary stock information that you
-                desire
-              </Typography>
+            <Search sx={{mt: 10, mb : 3}} align='center' /> 
+          
+            <Container maxWidth="xl">
 
-              <Typography
-                variant="h5"
-                align="left"
-                color="text.secondary"
-                paragraph
-                mb={16}
-              >
-                Here you can search, save, buy and sell equities!
-              </Typography>
-
-              <Typography
-                variant="h8"
-                align="center"
-                color="text.primary"
-                paragraph
-                marginTop={10}
-              >
-                Please use a ticker to search for your stocks
-              </Typography>
-
-              <Search sx={{ mt: 10, mb: 3 }} align="center" />
-
-              <Container maxWidth="xl">
-                <div>
+            <div>
                   <Typography
                     component="h1"
                     variant="h2"
                     align="center"
                     color="text.secondary"
-                    fontWeight="bold"
+                    fontWeight='bold'
                     mt={5}
                   >
-                    Your Selected Stock Information
+                    Our Featured Stocks
                   </Typography>
                 </div>
 
-                <TableContainer component={Paper}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Stock Name:</TableCell>
-                        <TableCell align="right">Enterprise Value:</TableCell>
-                        <TableCell align="right">Forward PE:</TableCell>
-                        <TableCell align="right">Profit Margins:</TableCell>
-                        <TableCell align="right">Float Shares:</TableCell>
-                        <TableCell align="right">Shares Outstanding:</TableCell>
-                        <TableCell align="right">Shares Short:</TableCell>
-                        <TableCell align="right">Short Ratio:</TableCell>
-                        <TableCell align="right">Beta:</TableCell>
-                        <TableCell align="right">Price to Book:</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {postedJobs.map((jobs) => (
-                        <TableRow
-                          key={jobs.name}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            {jobs.name}
-                          </TableCell>
-                          <TableCell align="right">{jobs.calories}</TableCell>
-                          <TableCell align="right">{jobs.fat}</TableCell>
-                          <TableCell align="right">{jobs.carbs}</TableCell>
-                          <TableCell align="right">{jobs.protein}</TableCell>
-                        </TableRow>
+
+              <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000} infinite={true} mt={12}>
+
+                  {postedJobs.map((jobs) => (
+                    <div>
+                      <Card
+                      key={jobs._id}
+                        sx={{ height: '100%', display: 'flex', flexDirection: 'column', margin: 'normal', backgroundColor:'black', opacity: '0.7', color: 'white', mr: 2, mt: 5, mb: 3, boxShadow: 10}}
+                      >
+                        <CardContent sx={{ flexGrow: 1 }}>
+
+                          <Typography gutterBottom variant="h3" component="h2" fontWeight='bold'>
+                            {jobs.company}
+                          </Typography>
+
+                          <Typography gutterBottom variant="h6" component='h2' fontStyle='oblique' fontWeight='bold'>
+                            {jobs.title}
+                          </Typography>
+
+                          <Typography gutterBottom variant="h7" component='h3' >
+                            {jobs.position}
+                          </Typography>
+
+                          <Typography fontStyle='italic'>
+                          Min: ${jobs.salary_min ? jobs.salary_min : ''}
+                          </Typography>
+
+                          <Typography fontStyle='italic'>
+                          Max: ${jobs.salary_max ? jobs.salary_max : ''}
+                          </Typography>
+
+                        </CardContent>
+                        <CardActions sx={{ justifyContent: 'center', mb: 2, opacity: 1}}>
+                          { savedData.includes(jobs._id) ? 
+                          <Button sx={{ mr: 1, opacity: '1'}} key={jobs._id} size="small" variant="contained" color='success' align='justify'>Saved</Button>
+                          :
+                          <Button sx={{ mr: 1, opacity: '1'}} key={jobs._id} size="small" variant="contained" value={jobs._id} color='info' align='justify' onClick={handleSave}>Save</Button>
+                          }
+                          <Button sx={{ ml: 1, opacity: '1'}} size="small" variant="contained" color='info' align='justify' href={`/jobs/${jobs._id}/edit`}>View</Button>
+                        </CardActions>
+                      </Card>
+                    </div>
                       ))}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </Container>
+              </Carousel>
+            </Container>
             </Container>
           </Box>
-        </main>
-      </ThemeProvider>
+
+      </main>
+    </ThemeProvider>
     </Paper>
   );
-}
+} 

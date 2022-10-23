@@ -1,16 +1,16 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import IconButton from '@mui/material/IconButton';
-import SearchIcon from '@mui/icons-material/Search';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-import { useState,useEffect } from 'react';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Paper from "@mui/material/Paper";
+import InputBase from "@mui/material/InputBase";
+import IconButton from "@mui/material/IconButton";
+import SearchIcon from "@mui/icons-material/Search";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { useState, useEffect } from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Table from "@mui/material/Table";
@@ -19,196 +19,273 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { Line } from "react-chartjs-2";
+import Chart from 'chart.js/auto';
 
 const theme = createTheme();
 
 const responsive = {
-    superLargeDesktop: {
-      // the naming can be any, depends on you.
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 3
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
-  };
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 5,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 3,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
 
 const Search = (props) => {
+  const [searchPass, setSearchPass] = useState(null);
+  const [searchData, setSearchData] = useState({
+    search: "",
+    pg: 1,
+  });
 
-    const [searchPass, setSearchPass] = useState(null)
-    const [searchData, setSearchData] = useState({
-        search: "",
-        pg: 1
+  const handleChange = (e) => {
+    setSearchData({
+      [e.target.name]: e.target.value,
+    });
+    console.log(searchData);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    fetch("http://localhost:3001/stock/search", {
+      method: "POST",
+      body: JSON.stringify(searchData),
+      headers: {
+        "Content-type": "application/json",
+      },
     })
+      .then((response) => {
+        console.log("Search Response: ", response);
+        return response.json();
+      })
+      .then((jsonResponse) => {
+        if (jsonResponse.error) {
+          console.log("jsonResponse.error: ", jsonResponse.error);
+          return;
+        }
+        console.log(jsonResponse);
+        setSearchPass(jsonResponse);
+      });
+  };
 
-    const handleChange = (e) => {
-        setSearchData({
-            [e.target.name]: e.target.value
-        })
-        console.log(searchData)
-    }
+  return (
+    <ThemeProvider theme={theme}>
+      <Container component="main" sx={{ marginTop: 5, paddingBottom: 1 }}>
+        <Paper
+          component="form"
+          sx={{ p: "2px 4px", display: "flex", width: "50%", mb: "100px" }}
+          onSubmit={handleSubmit}
+        >
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Search Stocks"
+            id="search"
+            name="search"
+            label="search"
+            value={searchData.search}
+            onChange={handleChange}
+          />
+          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+      </Container>
 
-    const handleSubmit = (event) => {
-        event.preventDefault()
+      {searchPass ? (
+        <Container maxWidth="xl">
+          <Typography
+            component="h1"
+            variant="h3"
+            align="center"
+            color="text.secondary"
+            fontWeight="bold"
+            mt={4}
+            mr={10}
+            mb={4}
+            fontStyle="bold"
+            sx={{ mr: 1 }}
+          >
+            {searchPass ? "Your Search Results" : ""}
+          </Typography>
+          <Carousel
+            responsive={responsive}
+            sx={{
+              ml: 20,
+            }}
+          >
+            {/* {searchPass ? searchPass.map((stock) => ( */}
+            <Card
+              sx={{
+                height: "100%",
+                width: "auto",
+                display: "flex",
+                flexDirection: "column",
+                margin: "normal",
+                mr: 2,
+                alignContent: "center",
+                backgroundColor: "black",
+                opacity: "0.6",
+                color: "white",
+              }}
+            >
+              <CardContent sx={{ flexGrow: 1, variant: "outlined", mr: 2 }}>
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  component="h2"
+                  fontWeight="bold"
+                  display="inline-flex"
+                >
+                  {searchPass[0]}
+                </Typography>
 
-        fetch('http://localhost:3001/stock/search', {
-            method: 'POST',
-            body: JSON.stringify(searchData),
-            headers: {
-                'Content-type': 'application/json',
-            },
-        })
-            .then(response => {
-                console.log('Search Response: ',response)
-                return response.json()
-            })
-            .then(jsonResponse => {
-                if(jsonResponse.error) {
-                    console.log('jsonResponse.error: ', jsonResponse.error)
-                    return
-                }
-                console.log(jsonResponse)
-                setSearchPass(jsonResponse)
-            })
-    }
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h3"
+                  fontWeight="bold"
+                  fontStyle="italic"
+                >
+                  {searchPass[1]}
+                </Typography>
 
-    return (
+                <Typography
+                  gutterBottom
+                  variant="h5"
+                  component="h4"
+                  lineheight={2}
+                >
+                  {searchPass[2]}
+                </Typography>
 
-        <ThemeProvider theme={theme}>
-            <Container component="main" sx={{marginTop: 5, paddingBottom: 1}}>
-                <Paper
-                component="form"
-                sx={{ p: '2px 4px', display: 'flex', width: '50%', mb: '100px'}}
-                onSubmit={handleSubmit}>
-                    <InputBase
-                    sx={{ ml: 1, flex: 1 }}
-                    placeholder="Search Stocks"
-                    id="search"
-                    name="search"
-                    label="search"
-                    value={searchData.search}
-                    onChange={handleChange}
-                    />
-                    <IconButton 
-                    type="submit" 
-                    sx={{ p: '10px' }} 
-                    aria-label="search">
-                        <SearchIcon />
-                    </IconButton>
-                </Paper>
-            </Container>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="h5"
+                  fontWeight="medium"
+                  fontStyle="italic"
+                >
+                  {searchPass[3]}
+                </Typography>
 
-            { searchPass ?
-            <Container maxWidth="xl">
-                 <Typography
-                    component="h1"
-                    variant="h3"
-                    align="center"
-                    color="text.secondary"
-                    fontWeight="bold"
-                    mt={4}
-                    mr={10}
-                    mb={4}
-                    fontStyle='bold'
-                    sx={{ mr: 1 }}
-                    >
-                    {searchPass ? ('Your Search Results') : ''}
-                    </Typography>
-            <Carousel responsive={responsive} >
-               
-                    {/* {searchPass ? searchPass.map((stock) => ( */}
-                        <Card
-                        sx={{ height: '100%', width: 'auto', display: 'flex', flexDirection: 'column', margin: 'normal', mr: 2, align: 'center', backgroundColor:'black', opacity: '0.7', color: 'white'}}
-                        >
-                        <CardContent sx={{ flexGrow: 1, variant: 'outlined', mr: 2}}>
-                            <Typography gutterBottom variant="h4" component="h2" fontWeight='bold' display='inline-flex'>
-                            {searchPass[0]}
-                            </Typography>
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="h5"
+                  fontWeight="medium"
+                  fontStyle="italic"
+                >
+                  {searchPass[4]}
+                </Typography>
+              </CardContent>
+              <CardActions sx={{ justifyContent: "center", mb: 2 }}>
+                <Button
+                  sx={{ mr: 1 }}
+                  size="small"
+                  variant="contained"
+                  color="info"
+                  align="center"
+                >
+                  Save
+                </Button>
+                <Button
+                  sx={{ ml: 1 }}
+                  size="small"
+                  variant="contained"
+                  color="info"
+                  align="center"
+                  href={`${searchPass.link}`}
+                >
+                  View
+                </Button>
+              </CardActions>
+            </Card>
+          </Carousel>
 
-                            <Typography gutterBottom variant="h5" component="h3" fontWeight='bold' fontStyle='italic'>
-                            {searchPass[1]}
-                            </Typography>
+          <TableContainer sx={{ mt: 5 }} component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell aliign="center">Stock Name</TableCell>
+                  <TableCell align="center">Currency:</TableCell>
+                  <TableCell align="center">Enterprise Value:</TableCell>
+                  <TableCell align="center">Forward PE:</TableCell>
+                  <TableCell align="center">Profit Margins:</TableCell>
+                  <TableCell align="center">Float Shares:</TableCell>
+                  <TableCell align="center">Shares Outstanding:</TableCell>
+                  <TableCell align="center">Shares Short:</TableCell>
+                  <TableCell align="center">Short Ratio:</TableCell>
+                  <TableCell align="center">Beta:</TableCell>
+                  <TableCell align="center">Price to Book:</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {/* {searchPass.map((stocks) => ( */}
+                <TableRow
+                  key={searchPass[0]}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                  }}
+                >
+                  <TableCell component="th" scope="row">
+                    {searchPass[0]}
+                  </TableCell>
+                  <TableCell align="center">{searchPass[1]}</TableCell>
+                  <TableCell align="center">{searchPass[2]}</TableCell>
+                  <TableCell align="center">{searchPass[3]}</TableCell>
+                  <TableCell align="center">{searchPass[4]}</TableCell>
+                  <TableCell align="center">{searchPass[5]}</TableCell>
+                  <TableCell align="center">{searchPass[6]}</TableCell>
+                  <TableCell align="center">{searchPass[7]}</TableCell>
+                  <TableCell align="center">{searchPass[8]}</TableCell>
+                  <TableCell align="center">{searchPass[9]}</TableCell>
+                  <TableCell align="center">{searchPass[10]}</TableCell>
+                </TableRow>
+                {/* ))} */}
+              </TableBody>
+            </Table>
+          </TableContainer>
 
-                            <Typography gutterBottom variant="h5" component="h4" lineheight={2}>
-                            {searchPass[2]}
-                            </Typography>
+        <Container maxWidth="s">
+          <Line
+            datasetIdKey="id"
+            data={{
+              labels: ["Jun", "Jul", "Aug"],
+              datasets: [
+                {
+                  id: 1,
+                  label: "",
+                  data: [5, 6, 7],
+                },
+                {
+                  id: 2,
+                  label: "",
+                  data: [3, 2, 1],
+                },
+              ],
+            }}
+          />
+          </Container>
+        </Container>
+      ) : (
+        <></>
+      )}
+    </ThemeProvider>
+  );
+};
 
-                            <Typography gutterBottom variant="h6" component="h5" fontWeight='medium' fontStyle='italic'>
-                            {searchPass[3]}
-                            </Typography>
-
-                            <Typography gutterBottom variant="h6" component="h5" fontWeight='medium' fontStyle='italic'>
-                            {searchPass[4]}
-                            </Typography>
-
-                        </CardContent>
-                        <CardActions sx={{ justifyContent: 'center', mb: 2}}>
-                            <Button sx={{ mr: 1 }} size="small" variant="contained" color='info' align='center'>Save</Button>
-                            <Button sx={{ ml: 1 }} size="small" variant="contained" color='info' align='center' href={`${searchPass.link}`}>View</Button>
-                        </CardActions>
-                        </Card> 
-                         
-            </Carousel> 
-
-            <TableContainer sx={{mt:5}} component={Paper}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
-                    <TableHead>
-                      <TableRow>
-                        <TableCell aliign='center'>Stock Name</TableCell>
-                        <TableCell align="center">Currency:</TableCell>
-                        <TableCell align="center">Enterprise Value:</TableCell>
-                        <TableCell align="center">Forward PE:</TableCell>
-                        <TableCell align="center">Profit Margins:</TableCell>
-                        <TableCell align="center">Float Shares:</TableCell>
-                        <TableCell align="center">Shares Outstanding:</TableCell>
-                        <TableCell align="center">Shares Short:</TableCell>
-                        <TableCell align="center">Short Ratio:</TableCell>
-                        <TableCell align="center">Beta:</TableCell>
-                        <TableCell align="center">Price to Book:</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {/* {searchPass.map((stocks) => ( */}
-                        <TableRow
-                          key={searchPass[0]}
-                          sx={{
-                            "&:last-child td, &:last-child th": { border: 0 },
-                          }}
-                        >
-                          <TableCell component="th" scope="row">
-                            {searchPass[0]}
-                          </TableCell>
-                          <TableCell align="center">{searchPass[1]}</TableCell>
-                          <TableCell align="center">{searchPass[2]}</TableCell>
-                          <TableCell align="center">{searchPass[3]}</TableCell>
-                          <TableCell align="center">{searchPass[4]}</TableCell>
-                          <TableCell align="center">{searchPass[5]}</TableCell>
-                          <TableCell align="center">{searchPass[6]}</TableCell>
-                          <TableCell align="center">{searchPass[7]}</TableCell>
-                          <TableCell align="center">{searchPass[8]}</TableCell>
-                          <TableCell align="center">{searchPass[9]}</TableCell>
-                          <TableCell align="center">{searchPass[10]}</TableCell>
-                        </TableRow>
-                      {/* ))} */}
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-
-            
-            </Container>
-            : <></> }
-
-        </ThemeProvider>
-    )
-}
-
-export default Search
+export default Search;

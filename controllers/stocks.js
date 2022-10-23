@@ -14,10 +14,22 @@ module.exports = {
 
         const chart = await fetch(`https://query1.finance.yahoo.com/v8/finance/chart/${searchStr}`)
 
+        //if search query returns a null result catch the error
+        if (chart == null) {
+            console.log('err:', err)
+            return res.json(409).msg({err: 'search is not valid'})
+        }
+
         const chartData = await chart.json()
         
             //stock info
         const stockInfo = await fetch(`https://query1.finance.yahoo.com/v10/finance/quoteSummary/${searchStr}?modules=defaultKeyStatistics`)
+
+        //if search query returns a null result catch the error
+        if (stockInfo == null) {
+            console.log('err:', err)
+            return res.json(409).msg({err: 'search is not valid'})
+        }
         
         //closeData price for this particular stock
         closeData = chartData.chart.result[0].indicators.quote[0].close
