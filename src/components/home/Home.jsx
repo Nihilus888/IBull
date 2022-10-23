@@ -17,6 +17,12 @@ import { Paper } from '@mui/material';
 import Image from '../../components/stockmarket.jpg'
 import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import Stack from '@mui/material/Stack';
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
 
 //use Paper material UI to get the background image but it does not work
 const styles = {
@@ -235,16 +241,149 @@ export default function Home() {
                     component="h1"
                     variant="h2"
                     align="center"
-                    color="text.secondary"
+                    color="text.primary"
                     fontWeight='bold'
+                    textDecoration='underline'
                     mt={5}
                   >
                     Our Featured Stocks
                   </Typography>
                 </div>
 
+                <TableContainer sx={{ mt: 5 }} component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell aliign="center">Stock Name:</TableCell>
+                  <TableCell align="center">Currency:</TableCell>
+                  <TableCell align="center">Enterprise Value:</TableCell>
+                  <TableCell align="center">Forward PE:</TableCell>
+                  <TableCell align="center">Profit Margins:</TableCell>
+                  <TableCell align="center">Float Shares:</TableCell>
+                  <TableCell align="center">Shares Outstanding:</TableCell>
+                  <TableCell align="center">Shares Short:</TableCell>
+                  <TableCell align="center">Short Ratio:</TableCell>
+                  <TableCell align="center">Beta:</TableCell>
+                  <TableCell align="center">Price to Book:</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {/* {searchPass.map((stocks) => ( */}
+                <TableRow
+                  // key={Google}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                  }}
+                >
+                  <TableCell component="th" scope="row">
+                    Google
+                  </TableCell>
+                  <TableCell align="center">USD</TableCell>
+                  <TableCell align="center">1.22T</TableCell>
+                  <TableCell align="center">17.26</TableCell>
+                  <TableCell align="center">25.89%</TableCell>
+                  <TableCell align="center">11.36B</TableCell>
+                  <TableCell align="center">51.46M</TableCell>
+                  <TableCell align="center">51.46M</TableCell>
+                  <TableCell align="center">1.77</TableCell>
+                  <TableCell align="center">1.1</TableCell>
+                  <TableCell align="center">5.18</TableCell>
+                </TableRow>
+                {/* ))} */}
+              </TableBody>
+            </Table>
+          </TableContainer>
 
-              <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000} infinite={true} mt={12}>
+          <TableContainer sx={{ mt: 5 }} component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell aliign="center">Stock Name:</TableCell>
+                  <TableCell align="center">Currency:</TableCell>
+                  <TableCell align="center">Enterprise Value:</TableCell>
+                  <TableCell align="center">Forward PE:</TableCell>
+                  <TableCell align="center">Profit Margins:</TableCell>
+                  <TableCell align="center">Float Shares:</TableCell>
+                  <TableCell align="center">Shares Outstanding:</TableCell>
+                  <TableCell align="center">Shares Short:</TableCell>
+                  <TableCell align="center">Short Ratio:</TableCell>
+                  <TableCell align="center">Beta:</TableCell>
+                  <TableCell align="center">Price to Book:</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {/* {searchPass.map((stocks) => ( */}
+                <TableRow
+                  // key={Google}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                  }}
+                >
+                  <TableCell component="th" scope="row">
+                    Eli Lilly
+                  </TableCell>
+                  <TableCell align="center">USD</TableCell>
+                  <TableCell align="center">338.04B</TableCell>
+                  <TableCell align="center">35.61</TableCell>
+                  <TableCell align="center">19.58%</TableCell>
+                  <TableCell align="center">948.27M</TableCell>
+                  <TableCell align="center">5.75M</TableCell>
+                  <TableCell align="center">5.75M</TableCell>
+                  <TableCell align="center">1.78</TableCell>
+                  <TableCell align="center">0.33</TableCell>
+                  <TableCell align="center">37.91</TableCell>
+                </TableRow>
+                {/* ))} */}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+          <TableContainer sx={{ mt: 5 }} component={Paper}>
+            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell aliign="center">Stock Name:</TableCell>
+                  <TableCell align="center">Currency:</TableCell>
+                  <TableCell align="center">Enterprise Value:</TableCell>
+                  <TableCell align="center">Forward PE:</TableCell>
+                  <TableCell align="center">Profit Margins:</TableCell>
+                  <TableCell align="center">Float Shares:</TableCell>
+                  <TableCell align="center">Shares Outstanding:</TableCell>
+                  <TableCell align="center">Shares Short:</TableCell>
+                  <TableCell align="center">Short Ratio:</TableCell>
+                  <TableCell align="center">Beta:</TableCell>
+                  <TableCell align="center">Price to Book:</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {/* {searchPass.map((stocks) => ( */}
+                <TableRow
+                  // key={Google}
+                  sx={{
+                    "&:last-child td, &:last-child th": { border: 0 },
+                  }}
+                >
+                  <TableCell component="th" scope="row">
+                    Goldman Sachs
+                  </TableCell>
+                  <TableCell align="center">USD</TableCell>
+                  <TableCell align="center">-42.3B</TableCell>
+                  <TableCell align="center">8.59</TableCell>
+                  <TableCell align="center">29.31%</TableCell>
+                  <TableCell align="center">350.83M</TableCell>
+                  <TableCell align="center">5.11M</TableCell>
+                  <TableCell align="center">5.11M</TableCell>
+                  <TableCell align="center">2.6</TableCell>
+                  <TableCell align="center">N/A</TableCell>
+                  <TableCell align="center">0.96</TableCell>
+                </TableRow>
+                {/* ))} */}
+              </TableBody>
+            </Table>
+          </TableContainer>
+
+
+              {/* <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000} infinite={true} mt={12}>
 
                   {postedJobs.map((jobs) => (
                     <div>
@@ -286,7 +425,7 @@ export default function Home() {
                       </Card>
                     </div>
                       ))}
-              </Carousel>
+              </Carousel> */}
             </Container>
             </Container>
           </Box>

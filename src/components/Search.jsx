@@ -84,7 +84,7 @@ const Search = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" sx={{ marginTop: 5, paddingBottom: 1 }}>
+      <Container component="main" sx={{ marginTop: 5, paddingBottom: 1 , align: 'center'}}>
         <Paper
           component="form"
           sx={{ p: "2px 4px", display: "flex", width: "50%", mb: "100px" }}
@@ -116,6 +116,7 @@ const Search = (props) => {
             mt={4}
             mr={10}
             mb={4}
+            ml={20}
             fontStyle="bold"
             sx={{ mr: 1 }}
           >
@@ -123,9 +124,8 @@ const Search = (props) => {
           </Typography>
           <Carousel
             responsive={responsive}
-            sx={{
-              ml: 20,
-            }}
+            ml={50}
+            align='center'
           >
             {/* {searchPass ? searchPass.map((stock) => ( */}
             <Card
@@ -137,9 +137,9 @@ const Search = (props) => {
                 margin: "normal",
                 mr: 2,
                 alignContent: "center",
-                backgroundColor: "black",
+                backgroundColor: "#37FDFC",
                 opacity: "0.6",
-                color: "white",
+                color: "black",
               }}
             >
               <CardContent sx={{ flexGrow: 1, variant: "outlined", mr: 2 }}>
@@ -150,7 +150,7 @@ const Search = (props) => {
                   fontWeight="bold"
                   display="inline-flex"
                 >
-                  {searchPass[0]}
+                 Name: {searchPass[0]}
                 </Typography>
 
                 <Typography
@@ -160,7 +160,7 @@ const Search = (props) => {
                   fontWeight="bold"
                   fontStyle="italic"
                 >
-                  {searchPass[1]}
+                Currency: {searchPass[1]}
                 </Typography>
 
                 <Typography
@@ -169,7 +169,7 @@ const Search = (props) => {
                   component="h4"
                   lineheight={2}
                 >
-                  {searchPass[2]}
+                 Enterprise Value: {searchPass[2]}
                 </Typography>
 
                 <Typography
@@ -179,7 +179,7 @@ const Search = (props) => {
                   fontWeight="medium"
                   fontStyle="italic"
                 >
-                  {searchPass[3]}
+                 Forward PE: {searchPass[3]}
                 </Typography>
 
                 <Typography
@@ -189,7 +189,7 @@ const Search = (props) => {
                   fontWeight="medium"
                   fontStyle="italic"
                 >
-                  {searchPass[4]}
+                 Profit Margins: {searchPass[4]}
                 </Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: "center", mb: 2 }}>
@@ -197,7 +197,7 @@ const Search = (props) => {
                   sx={{ mr: 1 }}
                   size="small"
                   variant="contained"
-                  color="info"
+                  color="error"
                   align="center"
                 >
                   Save
@@ -206,7 +206,7 @@ const Search = (props) => {
                   sx={{ ml: 1 }}
                   size="small"
                   variant="contained"
-                  color="info"
+                  color="error"
                   align="center"
                   href={`${searchPass.link}`}
                 >
@@ -260,7 +260,7 @@ const Search = (props) => {
             </Table>
           </TableContainer>
 
-        <Container maxWidth="s">
+        {/* <Container maxWidth="s">
           <Line
             datasetIdKey="id"
             data={{
@@ -279,7 +279,7 @@ const Search = (props) => {
               ],
             }}
           />
-          </Container>
+          </Container> */}
         </Container>
       ) : (
         <></>

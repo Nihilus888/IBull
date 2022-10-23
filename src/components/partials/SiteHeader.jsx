@@ -21,6 +21,7 @@ import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
 import Alert from '@mui/material/Alert';
 import { purple } from '@mui/material/colors';
+import { fontWeight } from "@mui/system";
 
 const SiteHeader = () => {
   const [profile, setProfile] = useState(null);
@@ -100,7 +101,8 @@ const SiteHeader = () => {
       rel="noopener"
       textAlign="center"
       style={{
-        color: "white"
+        color: "white",
+        fontWeight: "bold"
       }}
     >
       CNBC
@@ -124,6 +126,10 @@ const SiteHeader = () => {
       target="_blank"
       rel="noopener"
       textAlign="center"
+      style={{
+        color: "white",
+        fontWeight: "bold"
+      }}
     >
       CNBC
     </a>,
@@ -231,7 +237,7 @@ const SiteHeader = () => {
             noWrap
             component="a"
             sx={{
-              mr: 120,
+              mr: 110,
               display: { xs: "none", md: "flex" },
               fontFamily: "Segoe UI Symbol",
               fontWeight: 900,
