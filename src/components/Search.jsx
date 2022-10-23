@@ -125,45 +125,46 @@ const Search = (props) => {
                     </Typography>
             <Carousel responsive={responsive} >
                
-                    {searchPass ? searchPass.map((stock) => (
+                    {/* {searchPass ? searchPass.map((stock) => ( */}
                         <Card
                         sx={{ height: '100%', width: 'auto', display: 'flex', flexDirection: 'column', margin: 'normal', mr: 2, align: 'center', backgroundColor:'black', opacity: '0.7', color: 'white'}}
                         >
                         <CardContent sx={{ flexGrow: 1, variant: 'outlined', mr: 2}}>
                             <Typography gutterBottom variant="h4" component="h2" fontWeight='bold' display='inline-flex'>
-                            {stock[0]}
+                            {searchPass[0]}
                             </Typography>
 
                             <Typography gutterBottom variant="h5" component="h3" fontWeight='bold' fontStyle='italic'>
-                            {stock[1]}
+                            {searchPass[1]}
                             </Typography>
 
                             <Typography gutterBottom variant="h5" component="h4" lineheight={2}>
-                            {stock[2]}
+                            {searchPass[2]}
                             </Typography>
 
                             <Typography gutterBottom variant="h6" component="h5" fontWeight='medium' fontStyle='italic'>
-                            {stock[3]}
+                            {searchPass[3]}
                             </Typography>
 
                             <Typography gutterBottom variant="h6" component="h5" fontWeight='medium' fontStyle='italic'>
-                            {stock[4]}
+                            {searchPass[4]}
                             </Typography>
 
                         </CardContent>
                         <CardActions sx={{ justifyContent: 'center', mb: 2}}>
                             <Button sx={{ mr: 1 }} size="small" variant="contained" color='info' align='center'>Save</Button>
-                            <Button sx={{ ml: 1 }} size="small" variant="contained" color='info' align='center' href={`${stock.link}`}>View</Button>
+                            <Button sx={{ ml: 1 }} size="small" variant="contained" color='info' align='center' href={`${searchPass.link}`}>View</Button>
                         </CardActions>
                         </Card> 
-                        )) : ''}
+                         
             </Carousel> 
 
-            <TableContainer component={Paper}>
+            <TableContainer sx={{mt:5}} component={Paper}>
                   <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>
                       <TableRow>
-                        <TableCell aliign='center'>Stock Description:</TableCell>
+                        <TableCell aliign='center'>Stock Name</TableCell>
+                        <TableCell align="center">Currency:</TableCell>
                         <TableCell align="center">Enterprise Value:</TableCell>
                         <TableCell align="center">Forward PE:</TableCell>
                         <TableCell align="center">Profit Margins:</TableCell>
@@ -176,19 +177,28 @@ const Search = (props) => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {searchPass.map((stocks) => (
+                      {/* {searchPass.map((stocks) => ( */}
                         <TableRow
-                          key={stocks}
+                          key={searchPass[0]}
                           sx={{
                             "&:last-child td, &:last-child th": { border: 0 },
                           }}
                         >
                           <TableCell component="th" scope="row">
-                            {stocks}
+                            {searchPass[0]}
                           </TableCell>
-                          <TableCell align="center">{stocks}</TableCell>
+                          <TableCell align="center">{searchPass[1]}</TableCell>
+                          <TableCell align="center">{searchPass[2]}</TableCell>
+                          <TableCell align="center">{searchPass[3]}</TableCell>
+                          <TableCell align="center">{searchPass[4]}</TableCell>
+                          <TableCell align="center">{searchPass[5]}</TableCell>
+                          <TableCell align="center">{searchPass[6]}</TableCell>
+                          <TableCell align="center">{searchPass[7]}</TableCell>
+                          <TableCell align="center">{searchPass[8]}</TableCell>
+                          <TableCell align="center">{searchPass[9]}</TableCell>
+                          <TableCell align="center">{searchPass[10]}</TableCell>
                         </TableRow>
-                      ))}
+                      {/* ))} */}
                     </TableBody>
                   </Table>
                 </TableContainer>
