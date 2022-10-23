@@ -78,6 +78,7 @@ export default function Register() {
     if (title && details) {
       console.log(title, details);
     }
+    
     console.log({
       email: formData.email,
       password: formData.password,

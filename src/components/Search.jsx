@@ -119,35 +119,35 @@ const Search = (props) => {
                     </Typography>
             <Carousel responsive={responsive} >
                
-                    {searchPass ? searchPass.map((jobs) => (
+                    {searchPass ? searchPass.map((stock) => (
                         <Card
                         sx={{ height: '100%', width: 'auto', display: 'flex', flexDirection: 'column', margin: 'normal', mr: 2, align: 'center', backgroundColor:'black', opacity: '0.7', color: 'white'}}
                         >
                         <CardContent sx={{ flexGrow: 1, variant: 'outlined', mr: 2}}>
                             <Typography gutterBottom variant="h4" component="h2" fontWeight='bold' display='inline-flex'>
-                            {jobs.company}
+                            {stock[0]}
                             </Typography>
 
                             <Typography gutterBottom variant="h5" component="h3" fontWeight='bold' fontStyle='italic'>
-                            {jobs.title}
+                            {stock[1]}
                             </Typography>
 
                             <Typography gutterBottom variant="h5" component="h4" lineheight={2}>
-                            {jobs.experience}
+                            {stock[2]}
                             </Typography>
 
                             <Typography gutterBottom variant="h6" component="h5" fontWeight='medium' fontStyle='italic'>
-                            {jobs.salary_min ? jobs.salary_min : ''}
+                            {stock[3]}
                             </Typography>
 
                             <Typography gutterBottom variant="h6" component="h5" fontWeight='medium' fontStyle='italic'>
-                            {jobs.salary_max ? jobs.salary_max : ''}
+                            {stock[4]}
                             </Typography>
 
                         </CardContent>
                         <CardActions sx={{ justifyContent: 'center', mb: 2}}>
                             <Button sx={{ mr: 1 }} size="small" variant="contained" color='info' align='center'>Save</Button>
-                            <Button sx={{ ml: 1 }} size="small" variant="contained" color='info' align='center' href={`${jobs.link}`}>View</Button>
+                            <Button sx={{ ml: 1 }} size="small" variant="contained" color='info' align='center' href={`${stock.link}`}>View</Button>
                         </CardActions>
                         </Card> 
                         )) : ''}
