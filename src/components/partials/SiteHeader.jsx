@@ -252,7 +252,6 @@ const SiteHeader = () => {
                 color: "white",
                 fontFamily: '"Helvetica Neue"',
                 fontWeight: "bold",
-
               }}
             >
               {" "}

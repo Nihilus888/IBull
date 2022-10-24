@@ -33,11 +33,11 @@ function BarChart() {
   let delayed
 
   let data = {
-    labels: ["Google", "Tesla", "JP Morgan", "Chevron Corp", "Nvidia"],
+    labels: ["Google", "Tesla", "JP Morgan", "Chevron Corp", "Nvidia", "Berkshire Hathaway"],
     datasets: [
       {
         label: "Price",
-        data: [109, 300, 114, 173, 124],
+        data: [109, 300, 114, 173, 124, 279],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -69,6 +69,8 @@ function BarChart() {
     legend: {
       labels: {
         fontSize: 30,
+        fontWeight: "bold",
+        fontFamily: "cursive",
       },
     },
     animation: {
