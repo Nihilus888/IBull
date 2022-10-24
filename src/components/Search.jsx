@@ -22,7 +22,7 @@ import TableRow from "@mui/material/TableRow";
 import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { borders } from "@mui/system";
-import { shadows } from '@mui/system';
+import { shadows } from "@mui/system";
 import LineChart from "./stockView/Line";
 
 const theme = createTheme();
@@ -113,7 +113,7 @@ const Search = (props) => {
             name="search"
             label="search"
             alignContent="center"
-            color="text.primary"
+            fontFamily="Segoe UI Symbol"
             value={searchData.search}
             onChange={handleChange}
           />

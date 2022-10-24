@@ -19,14 +19,14 @@ import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Badge from "@mui/material/Badge";
-import Alert from '@mui/material/Alert';
-import { purple } from '@mui/material/colors';
+import Alert from "@mui/material/Alert";
+import { purple } from "@mui/material/colors";
 import { fontWeight } from "@mui/system";
 
 const SiteHeader = () => {
   const [profile, setProfile] = useState(null);
   const [profileId, setProfileId] = useState("");
-  const [isloggedin, setIsLoggedin] = useState(false)
+  const [isloggedin, setIsLoggedin] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("user_token");
@@ -34,7 +34,7 @@ const SiteHeader = () => {
 
     const fetchProfileApi = async () => {
       if (token) {
-        setIsLoggedin(true)
+        setIsLoggedin(true);
         const res = await fetch(`http://localhost:3001/user/profile/${id}`, {
           method: "GET",
           headers: {
@@ -46,7 +46,7 @@ const SiteHeader = () => {
         setProfile(token);
         setProfileId(id);
       } else {
-        setIsLoggedin(false)
+        setIsLoggedin(false);
         return;
       }
     };
@@ -94,7 +94,6 @@ const SiteHeader = () => {
   };
 
   const loggedIn = [
-
     <a
       href="https://www.cnbc.com/world/?region=world"
       target="_blank"
@@ -102,7 +101,7 @@ const SiteHeader = () => {
       textAlign="center"
       style={{
         color: "white",
-        fontWeight: "bold"
+        fontWeight: "bold",
       }}
     >
       CNBC
@@ -128,7 +127,7 @@ const SiteHeader = () => {
       textAlign="center"
       style={{
         color: "white",
-        fontWeight: "bold"
+        fontWeight: "bold",
       }}
     >
       CNBC
@@ -159,9 +158,8 @@ const SiteHeader = () => {
   const loggedInSettings = [
     //For logged In settings we need a profile route
     <Link
-      style={{ textDecoration: "none", color: "black", width: '100%'}}
+      style={{ textDecoration: "none", color: "black", width: "100%" }}
       to={`/profile/${profileId}`}
-
     >
       Profile
     </Link>,
@@ -230,7 +228,7 @@ const SiteHeader = () => {
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AttachMoneyIcon
-            sx={{ display: { xs: "none", md: "flex" }, mr: 1, color: "black" }}
+            sx={{ display: { xs: "none", md: "flex" }, mr: 1, color: "white" }}
           />
           <Typography
             variant="h6"
@@ -247,7 +245,16 @@ const SiteHeader = () => {
               textDecoration: "none",
             }}
           >
-            <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "white",
+                fontFamily: '"Helvetica Neue"',
+                fontWeight: "bold",
+
+              }}
+            >
               {" "}
               IBull{" "}
             </Link>
@@ -319,11 +326,11 @@ const SiteHeader = () => {
               mr: 2,
               display: { xs: "flex", md: "none" },
               flexGrow: 1,
-              fontFamily: "monospace",
               fontWeight: 700,
+              fontFamily: '"Helvetica Neue"',
               letterSpacing: ".3rem",
               color: "inherit",
-              textDecoration: "none",
+              textDecoration: "underline",
             }}
           >
             IBull
@@ -357,25 +364,15 @@ const SiteHeader = () => {
           {profile ? (
             <Box sx={{ flexGrow: 0 }}>
               <Tooltip title="Open settings">
-
                 <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-
                   <StyledBadge
                     overlap="circular"
                     anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                     variant="dot"
                   >
-                    <Avatar
-                      sx={{ bgcolor: purple[400]}}
-                    >
-                      J
-                    </Avatar>
-
-
+                    <Avatar sx={{ bgcolor: purple[400] }}>J</Avatar>
                   </StyledBadge>
-
                 </IconButton>
-
               </Tooltip>
 
               <Menu

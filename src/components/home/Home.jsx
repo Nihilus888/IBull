@@ -182,7 +182,7 @@ export default function Home() {
                   color: "black",
                 }}
               >
-                Various Prices
+                Stock Prices
               </Typography>
 
               <Stack direction="row" spacing={25} ml={65}>
@@ -252,6 +252,7 @@ export default function Home() {
                   borderColor: "secondary.main",
                   borderRadius: "50%",
                 }}
+                fontFamily="Roboto"
                 align="center"
               />
 
@@ -277,6 +278,7 @@ export default function Home() {
                       bgcolor: "#00D100",
                       border: 1,
                       borderColor: "text.primary",
+                      fontFamily: '"Apple Color Emoji"'
                     }}
                     aria-label="simple table"
                   >
