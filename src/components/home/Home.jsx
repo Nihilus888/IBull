@@ -293,7 +293,7 @@ export default function Home() {
                 </div>
 
                 <TableContainer sx={{ mt: 5 }} component={Paper}>
-                  <Table sx={{ minWidth: 650, bgcolor: '#00D100'}} aria-label="simple table">
+                  <Table sx={{ minWidth: 650, bgcolor: '#00D100', border: 1, borderColor: 'text.primary'}} aria-label="simple table">
                     <TableHead>
                       <TableRow>
                         <TableCell aliign="center">Stock Name:</TableCell>
@@ -339,7 +339,7 @@ export default function Home() {
                 </TableContainer>
 
                 <TableContainer sx={{ mt: 5 }} component={Paper}>
-                  <Table sx={{ minWidth: 650, bgcolor: '#00D100'}} aria-label="simple table">
+                  <Table sx={{ minWidth: 650, bgcolor: '#00D100', border: 1, borderColor: 'text.primary'}} aria-label="simple table">
                     <TableHead>
                       <TableRow>
                         <TableCell aliign="center">Stock Name:</TableCell>
@@ -385,7 +385,7 @@ export default function Home() {
                 </TableContainer>
 
                 <TableContainer sx={{ mt: 5 }} component={Paper}>
-                  <Table sx={{ minWidth: 650, bgcolor: '#00D100' }} aria-label="simple table">
+                  <Table sx={{ minWidth: 650, bgcolor: '#00D100', border: 1, borderColor: 'text.primary'}} aria-label="simple table">
                     <TableHead>
                       <TableRow>
                         <TableCell aliign="center">Stock Name:</TableCell>

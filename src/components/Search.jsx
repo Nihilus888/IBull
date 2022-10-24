@@ -23,6 +23,7 @@ import { Line } from "react-chartjs-2";
 import Chart from "chart.js/auto";
 import { borders } from "@mui/system";
 import { shadows } from '@mui/system';
+import LineChart from "./stockView/Line";
 
 const theme = createTheme();
 
@@ -272,6 +273,8 @@ const Search = (props) => {
               </TableBody>
             </Table>
           </TableContainer>
+
+          <LineChart data={searchPass[11]} />
 
           {/* <Container maxWidth="s">
           <Line
