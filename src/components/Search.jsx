@@ -107,17 +107,30 @@ const Search = (props) => {
           onSubmit={handleSubmit}
         >
           <InputBase
-            sx={{ ml: 1, flex: 1, flexDirection: "row", color: "text.primary" }}
+            sx={{
+              ml: 27,
+              flex: 1,
+              flexDirection: "row",
+              color: "primary.text",
+              fontWeight: "bold",
+              alignContent: 'center',
+              justifyContent: 'center',
+              align: 'center',
+              fontSize: 20,
+              fontFamily: "Segoe UI Symbol",
+            }}
             placeholder="Search Stocks"
             id="search"
             name="search"
             label="search"
-            alignContent="center"
-            fontFamily="Segoe UI Symbol"
             value={searchData.search}
             onChange={handleChange}
           />
-          <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
+          <IconButton
+            type="submit"
+            sx={{ p: "10px", color: "primary.text", fontWeight: "bold" }}
+            aria-label="search"
+          >
             <SearchIcon />
           </IconButton>
         </Paper>
@@ -233,7 +246,10 @@ const Search = (props) => {
           <LineChart />
 
           <TableContainer sx={{ mt: 5 }} component={Paper}>
-            <Table sx={{ minWidth: 650, bgcolor: 'grey', color: 'white' }} aria-label="simple table">
+            <Table
+              sx={{ minWidth: 650, bgcolor: "grey", color: "white" }}
+              aria-label="simple table"
+            >
               <TableHead>
                 <TableRow>
                   <TableCell aliign="center">Stock Name</TableCell>
@@ -254,7 +270,7 @@ const Search = (props) => {
                 <TableRow
                   key={searchPass[0]}
                   sx={{
-                    "&:last-child td, &:last-child th": { border: 0},
+                    "&:last-child td, &:last-child th": { border: 0 },
                   }}
                 >
                   <TableCell component="th" scope="row">

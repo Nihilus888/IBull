@@ -44,8 +44,8 @@ export default function StickyFooter() {
           mt: 'auto',
           backgroundColor: (theme) =>
             theme.palette.mode === 'dark'
-              ? '#708090'
-              : '#708090',
+              ? 'black'
+              : 'black',
         }}
       >
         <Container maxWidth="sm">
