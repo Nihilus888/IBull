@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { borders } from '@mui/system';
+import { borders } from "@mui/system";
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -24,6 +24,7 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import BarChart from "../chart/Technicals";
 
 //use Paper material UI to get the background image but it does not work
 const styles = {
@@ -162,61 +163,30 @@ export default function Home() {
             }}
           >
             <Container
-              maxWidth="md"
+              maxWidth="xs"
               align="right"
               display="flex"
-              flexDirection="row"
+              flexDirection="column"
+              alignContent='right'
             >
               <Typography
                 component="h5"
                 variant="h5"
                 color="text.primary"
                 align="center"
-                mb={3}
-                ml={90}
+                mb={4}
+                ml={80}
+                fontFamily="unset"
+                textDecoration="underline"
                 sx={{
                   color: "black",
                 }}
               >
-                Live Prices
+                Various Prices
               </Typography>
-              <Stack direction="row" spacing={15}>
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  color="text.primary"
-                  mb={3}
-                  ml={70}
-                  sx={{
-                    color: "black",
-                  }}
-                >
-                  Apple:
-                </Typography>
 
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  color="text.primary"
-                  mb={3}
-                  sx={{
-                    color: "black",
-                  }}
-                >
-                  Google:
-                </Typography>
-
-                <Typography
-                  component="h5"
-                  variant="h5"
-                  color="text.primary"
-                  mb={3}
-                  sx={{
-                    color: "black",
-                  }}
-                >
-                  Tesla:
-                </Typography>
+              <Stack direction="row" spacing={25} ml={65}>
+                <BarChart />
               </Stack>
             </Container>
 
@@ -237,7 +207,7 @@ export default function Home() {
                 gutterBottom
                 fontWeight="bold"
                 mb={5}
-                mt={-14}
+                mt={-50}
               >
                 IBull
               </Typography>
@@ -258,7 +228,7 @@ export default function Home() {
                 align="left"
                 color="text.secondary"
                 paragraph
-                mb={16}
+                mb={20}
               >
                 Here you can search, save, buy and sell equities!
               </Typography>
@@ -275,7 +245,15 @@ export default function Home() {
                 Please use a ticker to search for your stocks
               </Typography>
 
-              <Search sx={{ mt: 10, mb: 3 , borderColor: 'secondary.main', borderRadius: '50%' }} align="center" />
+              <Search
+                sx={{
+                  mt: 10,
+                  mb: 3,
+                  borderColor: "secondary.main",
+                  borderRadius: "50%",
+                }}
+                align="center"
+              />
 
               <Container maxWidth="xl">
                 <div>
@@ -293,7 +271,15 @@ export default function Home() {
                 </div>
 
                 <TableContainer sx={{ mt: 5 }} component={Paper}>
-                  <Table sx={{ minWidth: 650, bgcolor: '#00D100', border: 1, borderColor: 'text.primary'}} aria-label="simple table">
+                  <Table
+                    sx={{
+                      minWidth: 650,
+                      bgcolor: "#00D100",
+                      border: 1,
+                      borderColor: "text.primary",
+                    }}
+                    aria-label="simple table"
+                  >
                     <TableHead>
                       <TableRow>
                         <TableCell aliign="center">Stock Name:</TableCell>
@@ -339,7 +325,15 @@ export default function Home() {
                 </TableContainer>
 
                 <TableContainer sx={{ mt: 5 }} component={Paper}>
-                  <Table sx={{ minWidth: 650, bgcolor: '#00D100', border: 1, borderColor: 'text.primary'}} aria-label="simple table">
+                  <Table
+                    sx={{
+                      minWidth: 650,
+                      bgcolor: "#00D100",
+                      border: 1,
+                      borderColor: "text.primary",
+                    }}
+                    aria-label="simple table"
+                  >
                     <TableHead>
                       <TableRow>
                         <TableCell aliign="center">Stock Name:</TableCell>
@@ -385,7 +379,15 @@ export default function Home() {
                 </TableContainer>
 
                 <TableContainer sx={{ mt: 5 }} component={Paper}>
-                  <Table sx={{ minWidth: 650, bgcolor: '#00D100', border: 1, borderColor: 'text.primary'}} aria-label="simple table">
+                  <Table
+                    sx={{
+                      minWidth: 650,
+                      bgcolor: "#00D100",
+                      border: 1,
+                      borderColor: "text.primary",
+                    }}
+                    aria-label="simple table"
+                  >
                     <TableHead>
                       <TableRow>
                         <TableCell aliign="center">Stock Name:</TableCell>

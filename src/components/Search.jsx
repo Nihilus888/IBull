@@ -230,6 +230,8 @@ const Search = (props) => {
             </Card>
           </Carousel>
 
+          <LineChart />
+
           <TableContainer sx={{ mt: 5 }} component={Paper}>
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
@@ -273,8 +275,6 @@ const Search = (props) => {
               </TableBody>
             </Table>
           </TableContainer>
-
-          <LineChart data={searchPass[11]} />
 
           {/* <Container maxWidth="s">
           <Line
