@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { borders } from '@mui/system';
 import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -274,7 +275,7 @@ export default function Home() {
                 Please use a ticker to search for your stocks
               </Typography>
 
-              <Search sx={{ mt: 10, mb: 3 }} align="center" />
+              <Search sx={{ mt: 10, mb: 3 , borderColor: 'secondary.main', borderRadius: '50%' }} align="center" />
 
               <Container maxWidth="xl">
                 <div>
@@ -292,7 +293,7 @@ export default function Home() {
                 </div>
 
                 <TableContainer sx={{ mt: 5 }} component={Paper}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <Table sx={{ minWidth: 650, bgcolor: '#00D100'}} aria-label="simple table">
                     <TableHead>
                       <TableRow>
                         <TableCell aliign="center">Stock Name:</TableCell>
@@ -338,7 +339,7 @@ export default function Home() {
                 </TableContainer>
 
                 <TableContainer sx={{ mt: 5 }} component={Paper}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <Table sx={{ minWidth: 650, bgcolor: '#00D100'}} aria-label="simple table">
                     <TableHead>
                       <TableRow>
                         <TableCell aliign="center">Stock Name:</TableCell>
@@ -384,7 +385,7 @@ export default function Home() {
                 </TableContainer>
 
                 <TableContainer sx={{ mt: 5 }} component={Paper}>
-                  <Table sx={{ minWidth: 650 }} aria-label="simple table">
+                  <Table sx={{ minWidth: 650, bgcolor: '#00D100' }} aria-label="simple table">
                     <TableHead>
                       <TableRow>
                         <TableCell aliign="center">Stock Name:</TableCell>

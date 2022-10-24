@@ -20,7 +20,9 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Line } from "react-chartjs-2";
-import Chart from 'chart.js/auto';
+import Chart from "chart.js/auto";
+import { borders } from "@mui/system";
+import { shadows } from '@mui/system';
 
 const theme = createTheme();
 
@@ -84,18 +86,33 @@ const Search = (props) => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" sx={{ marginTop: 5, paddingBottom: 1 , align: 'center'}}>
+      <Container
+        component="main"
+        sx={{ marginTop: 5, paddingBottom: 1, align: "center" }}
+      >
         <Paper
           component="form"
-          sx={{ p: "2px 4px", display: "flex", width: "50%", mb: "100px" }}
+          sx={{
+            p: "2px 4px",
+            display: "flex",
+            width: "50%",
+            mb: "100px",
+            border: 1,
+            borderRadius: "25%",
+            borderColor: "grey.500",
+            backgroundColor: "primary.main",
+            boxShadow: 20,
+          }}
           onSubmit={handleSubmit}
         >
           <InputBase
-            sx={{ ml: 1, flex: 1 }}
+            sx={{ ml: 1, flex: 1, flexDirection: "row", color: "text.primary" }}
             placeholder="Search Stocks"
             id="search"
             name="search"
             label="search"
+            alignContent="center"
+            color="text.primary"
             value={searchData.search}
             onChange={handleChange}
           />
@@ -122,11 +139,7 @@ const Search = (props) => {
           >
             {searchPass ? "Your Search Results" : ""}
           </Typography>
-          <Carousel
-            responsive={responsive}
-            ml={50}
-            align='center'
-          >
+          <Carousel responsive={responsive} ml={50} align="center">
             {/* {searchPass ? searchPass.map((stock) => ( */}
             <Card
               sx={{
@@ -150,7 +163,7 @@ const Search = (props) => {
                   fontWeight="bold"
                   display="inline-flex"
                 >
-                 Name: {searchPass[0]}
+                  Name: {searchPass[0]}
                 </Typography>
 
                 <Typography
@@ -160,7 +173,7 @@ const Search = (props) => {
                   fontWeight="bold"
                   fontStyle="italic"
                 >
-                Currency: {searchPass[1]}
+                  Currency: {searchPass[1]}
                 </Typography>
 
                 <Typography
@@ -169,7 +182,7 @@ const Search = (props) => {
                   component="h4"
                   lineheight={2}
                 >
-                 Enterprise Value: {searchPass[2]}
+                  Enterprise Value: {searchPass[2]}
                 </Typography>
 
                 <Typography
@@ -179,7 +192,7 @@ const Search = (props) => {
                   fontWeight="medium"
                   fontStyle="italic"
                 >
-                 Forward PE: {searchPass[3]}
+                  Forward PE: {searchPass[3]}
                 </Typography>
 
                 <Typography
@@ -189,7 +202,7 @@ const Search = (props) => {
                   fontWeight="medium"
                   fontStyle="italic"
                 >
-                 Profit Margins: {searchPass[4]}
+                  Profit Margins: {searchPass[4]}
                 </Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: "center", mb: 2 }}>
@@ -260,7 +273,7 @@ const Search = (props) => {
             </Table>
           </TableContainer>
 
-        {/* <Container maxWidth="s">
+          {/* <Container maxWidth="s">
           <Line
             datasetIdKey="id"
             data={{
