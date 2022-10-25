@@ -75,6 +75,45 @@ module.exports = {
         //If we put it into the array, it is very hard to display in web or mobile
     },
 
+    saveStock: async(req, res) => {
+        const saveId = req.body.id  
+        const token = res.locals.userAuth
+        let userId = mongoose.Types.ObjectId(token.data.id)
+
+        //set up the userid
+        const filter = { user: userId}
+
+        //push the data into MongoDB
+        const update = { $push : {stockId : saveId } }
+
+        const validationAccount = await savedStocksSchema.find(filter)
+
+        //check if the account is there
+        if (validationAccount === undefined) {
+            await savedStocksSchema.create({
+                user: userId,
+                stockId: null
+            })
+        } else {
+            try {
+                if (validationAccount[0].stockId.includes(saveId)) {
+                    return res.json ("Stock already exists in your watchlist")
+                }
+                
+            } catch (err) {
+                console.log("The saved user data does not exist", err)
+            }
+        }
+
+        await savedStockModel.findOneAndUpdate(filter, update, {
+            new: true,
+            upsert: true
+        })
+
+        return res.json("Stock added to your watchlist")
+
+    },
+
     listWatchlist: async(req, res) => {
         const Watchlist = await savedStocksSchema.find()
         res.json(Watchlist)
