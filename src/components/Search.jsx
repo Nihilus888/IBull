@@ -339,7 +339,7 @@ const Search = (props) => {
             </Card>
           </Carousel>
 
-          <LineChart />
+          <LineChart data={searchPass[11]}/>
 
           <TableContainer sx={{ mt: 5 }} component={Paper}>
             <Table
