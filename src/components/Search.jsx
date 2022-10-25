@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useState, useEffect } from "react";
+import { useState, useEffect,  } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -24,6 +24,7 @@ import Chart from "chart.js/auto";
 import { borders } from "@mui/system";
 import { shadows } from "@mui/system";
 import LineChart from "./stockView/Line";
+import { useNavigate } from "react-router-dom";
 
 const theme = createTheme();
 
@@ -48,11 +49,13 @@ const responsive = {
 };
 
 const Search = (props) => {
+  const navigate = useNavigate()
   const [searchPass, setSearchPass] = useState(null);
   const [searchData, setSearchData] = useState({
     search: "",
     pg: 1,
   });
+  const [stockId, setStockId] = useState(null);
 
   const handleChange = (e) => {
     setSearchData({
@@ -85,6 +88,90 @@ const Search = (props) => {
       });
   };
 
+  // To handle save job click event by setting jobId state, triggering useEffect
+  const handleSave = (event) => {
+    let token = localStorage.getItem("user_token");
+    if (token) {
+      setSearchPass({
+        id: event.target.value,
+      });
+    } else {
+      navigate("/login");
+    }
+  };
+
+  // Function to fetch user's saved jobs data
+  const fetchSavedData = async () => {
+    let token = localStorage.getItem("user_token");
+    if (token) {
+      const res = await fetch(`http://localhost:3000/stock/saved`, {
+        method: "GET",
+        headers: {
+          Authorization: token,
+        },
+      });
+      const data = await res.json();
+
+      try {
+        setSearchData(data[0].jobId);
+      } catch (err) {
+        console.log("No saved jobs data present in DB");
+      }
+    }
+  };
+
+  // To fetch posted jobs data and set into a state to be mapped on the carousel
+  useEffect(() => {
+    const fetchApi = async () => {
+      const res = await fetch("http://localhost:3000/jobs/posted");
+      const data = await res.json();
+
+      setStockId(data);
+    };
+
+    fetchApi();
+    setTimeout(() => {
+      fetchSavedData();
+    }, "1000");
+  }, []);
+
+  // Save Stock into my watchlist
+  useEffect(() => {
+    let token = localStorage.getItem("user_token") || "";
+
+    if (stockId === null) {
+      return;
+    }
+
+    fetch(`http://localhost:3000/stock/saved`, {
+      method: "POST",
+      body: JSON.stringify(stockId),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        console.log("response: ", response);
+        return response.json();
+      })
+      .then((jsonResponse) => {
+        if (jsonResponse.error) {
+          console.log("jsonResponse.error: ", jsonResponse.error);
+          return;
+        }
+
+        console.log("Save Successful!", jsonResponse);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+
+    setTimeout(() => {
+      fetchSavedData();
+    }, "500");
+  }, [stockId]);
+
   return (
     <ThemeProvider theme={theme}>
       <Container
@@ -113,9 +200,9 @@ const Search = (props) => {
               flexDirection: "row",
               color: "primary.text",
               fontWeight: "bold",
-              alignContent: 'center',
-              justifyContent: 'center',
-              align: 'center',
+              alignContent: "center",
+              justifyContent: "center",
+              align: "center",
               fontSize: 20,
               fontFamily: "Segoe UI Symbol",
             }}
@@ -153,9 +240,10 @@ const Search = (props) => {
           >
             {searchPass ? "Your Search Results" : ""}
           </Typography>
-          <Carousel responsive={responsive} ml={50} align="center">
+          <Carousel responsive={responsive} ml={100} align="center">
             {/* {searchPass ? searchPass.map((stock) => ( */}
             <Card
+              key={searchPass[0]}
               sx={{
                 height: "100%",
                 width: "auto",
@@ -221,11 +309,14 @@ const Search = (props) => {
               </CardContent>
               <CardActions sx={{ justifyContent: "center", mb: 2 }}>
                 <Button
-                  sx={{ mr: 1 }}
+                  sx={{ mr: 1, opacity: "1" }}
+                  key={searchPass[0]}
+                  value={searchPass[0]}
                   size="small"
                   variant="contained"
                   color="error"
                   align="center"
+                  onClick={handleSave}
                 >
                   Save
                 </Button>

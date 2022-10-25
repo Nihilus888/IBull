@@ -7,6 +7,7 @@ const stockValidators = {
         symbol: Joi.string().required(),
         currency: Joi.string(),
         price: Joi.number().required(),
+        enterpriseValue: Joi.string().required()
     }),
 
     if(err) {

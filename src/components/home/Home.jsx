@@ -58,14 +58,14 @@ const theme = createTheme();
 export default function Home() {
   const navigate = useNavigate();
   const [postedJobs, setpostedJobs] = useState([]);
-  const [jobId, setJobId] = useState(null);
+  const [stockId, setStockId] = useState(null);
   const [savedData, setSavedData] = useState([]);
 
   // To handle save job click event by setting jobId state, triggering useEffect
   const handleSave = (event) => {
     let token = localStorage.getItem("user_token");
     if (token) {
-      setJobId({
+      setStockId({
         id: event.target.value,
       });
     } else {
@@ -77,7 +77,7 @@ export default function Home() {
   const fetchSavedData = async () => {
     let token = localStorage.getItem("user_token");
     if (token) {
-      const res = await fetch(`http://localhost:3000/jobs/saved`, {
+      const res = await fetch(`http://localhost:3000/stock/saved`, {
         method: "GET",
         headers: {
           Authorization: token,
@@ -108,17 +108,17 @@ export default function Home() {
     }, "1000");
   }, []);
 
-  // POST
+  // Save Stock into my watchlist
   useEffect(() => {
     let token = localStorage.getItem("user_token") || "";
 
-    if (jobId === null) {
+    if (stockId === null) {
       return;
     }
 
-    fetch(`http://localhost:3000/jobs/saved`, {
+    fetch(`http://localhost:3000/stock/saved`, {
       method: "POST",
-      body: JSON.stringify(jobId),
+      body: JSON.stringify(stockId),
       headers: {
         "Content-type": "application/json",
         Authorization: token,
@@ -143,7 +143,7 @@ export default function Home() {
     setTimeout(() => {
       fetchSavedData();
     }, "500");
-  }, [jobId]);
+  }, [stockId]);
 
   return (
     <Paper style={styles.paperContainer}>

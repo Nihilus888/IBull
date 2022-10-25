@@ -26,6 +26,11 @@ const savedStocksSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: true,
+    },
+
+    enterpriseValue: {
+        type: String,
+        required: true,
     }
 })
 
