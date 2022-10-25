@@ -31,11 +31,3 @@ import JobCard from '../jobcard/JobCard'
 import Image from "../../components/beach.jpg";
 
 const theme = createTheme()
-
-export default function watchList(props) {
-    const navigate = useNavigate()
-    const [stockInfo, setStockInfo] = useState([])
-    const [formdata, setFormData] = useState({
-        
-    })
-}

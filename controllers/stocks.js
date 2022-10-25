@@ -111,7 +111,6 @@ module.exports = {
         })
 
         return res.json("Stock added to your watchlist")
-
     },
 
     listWatchlist: async(req, res) => {
