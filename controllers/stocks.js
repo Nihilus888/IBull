@@ -1,6 +1,6 @@
 const jwt_decode = require('jwt-decode')
 const jwt = require('jsonwebtoken')
-const savedStocksSchema = require('../models/saved_stocks')
+const savedStocksModel = require('../models/saved_stocks')
 const stockValidators = require('./validators/stocks')
 const mongoose = require('mongoose')
 const saved_stocks = require('../models/saved_stocks')
@@ -76,21 +76,23 @@ module.exports = {
     },
 
     saveStock: async(req, res) => {
-        const saveId = req.body.id  
+        const saveId = req.body.id
+        console.log('saveId:', saveId)
         const token = res.locals.userAuth
         let userId = mongoose.Types.ObjectId(token.data.id)
+        console.log('userId', userId)
 
         //set up the userid
         const filter = { user: userId}
 
         //push the data into MongoDB
-        const update = { $push : {stockId : saveId } }
+        const update = { $push : { stockId : saveId } }
 
-        const validationAccount = await savedStocksSchema.find(filter)
+        const validationAccount = await savedStocksModel.find(filter)
 
         //check if the account is there
         if (validationAccount === undefined) {
-            await savedStocksSchema.create({
+            await savedStocksModel.create({
                 user: userId,
                 stockId: null
             })
@@ -105,7 +107,7 @@ module.exports = {
             }
         }
 
-        await savedStockModel.findOneAndUpdate(filter, update, {
+        await savedStocksModel.findOneAndUpdate(filter, update, {
             new: true,
             upsert: true
         })
@@ -114,13 +116,13 @@ module.exports = {
     },
 
     listWatchlist: async(req, res) => {
-        const Watchlist = await savedStocksSchema.find()
+        const Watchlist = await savedStocksModel.find()
         res.json(Watchlist)
     },
 
     showWatchlist: async(req, res) => {
         const id = req.params.id
-        const savedWatchList = await savedStocksSchema.findById(id)
+        const savedWatchList = await savedStocksModel.findById(id)
         res.json(savedWatchList)
     }
 }

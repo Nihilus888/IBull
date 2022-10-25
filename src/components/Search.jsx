@@ -92,7 +92,7 @@ const Search = (props) => {
   const handleSave = (event) => {
     let token = localStorage.getItem("user_token");
     if (token) {
-      setSearchPass({
+      setStockId({
         id: event.target.value,
       });
     } else {
@@ -104,7 +104,7 @@ const Search = (props) => {
   const fetchSavedData = async () => {
     let token = localStorage.getItem("user_token");
     if (token) {
-      const res = await fetch(`http://localhost:3000/stock/saved`, {
+      const res = await fetch(`http://localhost:3001/stock/saved`, {
         method: "GET",
         headers: {
           Authorization: token,
@@ -123,7 +123,7 @@ const Search = (props) => {
   // To fetch posted jobs data and set into a state to be mapped on the carousel
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await fetch("http://localhost:3000/jobs/posted");
+      const res = await fetch("http://localhost:300/jobs/posted");
       const data = await res.json();
 
       setStockId(data);
@@ -143,7 +143,7 @@ const Search = (props) => {
       return;
     }
 
-    fetch(`http://localhost:3000/stock/saved`, {
+    fetch(`http://localhost:3001/stock/saved`, {
       method: "POST",
       body: JSON.stringify(stockId),
       headers: {
