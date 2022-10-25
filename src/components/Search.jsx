@@ -108,7 +108,7 @@ const Search = (props) => {
         >
           <InputBase
             sx={{
-              ml: 27,
+              ml: 5,
               flex: 1,
               flexDirection: "row",
               color: "primary.text",

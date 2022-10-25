@@ -8,6 +8,8 @@ ChartJS.register(LineElement);
 function LineChart() {
   const [chart, setChart] = useState([]);
 
+  let delayed
+
   useEffect(() => {
     const fetchStockData = async () => {
       await fetch("http://localhost:3001/stock/search", {
@@ -67,6 +69,19 @@ function LineChart() {
     legend: {
       lables: {
         fontSize: 26,
+      },
+    },
+
+    animation: {
+      onComplete: () => {
+        delayed = true;
+      },
+      delay: (context) => {
+        let delay = 5;
+        if (context.type === 'data' && context.mode === 'default' && !delayed) {
+          delay = context.dataIndex * 600 + context.datasetIndex * 300;
+        }
+        return delay;
       },
     },
   };
