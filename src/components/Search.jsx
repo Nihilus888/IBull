@@ -32,19 +32,23 @@ const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
-    items: 5,
+    items: 1,
+    align: 'center'
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
-    items: 3,
+    items: 1,
+    align: 'center'
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 1,
+    align: 'center'
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
+    align: 'center'
   },
 };
 
@@ -204,6 +208,7 @@ const Search = (props) => {
               justifyContent: "center",
               align: "center",
               fontSize: 20,
+              textTransform:"capitalize",
               fontFamily: "Segoe UI Symbol",
             }}
             placeholder="Search Stocks"
@@ -234,7 +239,7 @@ const Search = (props) => {
             mt={4}
             mr={10}
             mb={4}
-            ml={20}
+            ml={5}
             fontStyle="bold"
             sx={{ mr: 1 }}
           >
