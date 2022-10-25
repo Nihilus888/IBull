@@ -111,23 +111,25 @@ module.exports = {
     //push the data into MongoDB
     const update = { $push: { stockId: saveId } };
 
-    const validationAccount = await savedStocksModel.find(filter);
+    const saveStock = await savedStocksModel.find(filter);
 
     //check if the account is there
-    if (validationAccount === undefined) {
+    if (saveStock === undefined) {
       await savedStocksModel.create({
         user: userId,
-        stockId: null,
+        stockId: saveId,
       });
-    } else {
-      try {
-        if (validationAccount[0].stockId.includes(saveId)) {
-          return res.json("Stock already exists in your watchlist");
-        }
-      } catch (err) {
-        console.log("The saved user data does not exist", err);
-      }
-    }
+     } 
+    // else {
+    //   try {
+    //     //idempotency
+    //     if (saveStock[0].stockId.includes(saveId)) {
+    //       return res.json("Stock already exists in your watchlist");
+    //     }
+    //   } catch (err) {
+    //     console.log("The saved user data does not exist", err);
+    //   }
+    // }
 
     await savedStocksModel.findOneAndUpdate(filter, update, {
       new: true,
