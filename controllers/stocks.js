@@ -99,6 +99,7 @@ module.exports = {
   },
 
   saveStock: async (req, res) => {
+    console.log('req.body', req.body)
     const saveId = req.body.id;
     console.log("saveId:", saveId);
     const token = res.locals.userAuth;
@@ -117,25 +118,25 @@ module.exports = {
     if (saveStock === undefined) {
       await savedStocksModel.create({
         user: userId,
-        stockId: saveId,
+        stockId: null,
       });
      } 
-    // else {
-    //   try {
-    //     //idempotency
-    //     if (saveStock[0].stockId.includes(saveId)) {
-    //       return res.json("Stock already exists in your watchlist");
-    //     }
-    //   } catch (err) {
-    //     console.log("The saved user data does not exist", err);
-    //   }
-    // }
+    else {
+      try {
+        //idempotency
+        if (saveStock[0].stockId.includes(saveId)) {
+          return res.json("Stock already exists in your watchlist");
+        }
+      } catch (err) {
+        console.log("The saved user data does not exist", err);
+      }
+    }
 
     await savedStocksModel.findOneAndUpdate(filter, update, {
       new: true,
       upsert: true,
     });
-
+    console.log('Stock added to watchlist')
     return res.json("Stock added to your watchlist");
   },
 

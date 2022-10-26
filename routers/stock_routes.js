@@ -10,7 +10,10 @@ router.post('/search', stockController.listStock)
 //save stock route
 router.post('/saved', auth_middleware, stockController.saveStock)
 
-//view the stock
-router.get('/stockView', stockController.listStock)
+
+// router.get('/stockView', stockController.listStock)
+
+//show watch list
+router.get('/watchlist/:id', auth_middleware, stockController.listWatchlist)
 
 module.exports = router

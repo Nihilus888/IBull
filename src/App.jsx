@@ -11,6 +11,7 @@ import SiteHeader from "./components/partials/SiteHeader";
 import StockCard from "./components/stockCard/StockCard";
 import Profile from "./components/profile/Profile";
 import Line from "./components/stockView/Line";
+import Watchlist from "./components/watchlist/Watchlist";
 
 //react-query or axios for frontend API call
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/register" element={<Guest component={Register} />} />
         <Route path="/login" element={<Guest component={Login} />} />
         <Route path="/profile/:id" element={<Auth component={Profile} />} />
+        <Route path="/watchlist" element={<Auth component={Watchlist} /> } />
         <Route path="/Line" element={<Guest component={Line} />} />
         <Route path="/logout" />
       </Routes>
