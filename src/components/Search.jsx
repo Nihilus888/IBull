@@ -124,20 +124,20 @@ const Search = (props) => {
     }
   };
 
-  // To fetch posted jobs data and set into a state to be mapped on the carousel
-  useEffect(() => {
-    const fetchApi = async () => {
-      const res = await fetch("http://localhost:300/jobs/posted");
-      const data = await res.json();
+  // // To fetch posted jobs data and set into a state to be mapped on the carousel
+  // useEffect(() => {
+  //   const fetchApi = async () => {
+  //     const res = await fetch("http://localhost:300/jobs/posted");
+  //     const data = await res.json();
 
-      setStockId(data);
-    };
+  //     setStockId(data);
+  //   };
 
-    fetchApi();
-    setTimeout(() => {
-      fetchSavedData();
-    }, "1000");
-  }, []);
+  //   fetchApi();
+  //   setTimeout(() => {
+  //     fetchSavedData();
+  //   }, "1000");
+  // }, []);
 
   // Save Stock into my watchlist
   useEffect(() => {

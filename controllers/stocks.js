@@ -141,8 +141,13 @@ module.exports = {
   },
 
   listWatchlist: async (req, res) => {
-    const Watchlist = await savedStocksModel.find();
-    res.json(Watchlist);
+    // list all jobs in JSON format
+    const token = res.locals.userAuth;
+    let userId = mongoose.Types.ObjectId(token.data.id);
+    const filter = { user: userId };
+
+    const savedWatchListData = await savedStocksModel.find(filter);
+    res.json(savedWatchListData);
   },
 
   showWatchlist: async (req, res) => {
