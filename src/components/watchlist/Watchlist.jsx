@@ -41,23 +41,23 @@ export default function Watchlist(props) {
   const [watchlist, setWatchlist] = useState(null);
 
   useEffect(() => {
-      let token = localStorage.getItem('user_token')
+    let token = localStorage.getItem("user_token");
 
-      const fetchSaveWatchList = async() => {
-        const response = await fetch('http://localhost:3001/stock/saved', {
-            method: 'GET',
-            headers: {
-                'Authorization:': token
-            },
-        })
+    const fetchSaveWatchList = async () => {
+      const response = await fetch("http://localhost:3001/stock/saved", {
+        method: "GET",
+        headers: {
+          "Authorization:": token,
+        },
+      });
 
-        const data = await response.json()
-        console.log('data: ', data)
-        setWatchlist(data)
-      }
+      const data = await response.json();
+      console.log("data: ", data);
+      setWatchlist(data);
+    };
 
-      fetchSaveWatchList()
-})
+    fetchSaveWatchList();
+  });
 
   return (
     <ThemeProvider theme={theme}>
@@ -76,8 +76,17 @@ export default function Watchlist(props) {
         <Carousel responsive={responsive}>
           <Card>
             <CardContent>
-              <Typography>Name: </Typography>
-              <Typography>Price: </Typography>
+              <Typography
+                component="h5"
+                variant="h5"
+                align="center"
+                sx={{ mb: 2 }}
+              >
+                Name:{" "}
+              </Typography>
+              <Typography component="h5" variant="h5" align="center">
+                Price:{" "}
+              </Typography>
             </CardContent>
           </Card>
         </Carousel>
