@@ -40,6 +40,34 @@ const responsive = {
   },
 };
 
+const handleDelete = (event) => {
+  event.preventDefault();
+  let token = localStorage.getItem("user_token");
+  let id = localStorage.getItem("user_Id");
+
+  console.log("token:", token);
+  fetch(`http://localhost:3001/stock/watchlist/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      console.log("response: ", response);
+      return response.json();
+    })
+    .then((jsonResponse) => {
+      if (jsonResponse.error) {
+        console.log("jsonResponse.error: ", jsonResponse.error);
+        return;
+      }
+    })
+    .catch((err) => {
+      console.log("err: ", err);
+    });
+};
+
 export default function Watchlist(props) {
   const [watchlist, setWatchlist] = useState(null);
 
@@ -70,7 +98,13 @@ export default function Watchlist(props) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="lg">
+      <Container
+        component="main"
+        maxWidth="lg"
+        sx={{
+          mb: 10,
+        }}
+      >
         <Typography
           component="h3"
           variant="h3"
@@ -82,24 +116,136 @@ export default function Watchlist(props) {
           My Stock Watchlist
         </Typography>
 
-        <PieChart sx={{mt: 5, mb: 10 }} />
+        <PieChart sx={{ mt: 5, mb: 10 }} />
 
-        <Carousel responsive={responsive}>
-          <Card>
-            <CardContent>
-              <Typography
-                component="h5"
-                variant="h5"
-                align="center"
-                sx={{ mb: 2 }}
-              >
-                Name:{" "}
-              </Typography>
-              <Typography component="h5" variant="h5" align="center">
-                Price:{" "}
-              </Typography>
-            </CardContent>
+        <Carousel
+          responsive={responsive}
+          autoPlay={true}
+          autoPlaySpeed={3000}
+          infinite={true}
+          mt={15}
+          mb={20}
+        >
+          <Card
+            sx={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              margin: "normal",
+              backgroundColor: "black",
+              opacity: "0.7",
+              color: "white",
+              mr: 2,
+              mt: 5,
+              mb: 3,
+              boxShadow: 20,
+            }}
+          >
+            <Typography gutterBottom variant="h7" component="h2">
+              Hello there
+            </Typography>
           </Card>
+
+          <Card
+            sx={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              margin: "normal",
+              backgroundColor: "black",
+              opacity: "0.7",
+              color: "white",
+              mr: 2,
+              mt: 5,
+              mb: 3,
+              boxShadow: 20,
+            }}
+          >
+            <Typography gutterBottom variant="h7" component="h2">
+              It is what it is
+            </Typography>
+          </Card>
+
+          <Card
+            sx={{
+              height: "100%",
+              display: "flex",
+              flexDirection: "column",
+              margin: "normal",
+              backgroundColor: "black",
+              opacity: "0.7",
+              color: "white",
+              mr: 2,
+              mt: 5,
+              mb: 3,
+              boxShadow: 20,
+            }}
+          >
+            <Typography gutterBottom variant="h7" component="h2">
+              It do be like that some times
+            </Typography>
+          </Card>
+          {/* {watchlist.map((stock) => (
+            <div>
+              <Card
+                key={stock._id}
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  margin: "normal",
+                  backgroundColor: "black",
+                  opacity: "0.7",
+                  color: "white",
+                  mr: 2,
+                  mt: 5,
+                  mb: 3,
+                  boxShadow: 10,
+                }}
+              >
+                <CardContent sx={{ flexGrow: 1 }}>
+                  <Typography
+                    gutterBottom
+                    variant="h3"
+                    component="h2"
+                    fontWeight="bold"
+                  >
+                    {stock.title}
+                  </Typography>
+
+                  <Typography
+                    gutterBottom
+                    variant="h6"
+                    component="h2"
+                    fontStyle="oblique"
+                    fontWeight="bold"
+                  >
+                    {stock.eps}
+                  </Typography>
+
+                  <Typography gutterBottom variant="h7" component="h3">
+                    {stock.position}
+                  </Typography>
+                </CardContent>
+                <CardActions
+                  sx={{ justifyContent: "center", mb: 2, opacity: 1 }}
+                >
+                  <Button
+                    sx={{ mr: 1, opacity: "1" }}
+                    key={stock._id}
+                    size="small"
+                    variant="contained"
+                    value={stock._id}
+                    color="info"
+                    align="justify"
+                    onClick={handleDelete}
+                  >
+                    Save
+                  </Button>
+                </CardActions>
+              </Card>
+            </div>
+          ))} */}
         </Carousel>
       </Container>
     </ThemeProvider>

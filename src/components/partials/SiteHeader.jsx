@@ -95,6 +95,34 @@ const SiteHeader = () => {
 
   const loggedIn = [
     <a
+      href="https://www.bloomberg.com/asia"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+      style={{
+        color: "white",
+        fontWeight: "bold",
+        width: "100%",
+      }}
+    >
+      Bloomberg
+    </a>,
+
+    <a
+      href="https://www.reuters.com/business/finance/"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+      style={{
+        color: "white",
+        fontWeight: "bold",
+        width: "100%",
+      }}
+    >
+      Reuters
+    </a>,
+
+    <a
       href="https://www.cnbc.com/world/?region=world"
       target="_blank"
       rel="noopener"
@@ -121,6 +149,34 @@ const SiteHeader = () => {
 
   const loggedOut = [
     <a
+      href="https://www.bloomberg.com/asia"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+      style={{
+        color: "white",
+        fontWeight: "bold",
+        width: "100%",
+      }}
+    >
+      Bloomberg
+    </a>,
+
+    <a
+      href="https://www.reuters.com/business/finance/"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+      style={{
+        color: "white",
+        fontWeight: "bold",
+        width: "100%",
+      }}
+    >
+      Reuters
+    </a>,
+
+    <a
       href="https://www.cnbc.com/world/?region=world"
       target="_blank"
       rel="noopener"
@@ -128,7 +184,7 @@ const SiteHeader = () => {
       style={{
         color: "white",
         fontWeight: "bold",
-        width: "100%"
+        width: "100%",
       }}
     >
       CNBC
@@ -139,7 +195,7 @@ const SiteHeader = () => {
         textDecoration: "underline",
         color: "white",
         fontWeight: "bold",
-        width: "100%"
+        width: "100%",
       }}
       to="/login"
     >
@@ -150,7 +206,7 @@ const SiteHeader = () => {
         textDecoration: "underline",
         color: "white",
         fontWeight: "bold",
-        width: "100%"
+        width: "100%",
       }}
       to="/register"
     >
@@ -234,7 +290,7 @@ const SiteHeader = () => {
             noWrap
             component="a"
             sx={{
-              mr: 110,
+              mr: 75,
               display: { xs: "none", md: "flex" },
               fontFamily: "Segoe UI Symbol",
               fontWeight: 900,

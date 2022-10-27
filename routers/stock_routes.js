@@ -11,6 +11,6 @@ router.post('/search', stockController.listStock)
 router.post('/saved', auth_middleware, stockController.saveStock)
 
 //get saved watchlist
-router.get('/saved', auth_middleware, stockController.listWatchlist)
+router.get('/saved/:id', auth_middleware, stockController.listWatchlist)
 
 module.exports = router
