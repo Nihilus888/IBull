@@ -111,7 +111,7 @@ export default function Profile(props) {
     event.preventDefault();
     let token = localStorage.getItem("user_token");
     console.log("token:", token);
-    fetch(`http://localhost:3000/users/profile/${id}`, {
+    fetch(`http://localhost:3001/user/profile/${id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
@@ -313,7 +313,7 @@ export default function Profile(props) {
                   />
 
                   <Typography variant="body2" sx={{ fontSize: 20 }}>
-                    Networth: {formData.networth}
+                    Networth: ${formData.networth}
                   </Typography>
 
                 </CardContent>
