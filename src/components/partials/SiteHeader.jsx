@@ -319,7 +319,7 @@ const SiteHeader = () => {
             noWrap
             component="a"
             sx={{
-              mr: 75,
+              mr: 65,
               display: { xs: "none", md: "flex" },
               fontFamily: "Segoe UI Symbol",
               fontWeight: 900,

@@ -116,6 +116,18 @@ export default function Watchlist(props) {
           My Stock Watchlist
         </Typography>
 
+        <Typography
+          component="h6"
+          variant="h6"
+          sx={{
+            mt: 2,
+            fontFamily: 'initial',
+            textDecoration: 'underline'
+          }}
+        >
+          Asset Allocation
+        </Typography>
+
         <PieChart sx={{ mt: 5, mb: 10 }} />
 
         <Carousel

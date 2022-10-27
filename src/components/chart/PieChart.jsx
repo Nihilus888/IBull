@@ -69,7 +69,7 @@ function PieChart() {
 
   return (
     <div>
-      <PolarArea data={data} options={options} height={400} ml={200} />
+      <PolarArea data={data} options={options} height={475} width={500} ml={200} />
     </div>
   );
 }

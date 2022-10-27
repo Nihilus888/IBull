@@ -278,7 +278,7 @@ export default function Home() {
                       bgcolor: "#00D100",
                       border: 1,
                       borderColor: "text.primary",
-                      fontFamily: '"Apple Color Emoji"'
+                      fontFamily: 'revert'
                     }}
                     aria-label="simple table"
                   >
