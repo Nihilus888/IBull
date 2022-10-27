@@ -1,6 +1,7 @@
 const jwt_decode = require("jwt-decode");
 const jwt = require("jsonwebtoken");
-const savedStocksModel = require("../models/saved_stocks");
+const savedStocksSchema = require("../models/saved_stocks");
+const savedStocksModel = require("../models/save_stocks")
 const stockValidators = require("./validators/stocks");
 const mongoose = require("mongoose");
 const saved_stocks = require("../models/saved_stocks");
@@ -109,13 +110,15 @@ module.exports = {
     //set up the userid
     const filter = { user: userId };
 
-    //push the data into MongoDB
-    const update = { $push: { stockId: saveId } };
+    //push the data into MongoDB, probably will explore this further
+    const update = { $push: { stockId: saveId, data: req.body  } };
 
     const saveStock = await savedStocksModel.find(filter);
+    console.log('saveStock', saveStock)
 
-    //check if the account is there
+    //check if the save stock is there
     if (saveStock === undefined) {
+      console.log('saveStock is undefined')
       await savedStocksModel.create({
         user: userId,
         stockId: null,
@@ -154,5 +157,11 @@ module.exports = {
     const id = req.params.id;
     const savedWatchList = await savedStocksModel.findById(id);
     res.json(savedWatchList);
+  },
+
+  removeWatchlist: async (req, res) => {
+    // find and remove saved job data from database collection
+    const id = req.params.id;
+    await savedStocksModel.findByIdAndDelete(id);
   },
 };

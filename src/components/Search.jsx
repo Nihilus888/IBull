@@ -92,89 +92,31 @@ const Search = (props) => {
       });
   };
 
-  // To handle save job click event by setting jobId state, triggering useEffect
   const handleSave = (event) => {
-    let token = localStorage.getItem("user_token");
-    if (token) {
-      setStockId({
-        id: event.target.value,
-      });
-    } else {
-      navigate("/login");
-    }
-  };
-
-  // Function to fetch user's saved jobs data
-  const fetchSavedData = async () => {
-    let token = localStorage.getItem("user_token");
-    if (token) {
-      const res = await fetch(`http://localhost:3001/stock/saved`, {
-        method: "GET",
-        headers: {
-          Authorization: token,
-        },
-      });
-      const data = await res.json();
-
-      try {
-        setSearchData(data[0].jobId);
-      } catch (err) {
-        console.log("No saved jobs data present in DB");
-      }
-    }
-  };
-
-  // // To fetch posted jobs data and set into a state to be mapped on the carousel
-  // useEffect(() => {
-  //   const fetchApi = async () => {
-  //     const res = await fetch("http://localhost:300/jobs/posted");
-  //     const data = await res.json();
-
-  //     setStockId(data);
-  //   };
-
-  //   fetchApi();
-  //   setTimeout(() => {
-  //     fetchSavedData();
-  //   }, "1000");
-  // }, []);
-
-  // Save Stock into my watchlist
-  useEffect(() => {
-    let token = localStorage.getItem("user_token") || "";
-
-    if (stockId === null) {
-      return;
-    }
-
+    event.preventDefault()
+    let token = localStorage.getItem('user_token')
     fetch(`http://localhost:3001/stock/saved`, {
-      method: "POST",
-      body: JSON.stringify(stockId),
+      method: 'GET',
       headers: {
-        "Content-type": "application/json",
-        Authorization: token,
-      },
+        'Content-type': 'application/json',
+        'Authorization': token
+      }
     })
-      .then((response) => {
-        console.log("response: ", response);
-        return response.json();
-      })
-      .then((jsonResponse) => {
-        if (jsonResponse.error) {
-          console.log("jsonResponse.error: ", jsonResponse.error);
-          return;
-        }
-
-        console.log("Save Successful!", jsonResponse);
-      })
-      .catch((err) => {
-        console.log("err: ", err);
-      });
-
-    setTimeout(() => {
-      fetchSavedData();
-    }, "500");
-  }, [stockId]);
+    .then(response => {
+      console.log('response', response)
+      return response.json()
+    })
+    .then(jsonResponse => {
+      if(jsonResponse.error) {
+        console.log('jsonResponse.error: ', jsonResponse.error)
+            return
+      }
+      console.log('Stock Safe Successful!', jsonResponse)
+    })
+    .catch(err => {
+      console.log('err:', err)
+    })
+  }
 
   return (
     <ThemeProvider theme={theme}>
