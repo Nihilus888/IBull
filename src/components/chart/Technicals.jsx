@@ -37,7 +37,7 @@ function BarChart() {
     datasets: [
       {
         label: "Price",
-        data: [109, 300, 114, 173, 124, 279],
+        data: [109, 300, 114, 173, 124, 279, 59],
         backgroundColor: [
           "rgba(255, 99, 132, 0.2)",
           "rgba(54, 162, 235, 0.2)",
@@ -60,7 +60,7 @@ function BarChart() {
   };
 
   let options = {
-    maintainAspectRatio: false,
+    maintainAspectRatio: true,
     scales: {
       y: {
         beginAtZero: true,
@@ -68,7 +68,7 @@ function BarChart() {
     },
     legend: {
       labels: {
-        fontSize: 30,
+        fontSize: 45,
         fontWeight: "bold",
         fontFamily: "cursive",
       },

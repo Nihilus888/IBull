@@ -170,8 +170,8 @@ export default function Home() {
               alignContent='right'
             >
               <Typography
-                component="h5"
-                variant="h5"
+                component="h6"
+                variant="h6"
                 color="text.primary"
                 align="center"
                 mb={4}

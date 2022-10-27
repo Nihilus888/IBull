@@ -100,7 +100,7 @@ const SiteHeader = () => {
       rel="noopener"
       textAlign="center"
       style={{
-        color: "white",
+        color: "black",
         fontWeight: "bold",
         width: "100%",
       }}
@@ -114,7 +114,7 @@ const SiteHeader = () => {
       rel="noopener"
       textAlign="center"
       style={{
-        color: "white",
+        color: "black",
         fontWeight: "bold",
         width: "100%",
       }}
@@ -123,13 +123,28 @@ const SiteHeader = () => {
     </a>,
 
     <a
+      href="https://www.wsj.com/news/markets"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+      style={{
+        color: "black",
+        fontWeight: "bold",
+        width: "100%",
+      }}
+    >
+      WSJ
+    </a>,
+
+    <a
       href="https://www.cnbc.com/world/?region=world"
       target="_blank"
       rel="noopener"
       textAlign="center"
       style={{
-        color: "white",
+        color: "black",
         fontWeight: "bold",
+        width: "100%",
       }}
     >
       CNBC
@@ -154,7 +169,7 @@ const SiteHeader = () => {
       rel="noopener"
       textAlign="center"
       style={{
-        color: "white",
+        color: "black",
         fontWeight: "bold",
         width: "100%",
       }}
@@ -168,7 +183,7 @@ const SiteHeader = () => {
       rel="noopener"
       textAlign="center"
       style={{
-        color: "white",
+        color: "black",
         fontWeight: "bold",
         width: "100%",
       }}
@@ -177,12 +192,26 @@ const SiteHeader = () => {
     </a>,
 
     <a
+      href="https://www.wsj.com/news/markets"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+      style={{
+        color: "black",
+        fontWeight: "bold",
+        width: "100%",
+      }}
+    >
+      WSJ
+    </a>,
+
+    <a
       href="https://www.cnbc.com/world/?region=world"
       target="_blank"
       rel="noopener"
       textAlign="center"
       style={{
-        color: "white",
+        color: "black",
         fontWeight: "bold",
         width: "100%",
       }}
