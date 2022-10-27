@@ -15,7 +15,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import StockCard from "../stockCard/StockCard";
-import Image from '../../components/stockmarket.jpg'
+import Image from "../../components/stockmarket.jpg";
+import PieChart from "../chart/PieChart";
 
 const theme = createTheme();
 
@@ -42,13 +43,17 @@ const responsive = {
 export default function Watchlist(props) {
   const [watchlist, setWatchlist] = useState(null);
 
+  let token = localStorage.getItem("user_token");
+  let id = localStorage.getItem("user_Id");
+
   useEffect(() => {
     let token = localStorage.getItem("user_token");
 
     const fetchSaveWatchList = async () => {
-      const response = await fetch("http://localhost:3001/stock/saved", {
+      const response = await fetch(`http://localhost:3001/stock/saved/${id}`, {
         method: "GET",
         headers: {
+          "Content-type": "application/json",
           "Authorization:": token,
         },
       });
@@ -61,7 +66,7 @@ export default function Watchlist(props) {
     fetchSaveWatchList();
   }, []);
 
-//   const stockCards = watchlist.map((stock) => (<StockCard key={stock._id} data={stock} showViewButton={true}/>))
+  //   const stockCards = watchlist.map((stock) => (<StockCard key={stock._id} data={stock} showViewButton={true}/>))
 
   return (
     <ThemeProvider theme={theme}>
@@ -71,11 +76,13 @@ export default function Watchlist(props) {
           variant="h3"
           sx={{
             mt: 2,
-            mb: 20,
+            mb: 5,
           }}
         >
           My Stock Watchlist
         </Typography>
+
+        <PieChart sx={{mt: 5, mb: 10 }} />
 
         <Carousel responsive={responsive}>
           <Card>
