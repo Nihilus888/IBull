@@ -128,6 +128,7 @@ const SiteHeader = () => {
       style={{
         color: "white",
         fontWeight: "bold",
+        width: "100%"
       }}
     >
       CNBC
@@ -138,6 +139,7 @@ const SiteHeader = () => {
         textDecoration: "underline",
         color: "white",
         fontWeight: "bold",
+        width: "100%"
       }}
       to="/login"
     >
@@ -148,6 +150,7 @@ const SiteHeader = () => {
         textDecoration: "underline",
         color: "white",
         fontWeight: "bold",
+        width: "100%"
       }}
       to="/register"
     >
@@ -164,12 +167,8 @@ const SiteHeader = () => {
       Profile
     </Link>,
 
-    <Link to={{ pathname: "https://www.ft.com/" }} target="_blank">
-      Financial Times
-    </Link>,
-
     <Button
-      style={{ textDecoration: "none", color: "black" }}
+      style={{ textDecoration: "none", color: "black", width: "100%" }}
       onClick={handleLogout}
     >
       Logout

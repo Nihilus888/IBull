@@ -14,6 +14,8 @@ import Carousel from "react-multi-carousel";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import StockCard from "../stockCard/StockCard";
+import Image from '../../components/stockmarket.jpg'
 
 const theme = createTheme();
 
@@ -57,7 +59,9 @@ export default function Watchlist(props) {
     };
 
     fetchSaveWatchList();
-  });
+  }, []);
+
+//   const stockCards = watchlist.map((stock) => (<StockCard key={stock._id} data={stock} showViewButton={true}/>))
 
   return (
     <ThemeProvider theme={theme}>

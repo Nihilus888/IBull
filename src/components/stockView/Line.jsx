@@ -12,15 +12,15 @@ function LineChart(props) {
       {
         label: "Stock price over the trading day",
         data: props.data,
-        backgroundColor: ["rgb(75, 192, 192)"],
-        borderColor: ["rgba(255, 99, 132, 1)"],
-        fill: false,
+        backgroundColor: ["red"],
+        borderColor: ["green"],
+        fill: true,
         tension: 0.1,
         borderDash: [],
         borderDashOffset: 0.0,
         borderJoinStyle: "miter",
         borderCapStyle: "butt",
-        pointBorderColor: "rgba(75,192,192,1)",
+        pointBorderColor: "rgba(192,192,192,1)",
         pointBorderWidth: 5,
         pointHoverRadius: 10,
         pointRadius: 5,
@@ -36,11 +36,11 @@ function LineChart(props) {
     scales: {
       y: {
         beginAtZero: false,
-        stacked: false,
+        stacked: true,
       },
       x: {
         beginAtZero: true,
-        stacked: true,
+        stacked: false,
         labels: [
           1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
           21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35
