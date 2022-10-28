@@ -23,4 +23,5 @@ router.patch('/profile/:id', auth_middleware, userController.editProfile)
 //delete profile route
 router.delete('/profile/:id', auth_middleware, userController.deleteProfile)
 
+
 module.exports = router;

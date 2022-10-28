@@ -96,7 +96,8 @@ const Search = (props) => {
     event.preventDefault()
     let token = localStorage.getItem('user_token')
     fetch(`http://localhost:3001/stock/saved`, {
-      method: 'GET',
+      method: 'POST',
+      body: JSON.stringify(),
       headers: {
         'Content-type': 'application/json',
         'Authorization': token

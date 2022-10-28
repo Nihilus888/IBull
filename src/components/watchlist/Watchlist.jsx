@@ -17,8 +17,17 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import StockCard from "../stockCard/StockCard";
 import Image from "../../components/stockmarket.jpg";
 import PieChart from "../chart/PieChart";
+import { Paper } from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { IconButton } from "@mui/material";
 
 const theme = createTheme();
+
+const styles = {
+  paperContainer: {
+    backgroundImage: `url(${"../../components/stockmarket.jpg"})`,
+  },
+};
 
 const responsive = {
   superLargeDesktop: {
@@ -97,107 +106,121 @@ export default function Watchlist(props) {
   //   const stockCards = watchlist.map((stock) => (<StockCard key={stock._id} data={stock} showViewButton={true}/>))
 
   return (
-    <ThemeProvider theme={theme}>
-      <Container
-        component="main"
-        maxWidth="lg"
-        sx={{
-          mb: 10,
-        }}
-      >
-        <Typography
-          component="h3"
-          variant="h3"
+    <Paper style={styles.paperContainer}>
+      <ThemeProvider theme={theme}>
+        <Container
+          component="main"
+          maxWidth="lg"
           sx={{
-            mt: 2,
-            mb: 5,
+            mb: 10,
           }}
         >
-          My Stock Watchlist
-        </Typography>
-
-        <Typography
-          component="h6"
-          variant="h6"
-          sx={{
-            mt: 2,
-            fontFamily: 'initial',
-            textDecoration: 'underline'
-          }}
-        >
-          Asset Allocation
-        </Typography>
-
-        <PieChart sx={{ mt: 5, mb: 10 }} />
-
-        <Carousel
-          responsive={responsive}
-          autoPlay={true}
-          autoPlaySpeed={3000}
-          infinite={true}
-          mt={15}
-          mb={20}
-        >
-          <Card
+          <Typography
+            component="h3"
+            variant="h3"
             sx={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              margin: "normal",
-              backgroundColor: "black",
-              opacity: "0.7",
-              color: "white",
-              mr: 2,
-              mt: 5,
-              mb: 3,
-              boxShadow: 20,
+              mt: 2,
+              mb: 5,
             }}
           >
-            <Typography gutterBottom variant="h7" component="h2">
-              Hello there
-            </Typography>
-          </Card>
+            My Stock Watchlist
+          </Typography>
 
-          <Card
+          <Typography
+            component="h6"
+            variant="h6"
             sx={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              margin: "normal",
-              backgroundColor: "black",
-              opacity: "0.7",
-              color: "white",
-              mr: 2,
-              mt: 5,
-              mb: 3,
-              boxShadow: 20,
+              mt: 2,
+              fontFamily: "initial",
+              textDecoration: "underline",
             }}
           >
-            <Typography gutterBottom variant="h7" component="h2">
-              It is what it is
-            </Typography>
-          </Card>
+            Asset Allocation
+          </Typography>
 
-          <Card
-            sx={{
-              height: "100%",
-              display: "flex",
-              flexDirection: "column",
-              margin: "normal",
-              backgroundColor: "black",
-              opacity: "0.7",
-              color: "white",
-              mr: 2,
-              mt: 5,
-              mb: 3,
-              boxShadow: 20,
-            }}
+          <PieChart sx={{ mt: 5, mb: 10 }} />
+
+          <Carousel
+            responsive={responsive}
+            autoPlay={true}
+            autoPlaySpeed={3000}
+            infinite={true}
+            mt={15}
+            mb={20}
           >
-            <Typography gutterBottom variant="h7" component="h2">
-              It do be like that some times
-            </Typography>
-          </Card>
-          {/* {watchlist.map((stock) => (
+            <Card
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                margin: "normal",
+                backgroundColor: "black",
+                opacity: "0.7",
+                color: "white",
+                mr: 2,
+                mt: 5,
+                mb: 3,
+                boxShadow: 20,
+              }}
+            >
+              <Typography gutterBottom variant="h7" component="h2">
+                Hello there
+              </Typography>
+
+              <Button
+                variant="outlined"
+                startIcon={<DeleteIcon />}
+                color='error'
+                sx={{ 
+                 width: "50%",
+                 ml: 10,
+                 justifyContent: 'center'
+                }}
+              >
+                Delete
+              </Button>
+            </Card>
+
+            <Card
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                margin: "normal",
+                backgroundColor: "black",
+                opacity: "0.7",
+                color: "white",
+                mr: 2,
+                mt: 5,
+                mb: 3,
+                boxShadow: 20,
+              }}
+            >
+              <Typography gutterBottom variant="h7" component="h2">
+                It is what it is
+              </Typography>
+            </Card>
+
+            <Card
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                margin: "normal",
+                backgroundColor: "black",
+                opacity: "0.7",
+                color: "white",
+                mr: 2,
+                mt: 5,
+                mb: 3,
+                boxShadow: 20,
+              }}
+            >
+              <Typography gutterBottom variant="h7" component="h2">
+                It do be like that some times
+              </Typography>
+            </Card>
+            {/* {watchlist.map((stock) => (
             <div>
               <Card
                 key={stock._id}
@@ -258,8 +281,9 @@ export default function Watchlist(props) {
               </Card>
             </div>
           ))} */}
-        </Carousel>
-      </Container>
-    </ThemeProvider>
+          </Carousel>
+        </Container>
+      </ThemeProvider>
+    </Paper>
   );
 }
