@@ -55,7 +55,7 @@ const handleDelete = (event) => {
   let id = localStorage.getItem("user_Id");
 
   console.log("token:", token);
-  fetch(`http://localhost:3001/stock/watchlist/${id}`, {
+  fetch(`http://localhost:3001/stock/saved/${id}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -72,6 +72,7 @@ const handleDelete = (event) => {
         return;
       }
     })
+    console.log('Delete successful')
     .catch((err) => {
       console.log("err: ", err);
     });
@@ -176,6 +177,7 @@ export default function Watchlist(props) {
                  ml: 10,
                  justifyContent: 'center'
                 }}
+                onClick={handleDelete}
               >
                 Delete
               </Button>

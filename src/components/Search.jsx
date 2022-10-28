@@ -60,6 +60,7 @@ const Search = (props) => {
     pg: 1,
   });
   const [stockId, setStockId] = useState(null);
+  const [savedData, setSavedData] = useState([])
 
   const handleChange = (e) => {
     setSearchData({
@@ -95,29 +96,81 @@ const Search = (props) => {
   const handleSave = (event) => {
     event.preventDefault()
     let token = localStorage.getItem('user_token')
-    fetch(`http://localhost:3001/stock/saved`, {
-      method: 'POST',
-      body: JSON.stringify(),
-      headers: {
-        'Content-type': 'application/json',
-        'Authorization': token
+    if (token) {
+      //retrieves the necessary information when we click on save
+      setStockId({
+        id: event.target.value
+      })
+      console.log('event.target.value: ', event.target.value)
+    } 
+      //if there is no token, we cannot let them save it and instead let them navigate to login
+      else {
+        navigate('/login')
       }
-    })
-    .then(response => {
-      console.log('response', response)
-      return response.json()
-    })
-    .then(jsonResponse => {
-      if(jsonResponse.error) {
-        console.log('jsonResponse.error: ', jsonResponse.error)
+    };
+
+    //Fetch the user's saved stocks data
+    const fetchSavedData = async() => {
+      let token = localStorage.getItem('user_token')
+      if (token) {
+        const response = await fetch('http://localhost:3001/stock/saved', {
+          method: 'GET',
+          headers: {
+            'Authorization': token
+          },
+        })
+        const data = await response.json()
+        console.log('data:', data)
+
+        try {
+          setSavedData(data)
+        } catch(err) {
+          console.log('No saved stock data present at the moment')
+        }
+      }
+    }
+
+    //save jobs 
+    useEffect(() => {
+      let token = localStorage.getItem('user_token') || ""
+
+      //if our stock id is null return null
+      if(stockId === null) {
+        return
+      }
+        
+      //if our stock id not null we shall post it into the database for storage
+      fetch('http://localhost:3001/stock/saved', {
+        method: 'POST',
+        body: JSON.stringify(stockId),
+        headers: {
+          'Content-type': 'application/json',
+          'Authorization': token
+        },
+      })
+        .then(response => {
+          console.log('response: ', response)
+          return response.json()
+        })
+        .then(jsonResponse => {
+          if (jsonResponse.error) {
+            console.log('jsonResponse.error: ', jsonResponse.error)
             return
-      }
-      console.log('Stock Safe Successful!', jsonResponse)
-    })
-    .catch(err => {
-      console.log('err:', err)
-    })
-  }
+          }
+
+          console.log('Save Stock Successful!', jsonResponse)
+        })
+        .catch(err => {
+          console.log('err: ', err)
+        })
+
+        setTimeout(() => {
+          fetchSavedData()
+        }, "600")
+
+      
+    }, [stockId])
+  
 
   return (
     <ThemeProvider theme={theme}>
