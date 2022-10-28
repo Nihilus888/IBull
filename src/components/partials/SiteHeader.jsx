@@ -60,6 +60,7 @@ const SiteHeader = () => {
     e.preventDefault();
 
     let token = localStorage.getItem("user_token");
+    let id = localStorage.getItem('user_Id')
 
     fetch(`http://localhost:3001/user/logout`, {
       method: "POST",
@@ -93,7 +94,11 @@ const SiteHeader = () => {
       });
   };
 
+  const token = localStorage.getItem("user_token");
+  let id = localStorage.getItem('user_Id')
+
   const loggedIn = [
+
     <a
       href="https://www.bloomberg.com/asia"
       target="_blank"
@@ -156,7 +161,7 @@ const SiteHeader = () => {
         color: "white",
         fontWeight: "bold",
       }}
-      to={`/watchlist`}
+      to={`/watchlist/${id}`}
     >
       Watchlist
     </Link>,

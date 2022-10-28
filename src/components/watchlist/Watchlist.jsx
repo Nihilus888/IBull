@@ -49,13 +49,34 @@ const responsive = {
   },
 };
 
-const handleDelete = (event) => {
-  event.preventDefault();
+
+export default function Watchlist(props) {
+  const [watchlist, setWatchlist] = useState(null);
+
+  const navigate = useNavigate()
+
   let token = localStorage.getItem("user_token");
   let id = localStorage.getItem("user_Id");
 
-  console.log("token:", token);
-  fetch(`http://localhost:3001/stock/saved/${id}`, {
+  const handleDelete = (event) => {
+    event.preventDefault();
+    let token = localStorage.getItem("user_token");
+    let id = localStorage.getItem("user_Id");
+  
+    if (token) {
+      //retrieves the necessary information when we click on save
+      setWatchlist({
+        id: event.target.value,
+      });
+      console.log("event.target.value: ", event.target.value);
+    }
+    //if there is no token, we cannot let them save it and instead let them navigate to login
+    else {
+      navigate("/login");
+    }
+  };
+  
+  fetch(`http://localhost:3001/stock/saved${setWatchlist}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
@@ -71,21 +92,15 @@ const handleDelete = (event) => {
         console.log("jsonResponse.error: ", jsonResponse.error);
         return;
       }
+      console.log("Delete successful")
     })
-    console.log('Delete successful')
     .catch((err) => {
-      console.log("err: ", err);
-    });
-};
-
-export default function Watchlist(props) {
-  const [watchlist, setWatchlist] = useState(null);
-
-  let token = localStorage.getItem("user_token");
-  let id = localStorage.getItem("user_Id");
+    console.log("err: ", err);
+  });
 
   useEffect(() => {
     let token = localStorage.getItem("user_token");
+    let id = localStorage.getItem('user_Id')
 
     const fetchSaveWatchList = async () => {
       const response = await fetch(`http://localhost:3001/stock/saved/${id}`, {
@@ -171,11 +186,11 @@ export default function Watchlist(props) {
               <Button
                 variant="outlined"
                 startIcon={<DeleteIcon />}
-                color='error'
-                sx={{ 
-                 width: "50%",
-                 ml: 10,
-                 justifyContent: 'center'
+                color="error"
+                sx={{
+                  width: "50%",
+                  ml: 10,
+                  justifyContent: "center",
                 }}
                 onClick={handleDelete}
               >

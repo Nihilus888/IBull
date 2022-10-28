@@ -150,6 +150,7 @@ module.exports = {
     const filter = { user: userId };
 
     const savedWatchListData = await savedStocksModel.find(filter);
+    console.log('savedWatchListData: ', savedWatchListData)
     res.json(savedWatchListData);
   },
 
