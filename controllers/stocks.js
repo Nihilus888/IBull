@@ -147,6 +147,7 @@ module.exports = {
     // list all jobs in JSON format
     const token = res.locals.userAuth;
     let userId = mongoose.Types.ObjectId(token.data.id);
+    console.log('userId', userId)
     const filter = { user: userId };
 
     const savedWatchListData = await savedStocksModel.find(filter);
@@ -156,7 +157,10 @@ module.exports = {
 
   showWatchlist: async (req, res) => {
     const id = req.params.id;
-    const savedWatchList = await savedStocksModel.findById(id);
+    console.log("id:", id)
+    const filter = { user: id }
+    const savedWatchList = await savedStocksModel.find(filter);
+    console.log("savedWatchList:", savedWatchList)
     res.json(savedWatchList);
   },
 

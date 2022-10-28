@@ -10,12 +10,9 @@ import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid'
 import Button from '@mui/material/Button'
 import { useParams, useNavigate } from 'react-router-dom'
-import { Line } from 'react-chartjs-2';
-import { EightteenMpSharp } from '@mui/icons-material';
 
 function StockCard(props) {
-  //pull the data from the API called stocks
-  const { _id, symbol, title, name, price, eps } = props.data
+  const { _id, title, position, company, salary_min, salary_max } = props.data
   const displayView = props.showViewButton ? true : false
 
   const navigate = useNavigate()
@@ -27,22 +24,21 @@ function StockCard(props) {
           sx={{ height: 'auto', width: '100', display: 'flex', flexDirection: 'column', mt:'5', opacity: '1', backgroundColor:'black', opacity: '0.7', color: 'white'}}
         >
           <CardContent sx={{ flexGrow: 1 }}>
-
             <Typography gutterBottom variant="h5" component="h2" fontWeight='bold'>
-              {symbol}
-            </Typography>
-            <Typography>
               {title}
             </Typography>
             <Typography>
-              {name}
+              {position}
             </Typography>
             <Typography>
-              {price}
+              {company}
+            </Typography>
+            <Typography>
+              ${salary_min} - {salary_max}
             </Typography>
           </CardContent>
           <CardActions sx={{ justifyContent: 'center'}}>
-            <Link style={{textDecoration: 'none', color: 'white', opacity: '1'}} to={`/stock/${_id}/edit`}><Button size="small" variant="contained" color='info'>View or Edit</Button></Link>
+            <Link style={{textDecoration: 'none', color: 'white', opacity: '1'}} to={`/jobs/${_id}/edit`}><Button size="small" variant="contained" color='info'>View or Edit</Button></Link>
           </CardActions>
         </Card>
         </Grid>
@@ -53,3 +49,4 @@ function StockCard(props) {
 }
 
 export default StockCard
+

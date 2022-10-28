@@ -20,6 +20,7 @@ import PieChart from "../chart/PieChart";
 import { Paper } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
+import { Grid } from "@mui/material";
 
 const theme = createTheme();
 
@@ -49,75 +50,73 @@ const responsive = {
   },
 };
 
-
-export default function Watchlist(props) {
+export default function Watchlist() {
   const [watchlist, setWatchlist] = useState(null);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   let token = localStorage.getItem("user_token");
   let id = localStorage.getItem("user_Id");
 
-  const handleDelete = (event) => {
-    event.preventDefault();
-    let token = localStorage.getItem("user_token");
-    let id = localStorage.getItem("user_Id");
-  
-    if (token) {
-      //retrieves the necessary information when we click on save
-      setWatchlist({
-        id: event.target.value,
-      });
-      console.log("event.target.value: ", event.target.value);
-    }
-    //if there is no token, we cannot let them save it and instead let them navigate to login
-    else {
-      navigate("/login");
-    }
-  };
-  
-  fetch(`http://localhost:3001/stock/saved${setWatchlist}`, {
-    method: "DELETE",
-    headers: {
-      "Content-type": "application/json",
-      Authorization: token,
-    },
-  })
-    .then((response) => {
-      console.log("response: ", response);
-      return response.json();
-    })
-    .then((jsonResponse) => {
-      if (jsonResponse.error) {
-        console.log("jsonResponse.error: ", jsonResponse.error);
-        return;
-      }
-      console.log("Delete successful")
-    })
-    .catch((err) => {
-    console.log("err: ", err);
-  });
 
   useEffect(() => {
-    let token = localStorage.getItem("user_token");
-    let id = localStorage.getItem('user_Id')
+    let token = localStorage.getItem('user_token')
+    let id = localStorage.getItem("user_Id");
 
-    const fetchSaveWatchList = async () => {
-      const response = await fetch(`http://localhost:3001/stock/saved/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-type": "application/json",
-          "Authorization:": token,
+    const fetchSaveData = async () => {
+        const res = await fetch(`http://localhost:3001/stock/saved/${id}`, {
+         method: 'GET',
+         headers: {
+          'Authorization': token
         },
-      });
+         })
+        const data = await res.json()
+        console.log('stock data:', data)
+        setWatchlist(data)
+    }
+    fetchSaveData()
+})
 
-      const data = await response.json();
-      console.log("data: ", data);
-      setWatchlist(data);
-    };
 
-    fetchSaveWatchList();
-  }, []);
+  // const handleDelete = (event) => {
+  //   event.preventDefault();
+  //   let token = localStorage.getItem("user_token");
+  //   let id = localStorage.getItem("user_Id");
+
+  //   if (token) {
+  //     //retrieves the necessary information when we click on save
+  //     setWatchlist({
+  //       id: event.target.value,
+  //     });
+  //     console.log("event.target.value: ", event.target.value);
+  //   }
+  //   //if there is no token, we cannot let them save it and instead let them navigate to login
+  //   else {
+  //     navigate("/login");
+  //   }
+  // };
+
+  // fetch(`http://localhost:3001/stock/saved/${id}`, {
+  //   method: "DELETE",
+  //   headers: {
+  //     "Content-type": "application/json",
+  //     Authorization: token,
+  //   },
+  // })
+  //   .then((response) => {
+  //     console.log("response: ", response);
+  //     return response.json();
+  //   })
+  //   .then((jsonResponse) => {
+  //     if (jsonResponse.error) {
+  //       console.log("jsonResponse.error: ", jsonResponse.error);
+  //       return;
+  //     }
+  //     console.log("Delete successful");
+  //   })
+  //   .catch((err) => {
+  //     console.log("err: ", err);
+  //   });
 
   //   const stockCards = watchlist.map((stock) => (<StockCard key={stock._id} data={stock} showViewButton={true}/>))
 
@@ -180,7 +179,7 @@ export default function Watchlist(props) {
               }}
             >
               <Typography gutterBottom variant="h7" component="h2">
-                Hello there
+                {}
               </Typography>
 
               <Button
@@ -192,7 +191,7 @@ export default function Watchlist(props) {
                   ml: 10,
                   justifyContent: "center",
                 }}
-                onClick={handleDelete}
+                // onClick={handleDelete}
               >
                 Delete
               </Button>
