@@ -26,7 +26,7 @@ const theme = createTheme();
 
 const styles = {
   paperContainer: {
-    backgroundImage: `url(${"../../components/stockmarket.jpg"})`,
+    backgroundImage: `url(${Image})`,
   },
 };
 
@@ -73,9 +73,14 @@ export default function Watchlist() {
       console.log("stock data:", data);
       setWatchlist(data);
     };
-    fetchSaveData()
+    fetchSaveData();
   }, []);
 
+  console.log("watchlist: ", watchlist[0].stockId);
+
+  for (let i = 0; i < watchlist[0].stockId.length; i++) {
+    console.log(watchlist[0].stockId[i]);
+  }
   // const handleDelete = (event) => {
   //   event.preventDefault();
   //   let token = localStorage.getItem("user_token");
@@ -161,6 +166,7 @@ export default function Watchlist() {
             mt={15}
             mb={20}
           >
+            {watchlist[0].stockId.map((stock)=> (
             <Card
               sx={{
                 height: "100%",
@@ -176,125 +182,19 @@ export default function Watchlist() {
                 boxShadow: 20,
               }}
             >
-              <Typography gutterBottom variant="h7" component="h2">
-                Hello there
-              </Typography>
-
-              <Button
-                variant="outlined"
-                startIcon={<DeleteIcon />}
-                color="error"
-                sx={{
-                  width: "50%",
-                  ml: 10,
-                  justifyContent: "center",
-                }}
-                // onClick={handleDelete}
-              >
-                Delete
-              </Button>
-            </Card>
-
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                margin: "normal",
-                backgroundColor: "black",
-                opacity: "0.7",
-                color: "white",
-                mr: 2,
-                mt: 5,
-                mb: 3,
-                boxShadow: 20,
-              }}
-            >
-              <Typography gutterBottom variant="h7" component="h2">
-                It is what it is
-              </Typography>
-            </Card>
-
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                margin: "normal",
-                backgroundColor: "black",
-                opacity: "0.7",
-                color: "white",
-                mr: 2,
-                mt: 5,
-                mb: 3,
-                boxShadow: 20,
-              }}
-            >
-              <Typography gutterBottom variant="h7" component="h2">
-                It do be like that some times
-              </Typography>
-            </Card>
-            {/* {watchlist.map((stock) => (
-            <div>
-              <Card
-                key={stock._id}
-                sx={{
-                  height: "100%",
-                  display: "flex",
-                  flexDirection: "column",
-                  margin: "normal",
-                  backgroundColor: "black",
-                  opacity: "0.7",
-                  color: "white",
-                  mr: 2,
-                  mt: 5,
-                  mb: 3,
-                  boxShadow: 10,
-                }}
-              >
-                <CardContent sx={{ flexGrow: 1 }}>
-                  <Typography
-                    gutterBottom
-                    variant="h3"
-                    component="h2"
-                    fontWeight="bold"
-                  >
-                    {stock.title}
-                  </Typography>
-
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="h2"
-                    fontStyle="oblique"
-                    fontWeight="bold"
-                  >
-                    {stock.eps}
-                  </Typography>
-
-                  <Typography gutterBottom variant="h7" component="h3">
-                    {stock.position}
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  sx={{ justifyContent: "center", mb: 2, opacity: 1 }}
+              <CardContent sx={{ flexGrow: 1, variant: "outlined", mr: 2 }}>
+                <Typography
+                  gutterBottom
+                  variant="h4"
+                  component="h2"
+                  fontWeight="bold"
+                  display="inline-flex"
                 >
-                  <Button
-                    sx={{ mr: 1, opacity: "1" }}
-                    key={stock._id}
-                    size="small"
-                    variant="contained"
-                    value={stock._id}
-                    color="info"
-                    align="justify"
-                    onClick={handleDelete}
-                  >
-                    Save
-                  </Button>
-                </CardActions>
-              </Card>
-            </div>
-          ))} */}
+                  {stock}
+                </Typography>
+              </CardContent>
+            </Card>
+            ))}
           </Carousel>
         </Container>
       </ThemeProvider>
