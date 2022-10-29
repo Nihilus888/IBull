@@ -21,6 +21,7 @@ import { useNavigate } from "react-router-dom";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
@@ -106,6 +107,9 @@ export default function Register() {
         }
 
         console.log("Registration Successful!");
+        toast.success("Registration successful!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
 
         //remember to deal navigate straight to home logged in page
         navigate("/");

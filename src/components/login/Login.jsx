@@ -69,12 +69,10 @@ function Login() {
       },
     })
       .then((response) => {
-        toast.success("Login successful!", {
-          position: toast.POSITION.TOP_CENTER,
-        });
         return response.json();
-      })
+      }) 
       .then((jsonResponse) => {
+        toast.error(jsonResponse.error);
         if (jsonResponse.error) {
           return;
         }
@@ -82,6 +80,9 @@ function Login() {
         // store the token into localstorage / cookie
         localStorage.setItem("user_token", jsonResponse.token);
         localStorage.setItem("user_Id", jsonResponse.userId);
+        toast.success("Login successful!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
 
         navigate("/");
       })
