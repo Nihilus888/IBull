@@ -81,6 +81,7 @@ export default function Watchlist() {
   for (let i = 0; i < watchlist[0].stockId.length; i++) {
     console.log(watchlist[0].stockId[i]);
   }
+
   // const handleDelete = (event) => {
   //   event.preventDefault();
   //   let token = localStorage.getItem("user_token");
@@ -159,14 +160,15 @@ export default function Watchlist() {
           <PieChart sx={{ mt: 5, mb: 10 }} />
 
           <Carousel
-            responsive={responsive}
-            autoPlay={true}
-            autoPlaySpeed={3000}
-            infinite={true}
-            mt={15}
-            mb={20}
-          >
-            {watchlist[0].stockId.map((stock)=> (
+              responsive={responsive}
+              autoPlay={true}
+              autoPlaySpeed={3000}
+              infinite={true}
+              mt={15}
+              mb={20}
+            >
+
+          {watchlist[0].stockId.map((stock)=> (
             <Card
               sx={{
                 height: "100%",
@@ -194,7 +196,7 @@ export default function Watchlist() {
                 </Typography>
               </CardContent>
             </Card>
-            ))}
+          ))}
           </Carousel>
         </Container>
       </ThemeProvider>
