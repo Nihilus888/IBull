@@ -58,25 +58,23 @@ export default function Watchlist() {
   let token = localStorage.getItem("user_token");
   let id = localStorage.getItem("user_Id");
 
-
   useEffect(() => {
-    let token = localStorage.getItem('user_token')
+    let token = localStorage.getItem("user_token");
     let id = localStorage.getItem("user_Id");
 
     const fetchSaveData = async () => {
-        const res = await fetch(`http://localhost:3001/stock/saved/${id}`, {
-         method: 'GET',
-         headers: {
-          'Authorization': token
+      const res = await fetch(`http://localhost:3001/stock/saved/${id}`, {
+        method: "GET",
+        headers: {
+          Authorization: token,
         },
-         })
-        const data = await res.json()
-        console.log('stock data:', data)
-        setWatchlist(data)
-    }
+      });
+      const data = await res.json();
+      console.log("stock data:", data);
+      setWatchlist(data);
+    };
     fetchSaveData()
-})
-
+  }, []);
 
   // const handleDelete = (event) => {
   //   event.preventDefault();
@@ -179,7 +177,7 @@ export default function Watchlist() {
               }}
             >
               <Typography gutterBottom variant="h7" component="h2">
-                {}
+                Hello there
               </Typography>
 
               <Button
