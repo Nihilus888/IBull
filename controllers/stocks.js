@@ -166,7 +166,10 @@ module.exports = {
 
   removeWatchlist: async (req, res) => {
     // find and remove saved job data from database collection
+    const saveId = req.body.id
+    console.log('saveId:', saveId)
     const id = req.params.id;
+    console.log('id:', id)
     await savedStocksModel.findByIdAndDelete(id);
   },
 };

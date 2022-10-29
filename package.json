@@ -34,6 +34,7 @@
     "react-multi-carousel": "^2.8.2",
     "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.0.8",
     "router": "^1.3.7",
     "utils": "^0.3.1",
     "vision-react-stock-chart": "^2.4.2",

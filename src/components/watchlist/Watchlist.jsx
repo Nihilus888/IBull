@@ -52,6 +52,7 @@ const responsive = {
 
 export default function Watchlist() {
   const [watchlist, setWatchlist] = useState(null);
+  const [stockId, setStockId] = useState(null)
 
   const navigate = useNavigate();
 
@@ -74,33 +75,35 @@ export default function Watchlist() {
       setWatchlist(data[0].stockId);
     };
     fetchSaveData();
-  });
+  }, []);
 
   console.log('watchlist:', watchlist)
 
   const handleDelete = (event) => {
-    event.preventDefault();
-    let token = localStorage.getItem("user_token");
-    let id = localStorage.getItem("user_Id");
 
-    if (token) {
-      //retrieves the necessary information when we click on save
-      setWatchlist({
-        id: event.target.value,
-      });
-      console.log("event.target.value: ", event.target.value);
-    }
-    //if there is no token, we cannot let them save it and instead let them navigate to login
-    else {
-      navigate("/login");
-    }
-  };
+    event.preventDefault();
+    let token = localStorage.getItem('user_token')
+    let id = localStorage.getItem("user_Id");
+  //   let token = localStorage.getItem("user_token");
+  //   if (token) {
+  //     //retrieves the necessary information when we click on delete
+  //     setStockId({
+  //       id: event.target.value,
+  //     });
+  //     console.log("event.target.value: ", setStockId.id);
+  //   }
+  //   //if there is no token, we cannot let them save it and instead let them navigate to login
+  //   else {
+  //     navigate("/login");
+  //   }
+  // };
+  console.log('Trying delete button')
 
   fetch(`http://localhost:3001/stock/saved/${id}`, {
     method: "DELETE",
     headers: {
       "Content-type": "application/json",
-      Authorization: token,
+      'Authorization': token,
     },
   })
     .then((response) => {
@@ -117,6 +120,8 @@ export default function Watchlist() {
     .catch((err) => {
       console.log("err: ", err);
     });
+    console.log('Delete successful')
+  }
 
   return (
     <Paper style={styles.paperContainer}>
@@ -154,9 +159,9 @@ export default function Watchlist() {
           <PieChart sx={{ mt: 5, mb: 10 }} />
 
             {watchlist
-              ? watchlist.map((stock) => (
+              ? watchlist.map((stock, index) => (
                   <Card
-                    key={stock.id}
+                    key={index}
                     sx={{
                       height: "100%",
                       display: "flex",

@@ -321,16 +321,6 @@ const Search = (props) => {
                 >
                   Save
                 </Button>
-                <Button
-                  sx={{ ml: 1 }}
-                  size="small"
-                  variant="contained"
-                  color="error"
-                  align="center"
-                  href={`${searchPass.link}`}
-                >
-                  View
-                </Button>
               </CardActions>
             </Card>
           </Carousel>
@@ -383,27 +373,6 @@ const Search = (props) => {
               </TableBody>
             </Table>
           </TableContainer>
-
-          {/* <Container maxWidth="s">
-          <Line
-            datasetIdKey="id"
-            data={{
-              labels: ["Jun", "Jul", "Aug"],
-              datasets: [
-                {
-                  id: 1,
-                  label: "",
-                  data: [5, 6, 7],
-                },
-                {
-                  id: 2,
-                  label: "",
-                  data: [3, 2, 1],
-                },
-              ],
-            }}
-          />
-          </Container> */}
         </Container>
       ) : (
         <></>

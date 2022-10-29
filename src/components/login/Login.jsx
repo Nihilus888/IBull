@@ -19,6 +19,7 @@ import Alert from '@mui/material/Alert';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
@@ -68,6 +69,9 @@ function Login() {
       },
     })
       .then((response) => {
+        toast.success("Login successful!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
         return response.json();
       })
       .then((jsonResponse) => {
