@@ -66,63 +66,57 @@ export default function Watchlist() {
       const res = await fetch(`http://localhost:3001/stock/saved/${id}`, {
         method: "GET",
         headers: {
-          Authorization: token,
+          'Authorization': token,
         },
       });
       const data = await res.json();
-      console.log("stock data:", data);
-      setWatchlist(data);
+      console.log("stock data:", data[0].stockId);
+      setWatchlist(data[0].stockId);
     };
     fetchSaveData();
-  }, []);
+  });
 
-  console.log("watchlist: ", watchlist[0].stockId);
+  console.log('watchlist:', watchlist)
 
-  for (let i = 0; i < watchlist[0].stockId.length; i++) {
-    console.log(watchlist[0].stockId[i]);
-  }
+  const handleDelete = (event) => {
+    event.preventDefault();
+    let token = localStorage.getItem("user_token");
+    let id = localStorage.getItem("user_Id");
 
-  // const handleDelete = (event) => {
-  //   event.preventDefault();
-  //   let token = localStorage.getItem("user_token");
-  //   let id = localStorage.getItem("user_Id");
+    if (token) {
+      //retrieves the necessary information when we click on save
+      setWatchlist({
+        id: event.target.value,
+      });
+      console.log("event.target.value: ", event.target.value);
+    }
+    //if there is no token, we cannot let them save it and instead let them navigate to login
+    else {
+      navigate("/login");
+    }
+  };
 
-  //   if (token) {
-  //     //retrieves the necessary information when we click on save
-  //     setWatchlist({
-  //       id: event.target.value,
-  //     });
-  //     console.log("event.target.value: ", event.target.value);
-  //   }
-  //   //if there is no token, we cannot let them save it and instead let them navigate to login
-  //   else {
-  //     navigate("/login");
-  //   }
-  // };
-
-  // fetch(`http://localhost:3001/stock/saved/${id}`, {
-  //   method: "DELETE",
-  //   headers: {
-  //     "Content-type": "application/json",
-  //     Authorization: token,
-  //   },
-  // })
-  //   .then((response) => {
-  //     console.log("response: ", response);
-  //     return response.json();
-  //   })
-  //   .then((jsonResponse) => {
-  //     if (jsonResponse.error) {
-  //       console.log("jsonResponse.error: ", jsonResponse.error);
-  //       return;
-  //     }
-  //     console.log("Delete successful");
-  //   })
-  //   .catch((err) => {
-  //     console.log("err: ", err);
-  //   });
-
-  //   const stockCards = watchlist.map((stock) => (<StockCard key={stock._id} data={stock} showViewButton={true}/>))
+  fetch(`http://localhost:3001/stock/saved/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: token,
+    },
+  })
+    .then((response) => {
+      console.log("response: ", response);
+      return response.json();
+    })
+    .then((jsonResponse) => {
+      if (jsonResponse.error) {
+        console.log("jsonResponse.error: ", jsonResponse.error);
+        return;
+      }
+      console.log("Delete successful");
+    })
+    .catch((err) => {
+      console.log("err: ", err);
+    });
 
   return (
     <Paper style={styles.paperContainer}>
@@ -159,45 +153,54 @@ export default function Watchlist() {
 
           <PieChart sx={{ mt: 5, mb: 10 }} />
 
-          <Carousel
-              responsive={responsive}
-              autoPlay={true}
-              autoPlaySpeed={3000}
-              infinite={true}
-              mt={15}
-              mb={20}
-            >
-
-          {watchlist[0].stockId.map((stock)=> (
-            <Card
-              sx={{
-                height: "100%",
-                display: "flex",
-                flexDirection: "column",
-                margin: "normal",
-                backgroundColor: "black",
-                opacity: "0.7",
-                color: "white",
-                mr: 2,
-                mt: 5,
-                mb: 3,
-                boxShadow: 20,
-              }}
-            >
-              <CardContent sx={{ flexGrow: 1, variant: "outlined", mr: 2 }}>
-                <Typography
-                  gutterBottom
-                  variant="h4"
-                  component="h2"
-                  fontWeight="bold"
-                  display="inline-flex"
-                >
-                  {stock}
-                </Typography>
-              </CardContent>
-            </Card>
-          ))}
-          </Carousel>
+            {watchlist
+              ? watchlist.map((stock) => (
+                  <Card
+                    key={stock.id}
+                    sx={{
+                      height: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      margin: "normal",
+                      backgroundColor: "black",
+                      opacity: "0.7",
+                      color: "white",
+                      mr: 2,
+                      mt: 5,
+                      mb: 3,
+                      boxShadow: 20,
+                    }}
+                  >
+                    <CardContent
+                      sx={{ flexGrow: 1, variant: "outlined", mr: 2 }}
+                    >
+                      <Typography
+                        gutterBottom
+                        variant="h4"
+                        component="h2"
+                        fontWeight="bold"
+                        display="inline-flex"
+                      >
+                        Name: {stock}
+                      </Typography>
+                      <Button
+                        sx={{
+                          mt: 10,
+                          ml: -15
+                        }}
+                        size="small"
+                        variant="contained"
+                        color="error"
+                        align="center"
+                        display="inline-flex"
+                        onClick={handleDelete}
+                      >
+                        Delete
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))
+              : ''}
         </Container>
       </ThemeProvider>
     </Paper>
