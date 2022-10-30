@@ -75,7 +75,6 @@ export default function Watchlist() {
       });
       const data = await res.json();
       console.log("stock data:", data[0].stockId);
-
       setWatchlist(data[0].stockId);
     };
     fetchSaveData();
@@ -115,6 +114,9 @@ export default function Watchlist() {
       })
       .then((jsonResponse) => {
         if (jsonResponse.error) {
+          toast.error("Unable to Delete", {
+            theme: "colored"
+          })
           console.log("jsonResponse.error: ", jsonResponse.error);
           return;
         }
@@ -123,6 +125,10 @@ export default function Watchlist() {
       .catch((err) => {
         console.log("err: ", err);
       });
+      toast.info("Delete successful", {
+        theme: "colored",
+        position: toast.POSITION.BOTTOM_RIGHT,
+      })
     console.log("Delete successful");
   };
 

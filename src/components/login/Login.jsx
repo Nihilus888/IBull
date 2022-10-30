@@ -81,7 +81,7 @@ function Login() {
         localStorage.setItem("user_token", jsonResponse.token);
         localStorage.setItem("user_Id", jsonResponse.userId);
         toast.success("Login successful!", {
-          position: toast.POSITION.TOP_CENTER,
+          position: toast.POSITION.BOTTOM_CENTER
         });
 
         navigate("/");

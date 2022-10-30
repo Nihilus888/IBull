@@ -90,7 +90,7 @@ function BarChart() {
 
   return (
     <div>
-      <Bar data={data} options={options} height={400} ml={200}/>
+      <Bar data={data} options={options} height={400} width={375} ml={105}/>
     </div>
   );
 }

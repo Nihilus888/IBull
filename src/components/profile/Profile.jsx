@@ -39,6 +39,7 @@ import WorkIcon from "@mui/icons-material/Work";
 import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import Image from "../../components/stockmarket.jpg";
 import { Line } from 'react-chartjs-2';
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
@@ -105,6 +106,11 @@ export default function Profile(props) {
       ...formData,
       skills: [...financeSkill],
     });
+
+    toast.success("Edit profile successful!", {
+      theme: 'colored',
+      position: toast.POSITION.TOP_CENTER,
+    });
   };
 
   const handleDelete = (event) => {
@@ -128,6 +134,11 @@ export default function Profile(props) {
           return;
         }
 
+        toast.success("Delete profile successful!", {
+          theme: 'colored',
+          position: toast.POSITION.TOP_CENTER,
+        });
+
         console.log("Delete Successful!");
         localStorage.clear();
         localStorage.removeItem("user-token");
@@ -135,6 +146,10 @@ export default function Profile(props) {
         navigate("/");
       })
       .catch((err) => {
+        toast.error("Unable to delete profile", {
+          theme: 'colored',
+          position: toast.POSITION.TOP_CENTER,
+        });
         console.log("err: ", err);
       });
   };
