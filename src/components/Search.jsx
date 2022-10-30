@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useState, useEffect,  } from "react";
+import { useState, useEffect } from "react";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
@@ -25,6 +25,7 @@ import { borders } from "@mui/system";
 import { shadows } from "@mui/system";
 import LineChart from "./stockView/Line";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
@@ -33,34 +34,34 @@ const responsive = {
     // the naming can be any, depends on you.
     breakpoint: { max: 4000, min: 3000 },
     items: 1,
-    align: 'center'
+    align: "center",
   },
   desktop: {
     breakpoint: { max: 3000, min: 1024 },
     items: 1,
-    align: 'center'
+    align: "center",
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
     items: 1,
-    align: 'center'
+    align: "center",
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
     items: 1,
-    align: 'center'
+    align: "center",
   },
 };
 
 const Search = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [searchPass, setSearchPass] = useState(null);
   const [searchData, setSearchData] = useState({
     search: "",
     pg: 1,
   });
   const [stockId, setStockId] = useState(null);
-  const [savedData, setSavedData] = useState([])
+  const [savedData, setSavedData] = useState([]);
 
   const handleChange = (e) => {
     setSearchData({
@@ -94,83 +95,91 @@ const Search = (props) => {
   };
 
   const handleSave = (event) => {
-    event.preventDefault()
-    let token = localStorage.getItem('user_token')
+    event.preventDefault();
+    let token = localStorage.getItem("user_token");
     if (token) {
       //retrieves the necessary information when we click on save
       setStockId({
-        id: event.target.value
-      })
-      console.log('event.target.value: ', event.target.value)
-    } 
-      //if there is no token, we cannot let them save it and instead let them navigate to login
-      else {
-        navigate('/login')
-      }
-    };
+        id: event.target.value,
+      });
+      console.log("event.target.value: ", event.target.value);
+    }
+    //if there is no token, we cannot let them save it and instead let them navigate to login
+    else {
+      navigate("/login");
+    }
+  };
 
-    //Fetch the user's saved stocks data
-    const fetchSavedData = async() => {
-      let token = localStorage.getItem('user_token')
-      if (token) {
-        const response = await fetch('http://localhost:3001/stock/saved', {
-          method: 'GET',
-          headers: {
-            'Authorization': token
-          },
-        })
-        const data = await response.json()
-        console.log('data:', data)
+  //Fetch the user's saved stocks data
+  const fetchSavedData = async () => {
+    let token = localStorage.getItem("user_token");
+    if (token) {
+      const response = await fetch("http://localhost:3001/stock/saved", {
+        method: "GET",
+        headers: {
+          Authorization: token,
+        },
+      });
+      const data = await response.json();
+      console.log("data:", data);
 
-        try {
-          setSavedData(data)
-        } catch(err) {
-          console.log('No saved stock data present at the moment')
-        }
+      try {
+        setSavedData(data);
+      } catch (err) {
+        console.log("No saved stock data present at the moment");
       }
     }
+  };
 
-    //save jobs 
-    useEffect(() => {
-      let token = localStorage.getItem('user_token') || ""
+  //save jobs
+  useEffect(() => {
+    let token = localStorage.getItem("user_token") || "";
 
-      //if our stock id is null return null
-      if(stockId === null) {
-        return
-      }
-        
-      //if our stock id not null we shall post it into the database for storage
-      fetch('http://localhost:3001/stock/saved', {
-        method: 'POST',
-        body: JSON.stringify(stockId),
-        headers: {
-          'Content-type': 'application/json',
-          'Authorization': token
-        },
+    //if our stock id is null return null
+    if (stockId === null) {
+      return;
+    }
+
+    //if our stock id not null we shall post it into the database for storage
+    fetch("http://localhost:3001/stock/saved", {
+      method: "POST",
+      body: JSON.stringify(stockId),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: token,
+      },
+    })
+      .then((response) => {
+        console.log("response: ", response);
+
+        toast.success("Save stock successful", {
+          theme: "colored",
+          position: toast.POSITION.BOTTOM_RIGHT,
+          autoClose: true,
+        });
+        return response.json();
       })
-        .then(response => {
-          console.log('response: ', response)
-          return response.json()
-        })
-        .then(jsonResponse => {
-          if (jsonResponse.error) {
-            console.log('jsonResponse.error: ', jsonResponse.error)
-            return
-          }
+      .then((jsonResponse) => {
+        if (jsonResponse.error) {
+          toast.error("Unable to save stock", {
+            theme: "colored",
+            position: toast.POSITION.BOTTOM_RIGHT,
+            autoClose: true,
+          });
+          console.log("jsonResponse.error: ", jsonResponse.error);
+          return;
+        }
 
-          console.log('Save Stock Successful!', jsonResponse)
-        })
-        .catch(err => {
-          console.log('err: ', err)
-        })
+        console.log("Save Stock Successful!", jsonResponse);
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
 
-        setTimeout(() => {
-          fetchSavedData()
-        }, "600")
-
-      
-    }, [stockId])
-  
+    setTimeout(() => {
+      fetchSavedData();
+    }, "600");
+  }, [stockId]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -204,7 +213,7 @@ const Search = (props) => {
               justifyContent: "center",
               align: "center",
               fontSize: 20,
-              textTransform:"capitalize",
+              textTransform: "capitalize",
               fontFamily: "Segoe UI Symbol",
             }}
             placeholder="Search Stocks"
@@ -241,21 +250,22 @@ const Search = (props) => {
           >
             {searchPass ? "Your Search Results" : ""}
           </Typography>
-          <Carousel responsive={responsive} ml={100} align="center">
+          <Carousel responsive={responsive} ml={100} mb={10} align="center">
             {/* {searchPass ? searchPass.map((stock) => ( */}
             <Card
               key={searchPass[0]}
               sx={{
                 height: "100%",
-                width: "auto",
+                width: "50%",
                 display: "flex",
                 flexDirection: "column",
                 margin: "normal",
                 mr: 2,
                 alignContent: "center",
                 backgroundColor: "#37FDFC",
-                opacity: "0.6",
+                opacity: "0.8",
                 color: "black",
+                boxshadow: 3,
               }}
             >
               <CardContent sx={{ flexGrow: 1, variant: "outlined", mr: 2 }}>
@@ -315,7 +325,7 @@ const Search = (props) => {
                   value={searchPass[0]}
                   size="small"
                   variant="contained"
-                  color="error"
+                  color="success"
                   align="center"
                   onClick={handleSave}
                 >
@@ -325,7 +335,7 @@ const Search = (props) => {
             </Card>
           </Carousel>
 
-          <LineChart data={searchPass[11]}/>
+          <LineChart data={searchPass[11]} sx={{ mt: 5, mb: 5 }} />
 
           <TableContainer sx={{ mt: 5 }} component={Paper}>
             <Table

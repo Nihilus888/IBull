@@ -102,6 +102,7 @@ export default function Register() {
       })
       .then((jsonResponse) => {
         if (jsonResponse.error) {
+          toast.error(jsonResponse.error);
           console.log("jsonResponse.error: ", jsonResponse.error);
           return;
         }

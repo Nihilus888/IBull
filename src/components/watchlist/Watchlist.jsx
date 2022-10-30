@@ -21,6 +21,8 @@ import { Paper } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { IconButton } from "@mui/material";
 import { Grid } from "@mui/material";
+import { toast } from "react-toastify";
+import { fontSize } from "@mui/system";
 
 const theme = createTheme();
 
@@ -52,9 +54,10 @@ const responsive = {
 
 export default function Watchlist() {
   const [watchlist, setWatchlist] = useState(null);
-  const [stockId, setStockId] = useState(null)
+  const [stockId, setStockId] = useState(null);
 
   const navigate = useNavigate();
+
 
   let token = localStorage.getItem("user_token");
   let id = localStorage.getItem("user_Id");
@@ -67,61 +70,61 @@ export default function Watchlist() {
       const res = await fetch(`http://localhost:3001/stock/saved/${id}`, {
         method: "GET",
         headers: {
-          'Authorization': token,
+          Authorization: token,
         },
       });
       const data = await res.json();
       console.log("stock data:", data[0].stockId);
+
       setWatchlist(data[0].stockId);
     };
     fetchSaveData();
   }, []);
 
-  console.log('watchlist:', watchlist)
+  console.log("watchlist:", watchlist);
 
   const handleDelete = (event) => {
-
     event.preventDefault();
-    let token = localStorage.getItem('user_token')
+    let token = localStorage.getItem("user_token");
     let id = localStorage.getItem("user_Id");
-  //   let token = localStorage.getItem("user_token");
-  //   if (token) {
-  //     //retrieves the necessary information when we click on delete
-  //     setStockId({
-  //       id: event.target.value,
-  //     });
-  //     console.log("event.target.value: ", setStockId.id);
-  //   }
-  //   //if there is no token, we cannot let them save it and instead let them navigate to login
-  //   else {
-  //     navigate("/login");
-  //   }
-  // };
-  console.log('Trying delete button')
+    //   let token = localStorage.getItem("user_token");
+    //   if (token) {
+    //     //retrieves the necessary information when we click on delete
+    //     setStockId({
+    //       id: event.target.value,
+    //     });
+    //     console.log("event.target.value: ", setStockId.id);
+    //   }
+    //   //if there is no token, we cannot let them save it and instead let them navigate to login
+    //   else {
+    //     navigate("/login");
+    //   }
+    // };
+    console.log("Trying delete button");
 
-  fetch(`http://localhost:3001/stock/saved/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-type": "application/json",
-      'Authorization': token,
-    },
-  })
-    .then((response) => {
-      console.log("response: ", response);
-      return response.json();
+    fetch(`http://localhost:3001/stock/saved/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: token,
+      },
     })
-    .then((jsonResponse) => {
-      if (jsonResponse.error) {
-        console.log("jsonResponse.error: ", jsonResponse.error);
-        return;
-      }
-      console.log("Delete successful");
-    })
-    .catch((err) => {
-      console.log("err: ", err);
-    });
-    console.log('Delete successful')
-  }
+      .then((response) => {
+        console.log("response: ", response);
+        return response.json();
+      })
+      .then((jsonResponse) => {
+        if (jsonResponse.error) {
+          console.log("jsonResponse.error: ", jsonResponse.error);
+          return;
+        }
+        console.log("Delete successful");
+      })
+      .catch((err) => {
+        console.log("err: ", err);
+      });
+    console.log("Delete successful");
+  };
 
   return (
     <Paper style={styles.paperContainer}>
@@ -158,54 +161,65 @@ export default function Watchlist() {
 
           <PieChart sx={{ mt: 5, mb: 10 }} />
 
-            {watchlist
-              ? watchlist.map((stock, index) => (
-                  <Card
-                    key={index}
-                    sx={{
-                      height: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      margin: "normal",
-                      backgroundColor: "black",
-                      opacity: "0.7",
-                      color: "white",
-                      mr: 2,
-                      mt: 5,
-                      mb: 3,
-                      boxShadow: 20,
-                    }}
-                  >
-                    <CardContent
-                      sx={{ flexGrow: 1, variant: "outlined", mr: 2 }}
+          <Typography
+            sx={{
+              mt: 10,
+              mb: 5,
+              fontSize: 30,
+              textDecoration: "underline",
+              fontWeight: "bold",
+              fontFamily: "initial",
+            }}
+          >
+            Stocks that I'm watching
+          </Typography>
+
+          {watchlist
+            ? watchlist.map((stock, index) => (
+                <Card
+                  key={index}
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    margin: "normal",
+                    backgroundColor: "black",
+                    opacity: "0.7",
+                    color: "white",
+                    mr: 2,
+                    mt: 5,
+                    mb: 3,
+                    boxShadow: 20,
+                  }}
+                >
+                  <CardContent sx={{ flexGrow: 1, variant: "outlined", mr: 2 }}>
+                    <Typography
+                      gutterBottom
+                      variant="h4"
+                      component="h2"
+                      fontWeight="bold"
+                      display="inline-flex"
                     >
-                      <Typography
-                        gutterBottom
-                        variant="h4"
-                        component="h2"
-                        fontWeight="bold"
-                        display="inline-flex"
-                      >
-                        Name: {stock}
-                      </Typography>
-                      <Button
-                        sx={{
-                          mt: 10,
-                          ml: -15
-                        }}
-                        size="small"
-                        variant="contained"
-                        color="error"
-                        align="center"
-                        display="inline-flex"
-                        onClick={handleDelete}
-                      >
-                        Delete
-                      </Button>
-                    </CardContent>
-                  </Card>
-                ))
-              : ''}
+                      Name: {stock}
+                    </Typography>
+                    <Button
+                      sx={{
+                        mt: 10,
+                        ml: -15,
+                      }}
+                      size="small"
+                      variant="contained"
+                      color="error"
+                      align="center"
+                      display="inline-flex"
+                      onClick={handleDelete}
+                    >
+                      Delete
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))
+            : ""}
         </Container>
       </ThemeProvider>
     </Paper>
