@@ -22,6 +22,7 @@ import Badge from "@mui/material/Badge";
 import Alert from "@mui/material/Alert";
 import { purple } from "@mui/material/colors";
 import { fontWeight } from "@mui/system";
+import { toast } from "react-toastify";
 
 const SiteHeader = () => {
   const [profile, setProfile] = useState(null);
@@ -71,10 +72,16 @@ const SiteHeader = () => {
     })
       .then((response) => {
         console.log("response:", response);
+        toast.success("Logout successful!", {
+          position: toast.POSITION.TOP_CENTER,
+        });
         return response.json();
       })
       .then((jsonResponse) => {
         if (jsonResponse.error) {
+          toast.error("Unable to logout please try again!", {
+            position: toast.POSITION.TOP_CENTER,
+          });
           return;
         }
         //remove JWT token from localstorage and return to home guest login page

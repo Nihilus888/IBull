@@ -85,6 +85,10 @@ function Login() {
         });
 
         navigate("/");
+        setTimeout(() => {
+          window.location.reload(false);
+        }, "1000");
+
       })
       .catch((err) => {
         console.log(err);
