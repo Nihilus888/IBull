@@ -12,5 +12,10 @@ IBull is a stock viewer that charts out your stock that you want to see with nec
 2. Mail.js
 3. React toastify
 4. Yahoo Finance API
+5. Material UI 
+
+# Challenges that I face during this project
+
+As this project has a deadline of 3 weeks and with other busy life commitments such as deploying another full stack application with Python Flask and learning about Data structures and Algorithms, managing time was imperative and paramount to ensure that this project remains working. 
 
 
