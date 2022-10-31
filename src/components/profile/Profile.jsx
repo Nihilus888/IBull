@@ -40,6 +40,7 @@ import LocalAtmIcon from "@mui/icons-material/LocalAtm";
 import Image from "../../components/stockmarket.jpg";
 import { Line } from 'react-chartjs-2';
 import { toast } from "react-toastify";
+// import Networth from "../chart/Networth";
 
 const theme = createTheme();
 
@@ -257,6 +258,8 @@ export default function Profile(props) {
                 Welcome to your profile {formData.name}!
             </Typography>
 
+            {/* <Networth data={formData.networth}/> */}
+
               <Card
                 sx={{
                   minHeight: 400,
@@ -330,7 +333,6 @@ export default function Profile(props) {
                   <Typography variant="body2" sx={{ fontSize: 20 }}>
                     Networth: ${formData.networth}
                   </Typography>
-
                 </CardContent>
               </Card>
             </TabPanel>

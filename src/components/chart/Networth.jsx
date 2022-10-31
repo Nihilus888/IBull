@@ -5,7 +5,7 @@ import { Bar } from "react-chartjs-2";
 
 ChartJS.register(Bar);
 
-function Networth(props) {
+function Networth() {
   
     let delayed
   
@@ -14,7 +14,7 @@ function Networth(props) {
       datasets: [
         {
           label: "Networth",
-          data: [props.data, 300000],
+          data: [10000, 300000],
           backgroundColor: [
             "rgba(255, 99, 132, 0.2)",
             "rgba(54, 162, 235, 0.2)",

@@ -291,6 +291,20 @@ const SiteHeader = () => {
       Finviz
     </a>,
 
+    <a
+      href="https://www.tdameritrade.com.sg/"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+      style={{
+        color: "black",
+        width: "100%",
+        textDecoration: "none",
+      }}
+    >
+      TD Ameritrade
+    </a>,
+
     <Button
       style={{
         textDecoration: "underline",
