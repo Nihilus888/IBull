@@ -339,7 +339,7 @@ const Search = (props) => {
 
           <TableContainer sx={{ mt: 5 }} component={Paper}>
             <Table
-              sx={{ minWidth: 650, bgcolor: "grey", color: "white" }}
+              sx={{ minWidth: 650, backgroundColor: "white", color: "#FFFFFF" }}
               aria-label="simple table"
             >
               <TableHead>

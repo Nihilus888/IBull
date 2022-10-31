@@ -61,7 +61,7 @@ const SiteHeader = () => {
     e.preventDefault();
 
     let token = localStorage.getItem("user_token");
-    let id = localStorage.getItem('user_Id')
+    let id = localStorage.getItem("user_Id");
 
     fetch(`http://localhost:3001/user/logout`, {
       method: "POST",
@@ -102,10 +102,9 @@ const SiteHeader = () => {
   };
 
   const token = localStorage.getItem("user_token");
-  let id = localStorage.getItem('user_Id')
+  let id = localStorage.getItem("user_Id");
 
   const loggedIn = [
-
     <a
       href="https://www.bloomberg.com/asia"
       target="_blank"
@@ -231,6 +230,20 @@ const SiteHeader = () => {
       CNBC
     </a>,
 
+    <a
+      href="https://finviz.com/"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+      style={{
+        color: "black",
+        fontWeight: "bold",
+        width: "100%",
+      }}
+    >
+      Finviz
+    </a>,
+
     <Link
       style={{
         textDecoration: "underline",
@@ -264,8 +277,27 @@ const SiteHeader = () => {
       Profile
     </Link>,
 
+    <a
+      href="https://finviz.com/"
+      target="_blank"
+      rel="noopener"
+      textAlign="center"
+      style={{
+        color: "black",
+        width: "100%",
+        textDecoration: "none",
+      }}
+    >
+      Finviz
+    </a>,
+
     <Button
-      style={{ textDecoration: "none", color: "black", width: "100%" }}
+      style={{
+        textDecoration: "underline",
+        color: "red",
+        width: "100%",
+        fontweight: "bold",
+      }}
       onClick={handleLogout}
     >
       Logout
