@@ -13,9 +13,12 @@ IBull is a stock viewer that charts out your stock that you want to see with nec
 3. React toastify
 4. Yahoo Finance API
 5. Material UI 
+6. Merging both frontend and backend into a single monolithic repository
 
 # Challenges that I face during this project
 
-As this project has a deadline of 3 weeks and with other busy life commitments such as deploying another full stack application with Python Flask and learning about Data structures and Algorithms, managing time was imperative and paramount to ensure that this project remains working. 
+As this project has a deadline of 3 weeks and with other busy life commitments such as deploying another full stack application with Python Flask and learning about Data structures and Algorithms, managing time was imperative and paramount to ensure that this project remains working. Most of my other friends decided to separate their projects into two repositories and deploy both the frontend and the backend seperately, however I decided to try a single monolithic repository. Learning React JS deeper and how to use Material UI was not easy as most of the time while trying to implement it, I was always faced with a blank white screen and multiple errors coming out of the console. As disheartening as it was, the thrill of fixing it and seeing whatever you wanted to be at the frontend trounced any feeling of defeat or failure that came up previously. 
+
+
 
 
