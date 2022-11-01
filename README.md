@@ -21,3 +21,10 @@ As this project has a deadline of 3 weeks and with other busy life commitments s
 
 # Things that I will do more if I had more time
 
+1. Use more APIs such as requesting different live data API such as live stock data API and financial news live API
+
+2. Merging machine learning to forecast stock prices. Here is a kaggle notebook that I used to forecast gold prices for your reference on how I would predict stock prices: https://www.kaggle.com/code/nihilus888/gold-price-analysis-and-prediction
+
+
+# Project Link
+https://dashing-puffpuff-9dfd30.netlify.app/
