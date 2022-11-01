@@ -61,7 +61,7 @@ function Login() {
     }
 
     // Need to add the mongodb here?
-    fetch(`http://localhost:3001/user/login`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/login`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
