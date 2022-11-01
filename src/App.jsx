@@ -1,6 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-import React, { useEffect } from "react";
+import React from "react";
 import Home from "./components/home/Home";
 import StickyFooter from "./components/partials/SiteFooter";
 import Register from "./components/register/Register";
@@ -8,9 +8,7 @@ import Guest from "./components/auth/Guest";
 import Auth from "./components/auth/Auth";
 import Login from "./components/login/Login";
 import SiteHeader from "./components/partials/SiteHeader";
-import StockCard from "./components/stockCard/StockCard";
 import Profile from "./components/profile/Profile";
-import Line from "./components/stockView/Line";
 import Watchlist from "./components/watchlist/Watchlist";
 import stockView from "./components/stock/stockView";
 import { ToastContainer } from "react-toastify";
@@ -25,7 +23,6 @@ function App() {
     <div className="App">
       <ToastContainer />
       <SiteHeader />
-      <title></title>
 
 
       <Routes>

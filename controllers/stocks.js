@@ -1,7 +1,7 @@
 const jwt_decode = require("jwt-decode");
 const jwt = require("jsonwebtoken");
 const savedStocksSchema = require("../models/saved_stocks");
-const savedStocksModel = require("../models/save_stocks")
+const savedStocksModel = require("../models/save_stocks");
 const stockValidators = require("./validators/stocks");
 const mongoose = require("mongoose");
 const saved_stocks = require("../models/saved_stocks");
@@ -39,6 +39,11 @@ module.exports = {
     //closeData price for this particular stock
     closeData = chartData.chart.result[0].indicators.quote[0].close;
     console.log("closeData: ", closeData);
+
+    if (closeData == undefined) {
+      return
+    }
+
     let result = Object.keys(closeData).map(function (key) {
       return closeData[key];
     });
@@ -100,7 +105,7 @@ module.exports = {
   },
 
   saveStock: async (req, res) => {
-    console.log('req.body', req.body)
+    console.log("req.body", req.body);
     const saveId = req.body.id;
     console.log("saveId:", saveId);
     const token = res.locals.userAuth;
@@ -111,20 +116,19 @@ module.exports = {
     const filter = { user: userId };
 
     //push the data into MongoDB, probably will explore this further
-    const update = { $push: { stockId: saveId, data: req.body  } };
+    const update = { $push: { stockId: saveId, data: req.body } };
 
     const saveStock = await savedStocksModel.find(filter);
-    console.log('saveStock', saveStock)
+    console.log("saveStock", saveStock);
 
     //check if the save stock is there
     if (saveStock === undefined) {
-      console.log('saveStock is undefined')
+      console.log("saveStock is undefined");
       await savedStocksModel.create({
         user: userId,
         stockId: null,
       });
-     } 
-    else {
+    } else {
       try {
         //idempotency
         if (saveStock[0].stockId.includes(saveId)) {
@@ -139,7 +143,7 @@ module.exports = {
       new: true,
       upsert: true,
     });
-    console.log('Stock added to watchlist')
+    console.log("Stock added to watchlist");
     return res.json("Stock added to your watchlist");
   },
 
@@ -147,29 +151,29 @@ module.exports = {
     // list all jobs in JSON format
     const token = res.locals.userAuth;
     let userId = mongoose.Types.ObjectId(token.data.id);
-    console.log('userId', userId)
+    console.log("userId", userId);
     const filter = { user: userId };
 
     const savedWatchListData = await savedStocksModel.find(filter);
-    console.log('savedWatchListData: ', savedWatchListData)
+    console.log("savedWatchListData: ", savedWatchListData);
     res.json(savedWatchListData);
   },
 
   showWatchlist: async (req, res) => {
     const id = req.params.id;
-    console.log("id:", id)
-    const filter = { user: id }
+    console.log("id:", id);
+    const filter = { user: id };
     const savedWatchList = await savedStocksModel.find(filter);
-    console.log("savedWatchList:", savedWatchList)
+    console.log("savedWatchList:", savedWatchList);
     res.json(savedWatchList);
   },
 
   removeWatchlist: async (req, res) => {
     // find and remove saved job data from database collection
-    const saveId = req.body.id
-    console.log('saveId:', saveId)
+    const saveId = req.body.id;
+    console.log("saveId:", saveId);
     const id = req.params.id;
-    console.log('id:', id)
+    console.log("id:", id);
     await savedStocksModel.findByIdAndDelete(id);
   },
 };
