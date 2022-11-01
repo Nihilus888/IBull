@@ -89,7 +89,7 @@ export default function Register() {
       networth: formData.networth,
     });
     // Need to add the mongodb here?
-    fetch("http://localhost:3001/user/register", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/register`, {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {

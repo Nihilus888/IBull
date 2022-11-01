@@ -67,7 +67,7 @@ export default function Watchlist() {
     let id = localStorage.getItem("user_Id");
 
     const fetchSaveData = async () => {
-      const res = await fetch(`http://localhost:3001/stock/saved/${id}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved/${id}`, {
         method: "GET",
         headers: {
           Authorization: token,
@@ -99,7 +99,7 @@ export default function Watchlist() {
       }
     console.log("Trying delete button");
 
-    fetch(`http://localhost:3001/stock/saved/${id}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved/${id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",

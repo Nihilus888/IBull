@@ -36,7 +36,7 @@ const SiteHeader = () => {
     const fetchProfileApi = async () => {
       if (token) {
         setIsLoggedin(true);
-        const res = await fetch(`http://localhost:3001/user/profile/${id}`, {
+        const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/profile/${id}`, {
           method: "GET",
           headers: {
             Authorization: token,
@@ -63,7 +63,7 @@ const SiteHeader = () => {
     let token = localStorage.getItem("user_token");
     let id = localStorage.getItem("user_Id");
 
-    fetch(`http://localhost:3001/user/logout`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/logout`, {
       method: "POST",
       headers: {
         "Content-type": "application/json",

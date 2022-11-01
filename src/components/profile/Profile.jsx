@@ -70,7 +70,7 @@ export default function Profile(props) {
 
   useEffect(() => {
     const fetchApi = async () => {
-      const res = await fetch(`http://localhost:3001/user/profile/${id}`, {
+      const res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/user/profile/${id}`, {
         method: "GET",
         headers: {
           // "Content-type": "application/json",
@@ -118,7 +118,7 @@ export default function Profile(props) {
     event.preventDefault();
     let token = localStorage.getItem("user_token");
     console.log("token:", token);
-    fetch(`http://localhost:3001/user/profile/${id}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/profile/${id}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json",
@@ -164,7 +164,7 @@ export default function Profile(props) {
     let token = localStorage.getItem("user_token");
     console.log("token:", token);
 
-    fetch(`http://localhost:3001/user/profile/${id}`, {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/user/profile/${id}`, {
       method: "PATCH",
       body: JSON.stringify(formData),
       headers: {

@@ -73,7 +73,7 @@ const Search = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    fetch("http://localhost:3001/stock/search", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/search`, {
       method: "POST",
       body: JSON.stringify(searchData),
       headers: {
@@ -114,7 +114,7 @@ const Search = (props) => {
   const fetchSavedData = async () => {
     let token = localStorage.getItem("user_token");
     if (token) {
-      const response = await fetch("http://localhost:3001/stock/saved", {
+      const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved`, {
         method: "GET",
         headers: {
           Authorization: token,
@@ -141,7 +141,7 @@ const Search = (props) => {
     }
 
     //if our stock id not null we shall post it into the database for storage
-    fetch("http://localhost:3001/stock/saved", {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved`, {
       method: "POST",
       body: JSON.stringify(stockId),
       headers: {
