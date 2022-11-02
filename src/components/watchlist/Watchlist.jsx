@@ -163,21 +163,9 @@ export default function Watchlist() {
             Asset Allocation
           </Typography>
 
-          <PieChart sx={{ mt: 5, mb: 10 }} />
+          <PieChart sx={{ mt: 5, mb: 10 }} />           
 
-          <Typography
-            sx={{
-              mt: 10,
-              mb: 5,
-              fontSize: 30,
-              textDecoration: "underline",
-              fontWeight: "bold",
-              fontFamily: "initial",
-            }}
-          >
-            Stocks that I'm watching
-          </Typography>
-
+          <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000} infinite={true} mt={12}>
           {watchlist
             ? watchlist.map((stock, index) => (
                 <Card
@@ -187,8 +175,8 @@ export default function Watchlist() {
                     display: "flex",
                     flexDirection: "column",
                     margin: "normal",
-                    backgroundColor: "black",
-                    opacity: "0.7",
+                    backgroundColor: "#00688B",
+                    opacity: "0.8",
                     color: "white",
                     mr: 2,
                     mt: 5,
@@ -203,27 +191,51 @@ export default function Watchlist() {
                       component="h2"
                       fontWeight="bold"
                       display="inline-flex"
+                      alignItems="center"
+                      justifyContent='center'
+                      sx={{
+                        ml: 3
+                      }}
                     >
                       Name: {stock}
                     </Typography>
+
                     <Button
                       sx={{
                         mt: 10,
-                        ml: -15,
+                        ml: -20,
                       }}
                       size="small"
                       variant="contained"
                       color="error"
                       align="center"
+                      justifyContent="center"
                       display="inline-flex"
                       onClick={handleDelete}
                     >
                       Delete
                     </Button>
+
+                    <Button
+                      sx={{
+                        mt: 10,
+                        mr: 4,
+                        ml: 2
+                      }}
+                      size="small"
+                      variant="contained"
+                      color="info"
+                      align="center"
+                      justifyContent="center"
+                      display="inline-flex"
+                    >
+                      View
+                    </Button>
                   </CardContent>
                 </Card>
               ))
             : ""}
+            </Carousel>
         </Container>
       </ThemeProvider>
     </Paper>
