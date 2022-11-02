@@ -165,7 +165,6 @@ export default function Watchlist() {
 
           <PieChart sx={{ mt: 5, mb: 10 }} />           
 
-          <Carousel responsive={responsive} autoPlay={true} autoPlaySpeed={3000} infinite={true} mt={12}>
           {watchlist
             ? watchlist.map((stock, index) => (
                 <Card
@@ -235,7 +234,6 @@ export default function Watchlist() {
                 </Card>
               ))
             : ""}
-            </Carousel>
         </Container>
       </ThemeProvider>
     </Paper>
