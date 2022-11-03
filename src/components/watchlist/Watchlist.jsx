@@ -102,7 +102,7 @@ export default function Watchlist() {
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved/${user_id}`, {
       method: "DELETE",
-      data: JSON.stringify(id),
+      body: JSON.stringify(id),
       headers: {
         "Content-type": "application/json",
         Authorization: token,

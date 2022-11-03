@@ -92,6 +92,7 @@ const Search = (props) => {
         console.log(jsonResponse);
         setSearchPass(jsonResponse);
       });
+
   };
 
   const handleSave = (event) => {
@@ -316,6 +317,16 @@ const Search = (props) => {
                   fontStyle="italic"
                 >
                   Profit Margins: {searchPass[4]}
+                </Typography>
+
+                <Typography
+                  gutterBottom
+                  variant="h6"
+                  component="h5"
+                  fontWeight="medium"
+                  fontStyle="italic"
+                >
+                  Predicted Price: {searchPass[12]}
                 </Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: "center", mb: 2 }}>

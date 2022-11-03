@@ -4,8 +4,8 @@ const JoiPassword = Joi.extend(joiPasswordExtendCore);
 
 const userValidators = {
   createUser: Joi.object({
-    id:Joi.string().optional(),
-    name: Joi.string().min(5).required(),
+    id: Joi.string().optional(),
+    name: Joi.string().min(4).required(),
     email: Joi.string().min(9).required(),
     password: JoiPassword.string().min(5).noWhiteSpaces().required(),
     confirmPassword : Joi.any().equal(Joi.ref('password'))

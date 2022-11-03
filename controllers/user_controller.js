@@ -5,7 +5,7 @@ const userValidators = require('../controllers/validators/users')
 const mongoose = require('mongoose')
 const user = require('../models/user')
 const { use } = require('bcrypt/promises')
-const DOMAIN = 'sandbox3a6439aadc5c4344a1fb034e03540685.mailgun.org';
+const DOMAIN = 'austonmartin@gmail.com';
 
 const formData = require('form-data');
 const Mailgun = require('mailgun.js');

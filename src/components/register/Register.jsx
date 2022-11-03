@@ -113,7 +113,7 @@ export default function Register() {
         });
 
         //remember to deal navigate straight to home logged in page
-        navigate("/");
+        navigate("/login");
       })
       .catch((err) => {
         console.log("err: ", err);

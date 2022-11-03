@@ -14,6 +14,7 @@ const connStr = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PAS
 app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+app.options('/stock/saved/:id', cors())
 app.use(cors({
   origin: '*'
 }));
