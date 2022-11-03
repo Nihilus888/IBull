@@ -84,7 +84,6 @@ export default function Watchlist() {
     event.preventDefault();
 
     console.log('stock: ', id)
-
     let token = localStorage.getItem("user_token");
     let user_id = localStorage.getItem("user_Id");
 
@@ -102,7 +101,7 @@ export default function Watchlist() {
 
     fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved/${user_id}`, {
       method: "DELETE",
-      body: JSON.stringify(id),
+      body: JSON.parse(id),
       headers: {
         "Content-type": "application/json",
         Authorization: token,
