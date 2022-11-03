@@ -15,8 +15,9 @@ app.use(express.static('public'))
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors({
-    origin: '*'
-  }))
+  origin: '*'
+}));
+
 
 //extension of stock routes
 const stockRoutes = require('./routers/stock_routes')

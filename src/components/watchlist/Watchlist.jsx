@@ -80,27 +80,29 @@ export default function Watchlist() {
     fetchSaveData();
   }, []);
 
-  console.log("watchlist:", watchlist);
-
-  const handleDelete = (event) => {
+  const handleDelete = (event, id) => {
     event.preventDefault();
-    let token = localStorage.getItem("user_token");
-    let id = localStorage.getItem("user_Id");
-      if (token) {
-        //retrieves the necessary information when we click on delete
-        setStockId({
-          id: watchlist,
-        });
-        console.log("event.target.id: ", stockId);
-      }
-      //if there is no token, we cannot let them save it and instead let them navigate to login
-      else {
-        navigate("/login");
-      }
-    console.log("Trying delete button");
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved/${id}`, {
+    console.log('stock: ', id)
+
+    let token = localStorage.getItem("user_token");
+    let user_id = localStorage.getItem("user_Id");
+
+      // if (token) {
+      //   //retrieves the necessary information when we click on delete
+      //   setStockId({
+      //     id: id,
+      //   });
+      //   console.log("event.target.id: ", id);
+      // }
+      // //if there is no token, we cannot let them save it and instead let them navigate to login
+      // else {
+      //   navigate("/login");
+      // }
+
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved/${user_id}`, {
       method: "DELETE",
+      data: JSON.stringify(id),
       headers: {
         "Content-type": "application/json",
         Authorization: token,
@@ -108,6 +110,7 @@ export default function Watchlist() {
     })
       .then((response) => {
         console.log("response: ", response);
+        console.log(response.json())
         return response.json();
       })
       .then((jsonResponse) => {
@@ -210,7 +213,9 @@ export default function Watchlist() {
                       align="center"
                       justifyContent="center"
                       display="inline-flex"
-                      onClick={handleDelete}
+                      onClick={(event) => {
+                        handleDelete(event, stock)
+                      }}
                     >
                       Delete
                     </Button>
