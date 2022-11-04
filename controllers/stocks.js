@@ -78,6 +78,41 @@ module.exports = {
     let priceToBook =
       stockData.quoteSummary.result[0].defaultKeyStatistics.priceToBook.fmt;
 
+    //bubblesort array to get the largest and lowest value in the array: time complexity O(n^2)
+    let sortedValue = []
+
+    for (var i = 0; i <= closeData.length - 1; i++) {
+      // Last i elements are already in place
+      for (var j = 0; j < closeData.length - i - 1; j++) {
+        // Comparing two adjacent numbers
+        // and see if first is greater than second
+        if (closeData[j] > closeData[j + 1]) {
+          // Swap them if the condition is true
+          var temp = closeData[j];
+          closeData[j] = closeData[j + 1];
+          closeData[j + 1] = temp;
+          sortedValue.push(closeData[j])
+        }
+      }
+    }
+    // Print the sorted array
+    console.log("sorted closeData", sortedValue);
+
+    //Equation of Linear Regression
+    //y^ = b0^ + b1^*x
+    //b1^ = sxy / sx^2
+    //b0^ = y mean - beta1^* x mean
+    highestYValue = sortedValue[200];
+    lowestYValue = sortedValue[10];
+    yMean = (highestYValue - lowestYValue) / 2
+    console.log('yMean:', yMean)
+
+    totalX = closeData.reduce((a, b) => a + b, 0);
+    xMean = totalX / closeData.length;
+    console.log("xMean", xMean);
+
+    // standardDeviation = Math.std(sortedValue)
+    // console.log('standardDeviation:', standardDeviation)
 
     //push all the individuals to stock
     let stock = [];
@@ -92,7 +127,7 @@ module.exports = {
       sharesShort,
       shortRatio,
       beta,
-      priceToBook,
+      priceToBook
     );
 
     let financialInfo = stock.push(result);
