@@ -79,32 +79,79 @@ module.exports = {
     let priceToBook =
       stockData.quoteSummary.result[0].defaultKeyStatistics.priceToBook.fmt;
 
-    //bubblesort array to get the largest and lowest value in the array: time complexity O(n^2)
-    let sortedValue = []
 
-    for (var i = 0; i <= closeData.length - 1; i++) {
-      // Last i elements are already in place
-      for (var j = 0; j < closeData.length - i - 1; j++) {
-        // Comparing two adjacent numbers
-        // and see if first is greater than second
-        if (closeData[j] > closeData[j + 1]) {
-          // Swap them if the condition is true
-          var temp = closeData[j];
-          closeData[j] = closeData[j + 1];
-          closeData[j + 1] = temp;
-          sortedValue.push(closeData[j + 1])
+      //Insertion Sort helper function for bucket sort
+      function InsertionSort(array) {
+        for (let i = 0; i < array.length; i++) {
+            let valueToInsert = array[i];
+            let holePosition = i;
+    
+            while (holePosition > 0 && array[holePosition - 1] > valueToInsert) {
+                array[holePosition] = array[holePosition - 1];
+                holePosition = holePosition - 1;
+            }
+            array[holePosition] = valueToInsert
         }
-      }
+        return array;
     }
-    // Print the sorted array
-    console.log("sorted closeData", sortedValue);
+    
+
+    //BucketSort implmentation for sorting values
+      function BucketSort(array, bucketSize) {
+        if (array.length === 0) {
+            return array;
+        }
+    
+        // Declaring vars
+        var i,
+            minValue = array[0],
+            maxValue = array[0],
+            bucketSize = bucketSize || 5;
+    
+        // Setting min and max values
+        array.forEach(function (currentVal) {
+            if (currentVal < minValue) {
+                minValue = currentVal;
+            } else if (currentVal > maxValue) {
+                maxValue = currentVal;
+            }
+        })
+    
+        // Initializing buckets
+        var bucketCount = Math.floor((maxValue - minValue) / bucketSize) + 1;
+        var allBuckets = new Array(bucketCount);
+    
+        for (i = 0; i < allBuckets.length; i++) {
+            allBuckets[i] = [];
+        }
+    
+        // Pushing values to buckets
+        array.forEach(function (currentVal) {
+            allBuckets[Math.floor((currentVal - minValue) / bucketSize)].push(currentVal);
+        });
+    
+        // Sorting buckets
+        array.length = 0;
+    
+        allBuckets.forEach(function (bucket) {
+            InsertionSort(bucket);
+            bucket.forEach(function (element) {
+                array.push(element)
+            });
+        });
+    
+        return array;
+    }
+    
+    sortedValue = (BucketSort(closeData, 10));
+    console.log('sortedValue:', sortedValue)
 
     //Equation of Linear Regression
     //y^ = b0^ + b1^*x
     //b1^ = sxy / sx^2
     //b0^ = y mean - beta1^* x mean
-    highestYValue = sortedValue[200];
-    lowestYValue = sortedValue[5];
+    highestYValue = sortedValue[300];
+    lowestYValue = sortedValue[10];
     yMean = (highestYValue - lowestYValue) / 2
     console.log('yMean:', yMean)
 
@@ -130,7 +177,7 @@ module.exports = {
 
     let b1 = standardDeviation/variance
     
-    let y = b0 + b1 * yMean
+    let y = b0 + b1 * xMean
 
     console.log('Predicted price:', y)
 
