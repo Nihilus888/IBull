@@ -92,7 +92,7 @@ module.exports = {
           var temp = closeData[j];
           closeData[j] = closeData[j + 1];
           closeData[j + 1] = temp;
-          sortedValue.push(closeData[j])
+          sortedValue.push(closeData[j + 1])
         }
       }
     }
@@ -104,7 +104,7 @@ module.exports = {
     //b1^ = sxy / sx^2
     //b0^ = y mean - beta1^* x mean
     highestYValue = sortedValue[200];
-    lowestYValue = sortedValue[10];
+    lowestYValue = sortedValue[5];
     yMean = (highestYValue - lowestYValue) / 2
     console.log('yMean:', yMean)
 
@@ -126,7 +126,13 @@ module.exports = {
 
     let standardDeviation = Math.sqrt(variance)
 
-    console.log('standardDeviation:', standardDeviation)
+    let b0 = xMean - standardDeviation * yMean
+
+    let b1 = standardDeviation/variance
+    
+    let y = b0 + b1 * yMean
+
+    console.log('Predicted price:', y)
 
     //push all the individuals to stock
     let stock = [];
@@ -149,8 +155,8 @@ module.exports = {
     let finance = JSON.stringify(financialInfo);
     console.log("finance:", finance);
 
-    // let totalStockInfo = stock.push(predictedPrice)
-    // let totalfinanceInfo = JSON.stringify(totalStockInfo)
+    let totalStockInfo = stock.push(y)
+    let totalfinanceInfo = JSON.stringify(totalStockInfo)
 
     res.json(stock);
     return;
@@ -225,7 +231,7 @@ module.exports = {
 
   removeWatchlist: async (req, res) => {
     // find and remove saved job data from database collection
-    const saveId = req.body.id;
+    const saveId = req.body;
     console.log("saveId:", saveId);
     const id = req.params.id;
     console.log("id:", id);

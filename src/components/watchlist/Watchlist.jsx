@@ -84,6 +84,7 @@ export default function Watchlist() {
     event.preventDefault();
 
     console.log('stock: ', id)
+
     let token = localStorage.getItem("user_token");
     let user_id = localStorage.getItem("user_Id");
 
