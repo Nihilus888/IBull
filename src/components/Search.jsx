@@ -326,7 +326,7 @@ const Search = (props) => {
                   fontWeight="medium"
                   fontStyle="italic"
                 >
-                  Predicted Price: {searchPass[12]}
+                  Predicted Price: ${searchPass[12]}
                 </Typography>
               </CardContent>
               <CardActions sx={{ justifyContent: "center", mb: 2 }}>
