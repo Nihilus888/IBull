@@ -15,6 +15,6 @@ router.post('/saved', auth_middleware, stockController.saveStock)
 router.get('/saved/:id', auth_middleware, stockController.showWatchlist)
 
 //delete specific watchlist
-router.delete('/saved/:id', auth_middleware, stockController.removeWatchlist, cors())
+router.post('/saved/:id', auth_middleware, stockController.removeWatchlist)
 
 module.exports = router

@@ -100,18 +100,22 @@ export default function Watchlist() {
       //   navigate("/login");
       // }
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved/${user_id}`, {
-      method: "DELETE",
-      body: JSON.parse(id),
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved${user_id}`, {
+      method: "POST",
+      mode: "no-cors",
       headers: {
         "Content-type": "application/json",
         Authorization: token,
       },
+      body: JSON.stringify(id),
     })
       .then((response) => {
         console.log("response: ", response);
-        console.log(response.json())
         return response.json();
+      })
+      .then((id) => {
+        console.log('Success:', id);
+        return id.json()
       })
       .then((jsonResponse) => {
         if (jsonResponse.error) {
