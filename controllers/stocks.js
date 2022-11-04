@@ -5,10 +5,8 @@ const savedStocksModel = require("../models/save_stocks");
 const stockValidators = require("./validators/stocks");
 const mongoose = require("mongoose");
 const saved_stocks = require("../models/saved_stocks");
-const brain = require("brain.js");
 const scaler = require("minmaxscaler");
 const { forwardRef } = require("react");
-const network = new brain.NeuralNetwork();
 
 module.exports = {
   listStock: async (req, res) => {
@@ -80,25 +78,6 @@ module.exports = {
     let priceToBook =
       stockData.quoteSummary.result[0].defaultKeyStatistics.priceToBook.fmt;
 
-    network.train([
-      // [age, visits, category]     [price]
-
-      { input: [closeData[0], closeData[1], closeData[2]], output: [0.2] }, // 1 input
-      { input: [closeData[4], closeData[5], closeData[6]], output: [0.3] }, // 2 input
-      { input: [closeData[7], closeData[8], closeData[9]], output: [0.4] }, // 3 input
-      { input: [closeData[10], closeData[11], closeData[12]], output: [0.5] }, // 4 input
-      { input: [closeData[13], closeData[14], closeData[15]], output: [0.7] }, // 5 input
-      { input: [closeData[16], closeData[17], closeData[18]], output: [0.8] }, // 6 input
-    ]);
-
-    //basically percentage that it deviates from the current price
-    let gradient = network.run([0.2, 0.3, 0.5]);
-
-    let constant = 50;
-
-    let predictedPrice = gradient * closeData[0] + 50;
-
-    console.log(`Price: ${predictedPrice}`);
 
     //push all the individuals to stock
     let stock = [];
@@ -121,8 +100,8 @@ module.exports = {
     let finance = JSON.stringify(financialInfo);
     console.log("finance:", finance);
 
-    let totalStockInfo = stock.push(predictedPrice)
-    let totalfinanceInfo = JSON.stringify(totalStockInfo)
+    // let totalStockInfo = stock.push(predictedPrice)
+    // let totalfinanceInfo = JSON.stringify(totalStockInfo)
 
     res.json(stock);
     return;
