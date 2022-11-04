@@ -144,6 +144,14 @@ export default function Profile(props) {
         localStorage.clear();
         localStorage.removeItem("user-token");
 
+        setTimeout(() => {
+          setProfile(null);
+        }, "500");
+
+        setTimeout(() => {
+          window.location.reload(false);
+        }, "1000");
+
         navigate("/");
       })
       .catch((err) => {
