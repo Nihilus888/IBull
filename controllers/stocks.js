@@ -7,6 +7,7 @@ const mongoose = require("mongoose");
 const saved_stocks = require("../models/saved_stocks");
 const scaler = require("minmaxscaler");
 const { forwardRef } = require("react");
+const { array } = require("joi");
 
 module.exports = {
   listStock: async (req, res) => {
@@ -111,8 +112,21 @@ module.exports = {
     xMean = totalX / closeData.length;
     console.log("xMean", xMean);
 
-    // standardDeviation = Math.std(sortedValue)
-    // console.log('standardDeviation:', standardDeviation)
+    //finding standard deviation
+    let array = sortedValue.map((k) => {
+      return (k - yMean ** 2)
+    })
+
+    let sum = array.reduce((acc, curr)=> acc + curr, 0);
+    console.log('sum:', sum)
+
+    let variance = (sum / array.length)
+
+    console.log('variance:', variance)
+
+    let standardDeviation = Math.sqrt(variance)
+
+    console.log('standardDeviation:', standardDeviation)
 
     //push all the individuals to stock
     let stock = [];
