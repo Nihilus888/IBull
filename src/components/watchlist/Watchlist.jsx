@@ -100,22 +100,19 @@ export default function Watchlist() {
       //   navigate("/login");
       // }
 
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved${user_id}`, {
-      method: "POST",
-      mode: "no-cors",
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/stock/saved/${user_id}`, {
+      method: "PATCH",
       headers: {
         "Content-type": "application/json",
         Authorization: token,
       },
-      body: JSON.stringify(id),
+      body: JSON.stringify({
+        ticker: id
+      }),
     })
       .then((response) => {
         console.log("response: ", response);
         return response.json();
-      })
-      .then((id) => {
-        console.log('Success:', id);
-        return id.json()
       })
       .then((jsonResponse) => {
         if (jsonResponse.error) {

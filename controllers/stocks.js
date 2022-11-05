@@ -278,10 +278,22 @@ module.exports = {
 
   removeWatchlist: async (req, res) => {
     // find and remove saved job data from database collection
-    const saveId = req.body;
-    console.log("saveId:", saveId);
+    const body = req.body;
+    console.log("body:", body);
     const id = req.params.id;
     console.log("id:", id);
-    await savedStocksModel.findByIdAndDelete(id);
+    // await savedStocksModel.findByIdAndDelete(id);
+    try {
+      const response = await savedStocksModel.updateOne(
+        { user: mongoose.Types.ObjectId(id) },
+        {
+          $pull: {
+            stockId: req.body.ticker
+          }
+        }
+      )
+    } catch (error) {
+      console.log(error)
+    }
   },
 };
