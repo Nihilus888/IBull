@@ -144,14 +144,18 @@ module.exports = {
     }
     
     sortedValue = (BucketSort(closeData, 10));
-    console.log('sortedValue:', sortedValue)
+    
+    //data cleaning by removing null values
+    let stockValue = sortedValue.filter(element => {
+      return element !== null
+    })
 
     //Equation of Linear Regression
     //y^ = b0^ + b1^*x
     //b1^ = sxy / sx^2
     //b0^ = y mean - beta1^* x mean
-    highestYValue = sortedValue[300];
-    lowestYValue = sortedValue[10];
+    highestYValue = stockValue[300];
+    lowestYValue = stockValue[0];
     yMean = (highestYValue - lowestYValue) / 2
     console.log('yMean:', yMean)
 
