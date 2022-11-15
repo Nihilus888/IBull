@@ -150,12 +150,16 @@ module.exports = {
       return element !== null
     })
 
+    console.log('stockValue', stockValue)
+
     //Equation of Linear Regression
     //y^ = b0^ + b1^*x
     //b1^ = sxy / sx^2
     //b0^ = y mean - beta1^* x mean
-    highestYValue = stockValue[300];
+    highestYValue = stockValue.slice(-1);
     lowestYValue = stockValue[0];
+    console.log('highestYvalue', highestYValue)
+    console.log('lowestYValue', lowestYValue)
     yMean = (highestYValue - lowestYValue) / 2
     console.log('yMean:', yMean)
 
@@ -184,11 +188,6 @@ module.exports = {
     
     let y = b0 + b1 * xMean
 
-    let totalSum = stockValue.map((k) => {
-      return (k - y)
-    })
-
-
     console.log('Predicted price:', y)
 
     //push all the individuals to stock
@@ -204,7 +203,7 @@ module.exports = {
       sharesShort,
       shortRatio,
       beta,
-      priceToBook
+      priceToBook,
     );
 
     let financialInfo = stock.push(result);
@@ -213,6 +212,7 @@ module.exports = {
     console.log("finance:", finance);
 
     let totalStockInfo = stock.push(y)
+    console.log('totalStockInfo', totalStockInfo)
     let totalfinanceInfo = JSON.stringify(totalStockInfo)
 
     res.json(stock);
