@@ -164,9 +164,10 @@ module.exports = {
     console.log("xMean", xMean);
 
     //finding standard deviation
-    let array = sortedValue.map((k) => {
+    let array = stockValue.map((k) => {
       return (k - yMean ** 2)
     })
+
 
     let sum = array.reduce((acc, curr)=> acc + curr, 0);
     console.log('sum:', sum)
@@ -182,6 +183,11 @@ module.exports = {
     let b1 = standardDeviation/variance
     
     let y = b0 + b1 * xMean
+
+    let totalSum = stockValue.map((k) => {
+      return (k - y)
+    })
+
 
     console.log('Predicted price:', y)
 
