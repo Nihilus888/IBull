@@ -198,7 +198,7 @@ function Login() {
               <Grid container sx={{ mb: 5, mr: 3, ml: 15 }}>
                 <Grid item>
                   <Link
-                    href="/register"
+                    href="/forgot"
                     variant="body3"
                     color="primary.dark"
                     justifyContent="center"

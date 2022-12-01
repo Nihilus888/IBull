@@ -13,6 +13,7 @@ import Watchlist from "./components/watchlist/Watchlist";
 import stockView from "./components/stock/stockView";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Forgot from "./components/forgot/Forgot";
 
 //react-query or axios for frontend API call
 
@@ -33,6 +34,7 @@ function App() {
         <Route path="/watchlist/:id" element={<Auth component={Watchlist} /> } />
         <Route path="/stockView" element={<Auth component={stockView} />} />
         <Route path="/logout" />
+        <Route path="/forgot" element={<Guest component={Forgot} />} />
       </Routes>
 
       <StickyFooter />
