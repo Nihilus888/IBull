@@ -182,7 +182,7 @@ function Login() {
               >
                 Sign In
               </Button>
-              <Grid container sx={{ mb: 5 }}>
+              <Grid container sx={{ mb: 2, ml: 8 }}>
                 <Grid item>
                   <Link
                     href="/register"
@@ -194,7 +194,21 @@ function Login() {
                   </Link>
                 </Grid>
               </Grid>
-              <FacebookIcon sx={{ml: 3, mb: 10}}/>
+
+              <Grid container sx={{ mb: 5, mr: 3, ml: 15 }}>
+                <Grid item>
+                  <Link
+                    href="/register"
+                    variant="body3"
+                    color="primary.dark"
+                    justifyContent="center"
+                  >
+                    {"Forgot password?"}
+                  </Link>
+                </Grid>
+              </Grid>
+              
+              <FacebookIcon sx={{ml: 0, mb: 10}}/>
               <GoogleIcon sx={{ml: 3, mb: 10}}/>
               <TwitterIcon sx={{ml:3, mb: 10}} />
             </Box>
