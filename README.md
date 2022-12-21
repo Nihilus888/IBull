@@ -42,4 +42,4 @@ As this project has a deadline of 3 weeks and with other busy life commitments s
 5. Fix my delete button as the id passing from the frontend to the backend does not work
 
 # Project Link
-https://dashing-puffpuff-9dfd30.netlify.app/
+https://ibull.netlify.app
