@@ -45,3 +45,32 @@ As this project has a deadline of 3 weeks and with other busy life commitments s
 https://ibull.netlify.app
 
 Unfortunately heroku has decided to not continue the service and as such, my backend portion is not working :( . However there are ways to circumvent this problem, such as cloning the repository and using it on the localhost.
+
+```
+git clone https://github.com/Nihilus888/ibull
+
+```
+
+We need to install the necessary packages for it to work so we need to run these commands.
+
+``` 
+npm install 
+```
+
+As this is a mono repository, we must have a split terminal, there should be a plus button beside your zsh or bash terminal to add another terminal. 
+
+To run the backend, we use the command.
+
+```
+nodemon server.js
+```
+
+To run the frontend, we use the command.
+
+```
+npm start
+```
+
+There will be a message that pops up to ask if you will like to run on another port and you should indicate yes.
+
+That should be it! Enjoy the app and see if the price prediction models are accurate!
