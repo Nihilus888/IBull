@@ -43,3 +43,5 @@ As this project has a deadline of 3 weeks and with other busy life commitments s
 
 # Project Link
 https://ibull.netlify.app
+
+Unfortunately heroku has decided to not continue the service and as such, my backend portion is not working :( . However there are ways to circumvent this problem, such as cloning the repository and using it on the localhost.
